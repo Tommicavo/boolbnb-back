@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('estates', function (Blueprint $table) {
-            $table->foreignId('message_id')->nullable()->constrained()->nullOnDelete();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->foreignId('estate_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 
@@ -21,9 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('estates', function (Blueprint $table) {
-            $table->dropForeign('estates_message_id_foreign');
-            $table->dropColumn('message_id');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropForeign('messages_estate_id_foreign');
+            $table->dropColumn('estate_id');
         });
     }
 };
