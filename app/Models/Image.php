@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['label', 'icon'];
+    protected $fillable = ['url', 'alt'];
 
-    public function estates()
+    public function estate()
     {
-        return $this->belognsToMany(Estate::class);
+        return $this->belognsTo(Estate::class);
     }
 }

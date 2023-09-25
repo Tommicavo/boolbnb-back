@@ -16,17 +16,16 @@ return new class extends Migration
 
             $table->string('title')->required();
             $table->text('description');
-            $table->string('image');
+            $table->string('cover');
             $table->unsignedTinyInteger('rooms')->default(1)->required();
             $table->unsignedTinyInteger('beds')->default(1)->required();
             $table->unsignedTinyInteger('bathrooms')->default(1)->required();
             $table->unsignedSmallInteger('mq')->required();
+            $table->float('price');
             $table->string('address')->required();
-            $table->boolean('is_published');
-            $table->unsignedTinyInteger('sponsorship_lvl')->default(0);
-            $table->date('expire_date');
-            $table->string('coordinates');
-            $table->unsignedSmallInteger('price');
+            $table->string('coordinates_long')->required();
+            $table->string('coordinates_lat')->required();
+            $table->boolean('is_visible');
 
             $table->softDeletes();
             $table->timestamps();
