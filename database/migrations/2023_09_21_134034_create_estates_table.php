@@ -20,12 +20,13 @@ return new class extends Migration
             $table->unsignedTinyInteger('rooms')->default(1)->required();
             $table->unsignedTinyInteger('beds')->default(1)->required();
             $table->unsignedTinyInteger('bathrooms')->default(1)->required();
-            $table->unsignedMediumInteger('mq')->required();
+            $table->unsignedSmallInteger('mq')->required();
             $table->string('address')->required();
             $table->boolean('is_published');
             $table->unsignedTinyInteger('sponsorship_lvl')->default(0);
             $table->date('expire_date');
             $table->string('coordinates');
+            $table->unsignedSmallInteger('price');
 
             $table->softDeletes();
             $table->timestamps();
