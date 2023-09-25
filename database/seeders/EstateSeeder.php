@@ -46,8 +46,8 @@ class EstateSeeder extends Seeder
                 if ($faker->boolean()) $estate_sponsorships[] = $sponsorship_id;
             }
 
-            $estate->services()->attach($estate_services);
-            $estate->sponsorships()->attach($estate_sponsorships);
+            $new_estate->services()->attach($estate_services);
+            $new_estate->sponsorships()->attach($estate_sponsorships);
         }
     }
 }

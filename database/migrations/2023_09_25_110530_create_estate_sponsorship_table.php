@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->foreignId('estate_id')->constrained()->onDelete('cascade');
             $table->foreignId('sponsorship_id')->constrained()->onDelete('cascade');
-            $table->date('start');
-            $table->date('stop');
+            $table->date('start')->nullable();
+            $table->date('stop')->nullable();
 
             $table->timestamps();
         });
