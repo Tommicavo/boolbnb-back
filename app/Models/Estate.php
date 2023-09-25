@@ -11,7 +11,7 @@ class Estate extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'cover', 'rooms', 'beds', 'bathrooms', 'mq', 'address', 'is_visible', 'coordinates_long', 'coordinates_lat', 'price'];
+    protected $fillable = ['title', 'description', 'cover', 'rooms', 'beds', 'bathrooms', 'mq', 'is_visible', 'price'];
 
     public function category()
     {
@@ -36,5 +36,10 @@ class Estate extends Model
     public function sponsorships()
     {
         return $this->belongsToMany(Sponsorship::class);
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
     }
 }

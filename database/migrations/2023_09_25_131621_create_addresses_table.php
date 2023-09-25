@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sponsorships', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-            $table->tinyInteger('level');
-            $table->tinyInteger('duration');
-            $table->float('price', 3, 2);
+            $table->string('toponymic');
+            $table->string('street_name');
+            $table->tinyInteger('number');
+            $table->char('zip_code', 5);
+            $table->string('city');
+            $table->string('latitude');
+            $table->string('longitude');
 
             $table->timestamps();
         });
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sponsorships');
+        Schema::dropIfExists('addresses');
     }
 };

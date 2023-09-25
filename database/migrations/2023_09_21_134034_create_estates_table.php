@@ -22,9 +22,6 @@ return new class extends Migration
             $table->unsignedTinyInteger('bathrooms')->default(1)->required();
             $table->unsignedSmallInteger('mq')->required();
             $table->float('price');
-            $table->string('address')->required();
-            $table->string('coordinates_long')->required();
-            $table->string('coordinates_lat')->required();
             $table->boolean('is_visible');
 
             $table->softDeletes();

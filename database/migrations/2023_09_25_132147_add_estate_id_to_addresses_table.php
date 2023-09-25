@@ -11,15 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sponsorships', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('name');
-            $table->tinyInteger('level');
-            $table->tinyInteger('duration');
-            $table->float('price', 3, 2);
-
-            $table->timestamps();
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->foreignId('estate_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 
@@ -28,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sponsorships');
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->dropForeign('addresses_estate_id_foreign');
+            $table->dropColumn('estate_id');
+        });
     }
 };
