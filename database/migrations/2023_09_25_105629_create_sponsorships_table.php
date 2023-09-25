@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->tinyInteger('level');
-            $table->tinyInteger('duration');
+            $table->smallInteger('duration');
             $table->float('price', 3, 2);
 
             $table->timestamps();
