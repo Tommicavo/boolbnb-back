@@ -10,8 +10,8 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('guests.home')) active @endif"
-                            href="{{ route('guests.home') }}">Home</a>
+                        <a class="nav-link @if (request()->routeIs('guest.home')) active @endif"
+                            href="{{ route('guest.home') }}">Home</a>
                     </li>
                 @endauth
             </ul>

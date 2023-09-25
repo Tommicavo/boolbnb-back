@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\guests\HomeController as GuestsHomeController;
-use App\Http\Controllers\admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Guest\HomeController as GuestHomeController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use App\Http\Controllers\admin\HomeController as AdminHomeController;
 |
 */
 
-Route::get('/', [GuestsHomeController::class, 'index'])->name('guests.home');
+Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
 
