@@ -54,5 +54,9 @@
             <label class="form-check-label" for="visible">Visibile per tutti</label>
         </div>
 
+        {{-- Button --}}
+        <button class="btn btn-outline-success">
+            Crea
+        </button>
     </form>
 </div>
