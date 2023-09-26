@@ -51,7 +51,7 @@
             <label for="rooms">Stanze</label>
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
-                value="{{ old('rooms', $estate->rooms) }}" min="1" required>
+                value="{{ old('rooms', $estate->rooms) }}" min="1" max="254" required>
             @error('rooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -64,7 +64,7 @@
             <label for="beds">Posti Letto</label>
             <input type="number" id="beds" name="beds"
                 class="form-control @error('beds') is-invalid @elseif (old('beds')) is-valid @enderror"
-                value="{{ old('beds', $estate->beds) }}" min="1" required>
+                value="{{ old('beds', $estate->beds) }}" min="1" max="254" required>
             @error('beds')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -77,7 +77,7 @@
             <label for="bathrooms">Bagni</label>
             <input type="number" id="bathrooms" name="bathrooms"
                 class="form-control @error('bathrooms') is-invalid @elseif (old('bathrooms')) is-valid @enderror"
-                value="{{ old('bathrooms', $estate->bathrooms) }}" min="1" required>
+                value="{{ old('bathrooms', $estate->bathrooms) }}" min="1" max="254" required>
             @error('bathrooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -90,7 +90,7 @@
             <label for="mq">Mq</label>
             <input type="number" id="mq" name="mq"
                 class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
-                value="{{ old('mq', $estate->mq) }}" min="20" required>
+                value="{{ old('mq', $estate->mq) }}" min="20" max="1000" required>
             @error('mq')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -103,7 +103,7 @@
             <label for="price">Prezzo a Notte</label>
             <input type="number" id="price" name="price"
                 class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
-                value="{{ old('price', $estate->price) }}" min="20" required>
+                value="{{ old('price', $estate->price) }}" min="0.01" step="0.01" required>
             @error('price')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -132,7 +132,7 @@
     {{-- Image/cover input --}}
     <div class="col-10 text-start">
         <div class="mb-3">
-            <label class="form-label" for="cover">Immagine</label>
+            <label class="form-label" for="cover">Foto di Copertina</label>
             <input type="file" id="cover" name="cover"
                 class="form-control @error('cover') is-invalid @elseif (old('cover')) is-valid @enderror"
                 value="{{ old('cover', $estate->cover) }}" required>
