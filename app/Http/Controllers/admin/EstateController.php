@@ -71,8 +71,17 @@ class EstateController extends Controller
     public function update(Request $request, Estate $estate)
     {
         $data = $request->all();
+
+        // Change is_visible switch value to boolean one.
+        $data['is_visible'] = isset($data['is_visible']);
+
         $estate->update($data);
-        return to_route('admin.estates.index');
+
+        // Attach if services exitsts
+        if (!Arr::exists($data, 'services') && count($estate->consoles)) $estate->consoles()->detach();
+        elseif (Arr::exists($data, 'services')) $estate->services()->sync($data['services']);
+
+        return to_route('admin.estates.create')->with('type', 'success')->with('message', 'Annuncio modificato con successo');
     }
 
     /**
