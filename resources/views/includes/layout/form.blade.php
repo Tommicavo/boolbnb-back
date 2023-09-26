@@ -50,8 +50,16 @@
 
         {{-- Visible switch --}}
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="visible" checked>
-            <label class="form-check-label" for="visible">Visibile per tutti</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" checked>
+            <label class="form-check-label" for="is_visible">Visibile per tutti</label>
+        </div>
+
+        {{-- Image/cover iput --}}
+        <div class="col-10 text-start">
+            <div class="mb-3">
+                <label class="form-label" for="cover">Immagine</label>
+                <input type="file" id="cover" name="cover" class="form-control" required>
+            </div>
         </div>
 
         {{-- Button --}}
