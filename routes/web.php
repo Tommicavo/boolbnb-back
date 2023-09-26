@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\EstateController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +22,15 @@ use App\Http\Controllers\Admin\EstateController;
 
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
-Route::get('/admin/estates/{estate}', [EstateController::class, 'show'])->name('estates.show');
-
-Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
-    Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
+Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
     Route::patch('/estates/restore', [EstateController::class, 'restoreAll'])->name('estates.restoreAll'); // restore all estates
     Route::patch('/estates/{estate}/restore', [EstateController::class, 'restore'])->name('estates.restore'); // restore an estate
     Route::delete('/estates/drop', [EstateController::class, 'dropAll'])->name('estates.dropAll'); // drop all estates from db
     Route::delete('/estates/{estate}', [EstateController::class, 'destroy'])->name('estates.destroy'); // move estate into trash
     Route::delete('/estates/{estate}/drop', [EstateController::class, 'drop'])->name('estates.drop'); // drop estate from db
-  
-    Route::resource('/estates', EstateController::class);
+    Route::resource('estates', EstateController::class);
 });
 
 Route::middleware('auth')->group(function () {
