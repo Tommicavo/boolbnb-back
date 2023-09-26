@@ -138,7 +138,7 @@ class EstateController extends Controller
         $estate->update($data);
 
         // Attach if services exitsts
-        if (!Arr::exists($data, 'services') && count($estate->consoles)) $estate->consoles()->detach();
+        if (!Arr::exists($data, 'services') && count($estate->services)) $estate->services()->detach();
         elseif (Arr::exists($data, 'services')) $estate->services()->sync($data['services']);
 
         return to_route('admin.estates.create')->with('type', 'success')->with('message', 'Annuncio modificato con successo');
