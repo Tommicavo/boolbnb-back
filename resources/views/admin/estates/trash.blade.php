@@ -22,10 +22,10 @@
                     <span>Restore All</span>
                 </button>
             </form>
-            <form action="{{ route('admin.estates.dropAll') }}" method="POST">
+            <form action="{{ route('admin.estates.dropAll') }}" method="POST" class="deleteForm dropAllEstates">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger" type="submit">
+                <button class="btn btn-danger" type="submit" data-bs-toggle="modal" data-bs-target="#myModal">
                     <span><i class="fa-solid fa-explosion"></i></span>
                     <span>Erase All</span>
                 </button>
@@ -60,10 +60,12 @@
                                     <span><i class="fa-solid fa-info"></i></span>
                                     <span>Info</span>
                                 </a>
-                                <form action="{{ route('admin.estates.drop', $estate->id) }}" method="POST">
+                                <form action="{{ route('admin.estates.drop', $estate->id) }}" method="POST"
+                                    class="deleteForm dropEstate" data-name="{{ $estate->title }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">
+                                    <button class="btn btn-danger" type="submit" data-bs-toggle="modal"
+                                        data-bs-target="#myModal">
                                         <span><i class="fa-solid fa-trash-can"></i></span>
                                         <span>Erase</span>
                                     </button>
@@ -75,4 +77,8 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('scripts')
+    @vite(['resources/js/modalScript.js'])
 @endsection

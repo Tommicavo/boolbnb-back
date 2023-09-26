@@ -9,6 +9,7 @@
 
         <main>
             <div class="container">
+                @include('includes.layout.modal')
                 @yield('content')
             </div>
             @yield('scripts')
