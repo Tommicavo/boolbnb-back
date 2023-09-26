@@ -59,7 +59,9 @@ class EstateController extends Controller
      */
     public function update(Request $request, Estate $estate)
     {
-        //
+        $data = $request->all();
+        $estate->update($data);
+        return to_route('admin.estates.index');
     }
 
     /**
