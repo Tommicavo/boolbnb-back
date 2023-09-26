@@ -13,7 +13,8 @@ class EstateController extends Controller
      */
     public function index()
     {
-        //
+        $estates = Estate::orderBy('updated_at', 'DESC')->get();
+        return view('admin.estates.index', compact('estates'));
     }
 
     /**
