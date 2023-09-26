@@ -51,7 +51,7 @@ class EstateController extends Controller
      */
     public function edit(Estate $estate)
     {
-        //
+        return view('admin.estates.edit', compact('estate'));
     }
 
     /**
