@@ -15,13 +15,20 @@
         </div>
 
         {{-- Only numbers selectors --}}
-        <div>
+        <div class="d-flex row-cols-6">
 
             {{-- Rooms --}}
-            <div class="mb-3 col-12 text-start">
-                <label for="rooms">Nome</label>
-                <input type="number" id="rooms" name="rooms" class="form-control" autofocus required>
+            <div class="mb-3 text-start col">
+                <label for="rooms">Stanze</label>
+                <input type="number" id="rooms" name="rooms" class="form-control" min="1" required>
             </div>
+
+            {{-- Beds --}}
+            <div class="mb-3 text-start col">
+                <label for="beds">Stanze</label>
+                <input type="number" id="beds" name="beds" class="form-control" min="1" required>
+            </div>
+
 
         </div>
     </form>
