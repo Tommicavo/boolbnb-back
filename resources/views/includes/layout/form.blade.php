@@ -13,5 +13,12 @@
                 value="{{ old('title', $estate->title) }}" autofocus required>
         </div>
 
+        {{-- Description --}}
+        <div class="mb-3 col-12 text-start">
+            <label class="form-label" for="description">Descrizione</label>
+            <textarea type="text" id="description" name="description" class="form-control bg-dark">{{ old('description', $estate->description) }}</textarea>
+        </div>
+
+
     </form>
 </div>
