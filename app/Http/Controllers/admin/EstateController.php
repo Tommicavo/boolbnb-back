@@ -31,6 +31,10 @@ class EstateController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        // Change is_visible switch value to boolean one.
+        $data['is_visible'] = isset($data['is_visible']);
+
         $estate = new Estate;
         $estate->fill($data);
         $estate->save();
