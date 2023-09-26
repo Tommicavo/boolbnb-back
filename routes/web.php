@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\EstateController;
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+Route::get('/admin/estates/{estate}', [EstateController::class, 'show'])->name('estates.show');
 
 Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
     Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
