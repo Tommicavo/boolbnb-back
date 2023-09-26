@@ -57,7 +57,9 @@ class EstateController extends Controller
      */
     public function edit(Estate $estate)
     {
-        return view('admin.estates.edit', compact('estate'));
+        $services = Service::all();
+        $estate_service_ids = $estate->services->pluck('id')->toArray();
+        return view('admin.estates.edit', compact('estate', 'services', 'estate_service_ids'));
     }
 
     /**
