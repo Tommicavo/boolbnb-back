@@ -56,7 +56,7 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'Il mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'price.required' => 'Il prezzo deve essere compreso tra 1 e 254.',
+                'price.required' => 'Il prezzo deve essere compreso tra 0.01 e 254.00.'
             ]
         );
 
@@ -120,7 +120,7 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'Il mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'price.required' => 'Il prezzo deve essere compreso tra 1 e 254.',
+                'price.required' => 'Il prezzo deve essere compreso tra 0.01 e 254.00.'
             ]
         );
 
