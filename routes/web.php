@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
@@ -19,7 +19,13 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+
+Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+
+    Route::resource('estates', EstateController::class);
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
