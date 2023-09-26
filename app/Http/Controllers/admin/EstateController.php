@@ -36,12 +36,13 @@ class EstateController extends Controller
      */
     public function store(Request $request)
     {
+
         // Validation
         $request->validate(
             [
                 'title' => 'required|string|max:50',
                 'description' => 'nullable|string|max:300',
-                'cover' => 'nullable|image',
+                'cover' => 'nullable',
                 'rooms' => 'required|numeric:1,254',
                 'beds' => 'required|numeric:1,254',
                 'bathrooms' => 'required|numeric:1,254',
@@ -66,24 +67,27 @@ class EstateController extends Controller
         );
 
         $data = $request->all();
+        $images = $request->file('multiple_images');
+
 
         // Change is_visible switch value to a boolean one.
         $data['is_visible'] = isset($data['is_visible']);
 
         $estate = new Estate;
         $estate->fill($data);
+        $estate->cover = $images[0] ?? 'https://marcolanci.it/utils/placeholder.jpg';
         $estate->save();
 
         // Save multiple images
-        $images = $request->file('multiple_images');
-
-        foreach ($images as $image) {
-            $img_path = Storage::putFile("estate_images/$estate->id", $image);
-            $new_image = new Image();
-            $new_image->url = $img_path;
-            $new_image->estate_id = $estate->id;
-            $new_image->save();
-        };
+        if ($images) {
+            foreach ($images as $image) {
+                $img_path = Storage::putFile("estate_images/$estate->id", $image);
+                $new_image = new Image();
+                $new_image->url = $img_path;
+                $new_image->estate_id = $estate->id;
+                $new_image->save();
+            };
+        }
 
         if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
 
@@ -159,14 +163,16 @@ class EstateController extends Controller
 
         $images = $request->file('multiple_images');
 
-        // Save multiple images on update
-        foreach ($images as $image) {
-            $img_path = Storage::putFile("estate_images/$estate->id", $image);
-            $new_image = new Image();
-            $new_image->url = $img_path;
-            $new_image->estate_id = $estate->id;
-            $new_image->save();
-        };
+        // Save multiple images
+        if ($images) {
+            foreach ($images as $image) {
+                $img_path = Storage::putFile("estate_images/$estate->id", $image);
+                $new_image = new Image();
+                $new_image->url = $img_path;
+                $new_image->estate_id = $estate->id;
+                $new_image->save();
+            };
+        }
 
         // Attach if services exitsts
         if (!Arr::exists($data, 'services') && count($estate->services)) $estate->services()->detach();
