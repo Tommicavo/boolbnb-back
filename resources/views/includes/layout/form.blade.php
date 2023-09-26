@@ -29,7 +29,11 @@
                 <input type="number" id="beds" name="beds" class="form-control" min="1" required>
             </div>
 
-
+            {{-- Bathrooms --}}
+            <div class="mb-3 text-start col">
+                <label for="bathrooms">Stanze</label>
+                <input type="number" id="bathrooms" name="bathrooms" class="form-control" min="1" required>
+            </div>
         </div>
     </form>
 </div>
