@@ -37,7 +37,7 @@ class EstateController extends Controller
      */
     public function show(Estate $estate)
     {
-        //
+        return view('admin.estates.show', compact('estate'));
     }
 
     /**
