@@ -10,6 +10,7 @@
         <main>
             <div class="container">
                 @include('includes.layout.modal')
+                @include('includes.layout.alert')
                 @yield('content')
             </div>
             @yield('scripts')

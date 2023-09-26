@@ -65,12 +65,16 @@ class EstateController extends Controller
         $estate = Estate::findOrFail($id);
         $estate->delete();
 
-        return to_route('admin.estates.index');
+        return to_route('admin.estates.index')
+            ->with('alertType', 'info')
+            ->with('alertTitle', "$estate->title")
+            ->with('alertMessage', 'has been moved into Trash Can!');
     }
 
     public function trash()
     {
         $estates = Estate::onlyTrashed()->get();
+
         return view('admin.estates.trash', compact('estates'));
     }
 
@@ -89,12 +93,16 @@ class EstateController extends Controller
 
         $estate->forceDelete();
 
-        return to_route('admin.estates.trash');
+        return to_route('admin.estates.trash')
+            ->with('alertType', 'danger')
+            ->with('alertTitle', "$estate->title")
+            ->with('alertMessage', 'has been successfully erased from Trash Can!');
     }
 
     public function dropAll()
     {
         $estates = Estate::onlyTrashed()->get();
+        $estates_count = Estate::onlyTrashed()->count();
 
         foreach ($estates as $estate) {
             // ! DA VERIFICARE CHE LA COVER E LE IMMAGINI SI CANCELLINO !
@@ -109,7 +117,9 @@ class EstateController extends Controller
             $estate->forceDelete();
         }
 
-        return to_route('admin.estates.index');
+        return to_route('admin.estates.index')
+            ->with('alertType', 'danger')
+            ->with('alertMessage', "$estates_count estates have been successfully erased from Trash Can!");
     }
 
     public function restore(string $id)
@@ -118,15 +128,21 @@ class EstateController extends Controller
 
         $estate->restore();
 
-        return to_route('admin.estates.trash');
+        return to_route('admin.estates.trash')
+            ->with('alertType', 'success')
+            ->with('alertTitle', "$estate->title")
+            ->with('alertMessage', 'has been successfully restored!');
     }
 
     public function restoreAll()
     {
         $estates = Estate::onlyTrashed();
+        $estates_count = Estate::onlyTrashed()->count();
 
         $estates->restore();
 
-        return to_route('admin.estates.index');
+        return to_route('admin.estates.index')
+            ->with('alertType', 'success')
+            ->with('alertMessage', "$estates_count estates have been successfully restored!");
     }
 }
