@@ -54,7 +54,24 @@
             <label class="form-check-label" for="is_visible">Visibile per tutti</label>
         </div>
 
-        {{-- Image/cover iput --}}
+        {{-- Services Checkboxes --}}
+        <div class="d-flex justify-content-start my-5">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">Nessuna</label>
+            </div>
+
+            {{-- Dynamic Services Checkboxes --}}
+            @foreach ($services as $service)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif
+                        id="tech-{{ $service->id }}" value="{{ $service->id }}" name="services[]">
+                    <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Image/cover input --}}
         <div class="col-10 text-start">
             <div class="mb-3">
                 <label class="form-label" for="cover">Immagine</label>
