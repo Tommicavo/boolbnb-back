@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class EstateController extends Controller
 {
@@ -41,7 +42,9 @@ class EstateController extends Controller
         $estate->fill($data);
         $estate->save();
 
-        return to_route('admin.estates.create', $estate);
+        if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
+
+        return to_route('admin.estates.create', $estate)->with("type", "success")->with("message", "Annuncio inserito");
     }
 
     /**
