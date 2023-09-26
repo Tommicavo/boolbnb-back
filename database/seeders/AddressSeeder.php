@@ -16,8 +16,10 @@ class AddressSeeder extends Seeder
      */
     public function run(Generator $faker): void
     {
+        $num_estates = count(config('estates'));
+
         $estate_ids = Estate::pluck('id')->toArray();
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < $num_estates; $i++) {
             $address = new Address();
 
             $address->toponymic = $faker->cityPrefix();

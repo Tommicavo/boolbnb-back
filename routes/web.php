@@ -22,7 +22,16 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
 
-Route::resource('admin/estates'[EstateController::class]);
+Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
+    Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
+    Route::patch('/estates/restore', [EstateController::class, 'restoreAll'])->name('estates.restoreAll'); // restore all estates
+    Route::patch('/estates/{estate}/restore', [EstateController::class, 'restore'])->name('estates.restore'); // restore an estate
+    Route::delete('/estates/drop', [EstateController::class, 'dropAll'])->name('estates.dropAll'); // drop all estates from db
+    Route::delete('/estates/{estate}', [EstateController::class, 'destroy'])->name('estates.destroy'); // move estate into trash
+    Route::delete('/estates/{estate}/drop', [EstateController::class, 'drop'])->name('estates.drop'); // drop estate from db
+  
+    Route::resource('/estates', EstateController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
