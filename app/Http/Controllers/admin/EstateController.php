@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class EstateController extends Controller
@@ -22,7 +23,8 @@ class EstateController extends Controller
     public function create()
     {
         $estate = new Estate();
-        return view('admin.estates.create', compact('estate'));
+        $services = Service::all();
+        return view('admin.estates.create', compact('estate', 'services'));
     }
 
     /**
