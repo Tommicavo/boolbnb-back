@@ -60,7 +60,6 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'price.required' => 'Il prezzo deve essere compreso tra € 0.01 ed € 254.00.',
                 'cover.image' => "È possibile allegare solo file di tipo immagine."
             ]
         );
@@ -127,7 +126,6 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'price.required' => 'Il prezzo deve essere compreso tra € 0.01 ed € 254.00.',
                 'cover.image' => "È possibile allegare solo file di tipo immagine."
             ]
         );
