@@ -30,7 +30,12 @@ class EstateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $estate = new Estate;
+        $estate->fill($data);
+        $estate->save();
+
+        return to_route('admin.estates.show', $estate);
     }
 
     /**
