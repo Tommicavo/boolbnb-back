@@ -39,7 +39,7 @@ class EstateController extends Controller
         $estate->fill($data);
         $estate->save();
 
-        return to_route('admin.estates.show', $estate);
+        return to_route('admin.estates.create', $estate);
     }
 
     /**
