@@ -25,14 +25,20 @@
 
             {{-- Beds --}}
             <div class="mb-3 text-start col">
-                <label for="beds">Stanze</label>
+                <label for="beds">Posti Letto</label>
                 <input type="number" id="beds" name="beds" class="form-control" min="1" required>
             </div>
 
             {{-- Bathrooms --}}
             <div class="mb-3 text-start col">
-                <label for="bathrooms">Stanze</label>
+                <label for="bathrooms">Bagni</label>
                 <input type="number" id="bathrooms" name="bathrooms" class="form-control" min="1" required>
+            </div>
+
+            {{-- Mq --}}
+            <div class="mb-3 text-start col">
+                <label for="mq">Mq</label>
+                <input type="number" id="mq" name="mq" class="form-control" min="20" required>
             </div>
         </div>
     </form>
