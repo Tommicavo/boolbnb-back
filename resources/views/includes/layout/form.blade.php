@@ -40,7 +40,7 @@
     {{-- Description --}}
     <div class="mb-3 col-12">
         <label class="form-label" for="description">Descrizione</label>
-        <textarea type="text" id="description" name="description" class="form-control">{{ old('description', $estate->description) }}</textarea>
+        <textarea type="text" id="description" name="description" class="form-control" maxlength="300">{{ old('description', $estate->description) }}</textarea>
     </div>
 
     {{-- Only numbers selectors --}}
