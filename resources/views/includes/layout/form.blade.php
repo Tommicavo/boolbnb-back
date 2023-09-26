@@ -145,6 +145,21 @@
         @enderror
     </div>
 
+    {{-- Multiple images --}}
+    <div class="col-10 text-start">
+        <div class="mb-3">
+            <label class="form-label" for="multiple_images">Foto di Copertina</label>
+            <input type="file" multiple id="multiple_images" name="multiple_images[]"
+                class="form-control @error('multiple_images') is-invalid @elseif (old('multiple_images')) is-valid @enderror"
+                value="{{ old('multiple_images', $estate->images) }}">
+        </div>
+        @error('multiple_images')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
     {{-- Button --}}
     <button class="btn btn-outline-success">
         @if ($estate->exists)
