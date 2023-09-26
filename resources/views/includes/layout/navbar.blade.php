@@ -18,7 +18,7 @@
                     </li> --}}
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.create')) active @endif"
-                            href="{{ route('admin.estates.create') }}">Create</a>
+                            href="{{ route('admin.estates.create') }}">Aggiungi</a>
                     </li>
                 @else
                     <li class="nav-item">
