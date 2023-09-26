@@ -8,6 +8,18 @@
                         <a class="nav-link @if (request()->routeIs('admin.home')) active @endif"
                             href="{{ route('admin.home') }}">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
+                            href="{{ route('admin.home') }}">Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (request()->routeIs('admin.estates.trash')) active @endif"
+                            href="{{ route('admin.home') }}">Trash</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (request()->routeIs('admin.estates.create')) active @endif"
+                            href="{{ route('admin.home') }}">Create</a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('guest.home')) active @endif"
