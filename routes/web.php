@@ -29,7 +29,8 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     Route::delete('/estates/drop', [EstateController::class, 'dropAll'])->name('estates.dropAll'); // drop all estates from db
     Route::delete('/estates/{estate}', [EstateController::class, 'destroy'])->name('estates.destroy'); // move estate into trash
     Route::delete('/estates/{estate}/drop', [EstateController::class, 'drop'])->name('estates.drop'); // drop estate from db
-    Route::resource('estates', EstateController::class);
+  
+    Route::resource('/estates', EstateController::class);
 });
 
 Route::middleware('auth')->group(function () {
