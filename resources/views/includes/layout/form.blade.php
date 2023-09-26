@@ -114,7 +114,8 @@
 
     {{-- Visible switch --}}
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" checked>
+        <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible"
+            @if ($estate->is_visible) checked @endif>
         <label class="form-check-label" for="is_visible">Visibile per tutti</label>
     </div>
 
