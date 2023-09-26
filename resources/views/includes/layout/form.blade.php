@@ -48,5 +48,11 @@
             </div>
         </div>
 
+        {{-- Visible switch --}}
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="visible" checked>
+            <label class="form-check-label" for="visible">Visibile per tutti</label>
+        </div>
+
     </form>
 </div>
