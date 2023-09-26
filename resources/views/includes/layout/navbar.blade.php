@@ -12,13 +12,13 @@
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
                             href="{{ route('admin.estates.index') }}">Index</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.trash')) active @endif"
-                            href="{{ route('admin.home') }}">Trash</a>
-                    </li>
+                            href="{{ route('admin.estates.trash') }}">Trash</a>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.create')) active @endif"
-                            href="{{ route('admin.home') }}">Create</a>
+                            href="{{ route('admin.estates.create') }}">Aggiungi</a>
                     </li>
                 @else
                     <li class="nav-item">
