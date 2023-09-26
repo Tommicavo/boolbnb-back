@@ -21,7 +21,8 @@ class EstateController extends Controller
      */
     public function create()
     {
-        //
+        $estate = new Estate();
+        return view('admin.estates.create', compact('estate'));
     }
 
     /**
