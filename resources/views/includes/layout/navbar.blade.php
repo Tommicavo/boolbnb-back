@@ -10,7 +10,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
-                            href="{{ route('admin.home') }}">Index</a>
+                            href="{{ route('admin.estates.index') }}">Index</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.trash')) active @endif"
