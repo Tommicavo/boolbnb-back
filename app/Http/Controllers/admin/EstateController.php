@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -102,6 +103,7 @@ class EstateController extends Controller
 
         $estate = new Estate;
         $estate->fill($data);
+        $estate->user_id = Auth::user()->id;
         $estate->save();
 
 
