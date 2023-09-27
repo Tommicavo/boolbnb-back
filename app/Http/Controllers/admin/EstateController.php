@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Estate;
 use App\Models\Image;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class EstateController extends Controller
@@ -36,6 +38,7 @@ class EstateController extends Controller
      */
     public function store(Request $request)
     {
+
 
         // Validation
         $request->validate(
@@ -69,7 +72,6 @@ class EstateController extends Controller
         $data = $request->all();
         $images = $request->file('multiple_images');
 
-
         // Change is_visible switch value to a boolean one.
         $data['is_visible'] = isset($data['is_visible']);
 
@@ -78,6 +80,31 @@ class EstateController extends Controller
         $estate->cover = $images[0] ?? 'https://marcolanci.it/utils/placeholder.jpg';
         $estate->save();
 
+
+
+        // ############# ADDRESS #############
+        // Push address into DB
+        $address = new Address();
+        $address->fill($data);
+
+        $query = '';
+
+        foreach ($address->toArray() as $field) {
+            $query .= $field . '%20';
+        };
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&lat=37.337&lon=-121.89&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+
+        $jsonData = $response->json();
+
+        $address->latitude = $jsonData['results'][0]['position']['lat'];
+        $address->longitude = $jsonData['results'][0]['position']['lon'];
+        $address->estate_id = $estate->id;
+
+        $address->save();
+
+
+
+        // ############# IMAGES #############
         // Save multiple images
         if ($images) {
             foreach ($images as $image) {
@@ -91,7 +118,7 @@ class EstateController extends Controller
 
         if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
 
-        return to_route('admin.estates.create', $estate)->with("type", "success")->with("message", "Annuncio inserito");
+        return to_route('admin.estates.create', $estate, $address)->with("type", "success")->with("message", "Annuncio inserito");
     }
 
     /**
