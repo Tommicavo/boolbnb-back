@@ -2,6 +2,8 @@
 
 @section('title', $estate->title)
 
+
+
 @section('content')
 
     <div class="d-flex justify-content-between align-items-center my-3">
@@ -35,6 +37,19 @@
             <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
             <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }}</li>
             <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
+            <li class="list-group-item"><strong>servizi: </strong>
+                @forelse($estate->services as $service)
+                    <div class="service p-1 d-flex flex-column">
+                        <h5 class="card-title text-center pb-3"> {{ $service?->label }}</h5>
+                        <i class="text-center fa-solid fa-{{ $service->icon }} fa-2xl"></i>
+                    </div>
+
+                @empty
+                    -
+                @endforelse
+
+            </li>
+
         </ul>
     </div>
 @endsection
