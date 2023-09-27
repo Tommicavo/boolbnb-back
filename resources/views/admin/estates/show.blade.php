@@ -39,7 +39,7 @@
             <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
             <li class="list-group-item d-flex"><strong>servizi: </strong>
                 @forelse($estate->services as $service)
-                    <div class="service p-1 d-flex flex-column mx-3">
+                    <div class="service p-1 d-flex flex-column mx-2">
                         <h5 class="card-title text-center pb-3"> {{ $service?->label }}</h5>
                         <i class="text-center fa-solid fa-{{ $service->icon }} fa-2xl"></i>
                     </div>
