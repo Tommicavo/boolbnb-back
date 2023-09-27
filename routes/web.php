@@ -3,8 +3,7 @@
 use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Guest\HomeController as GuestHomeController;
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Guest\HomeController;
 
 
 /*
@@ -18,10 +17,9 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 |
 */
 
-Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
+Route::get('/', [HomeController::class, 'index'])->name('guest.home');
 
 Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(function () {
-    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
     Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
     Route::patch('/estates/restore', [EstateController::class, 'restoreAll'])->name('estates.restoreAll'); // restore all estates
     Route::patch('/estates/{estate}/restore', [EstateController::class, 'restore'])->name('estates.restore'); // restore an estate

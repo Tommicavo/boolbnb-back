@@ -5,20 +5,8 @@
             <ul class="navbar-nav me-auto">
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('admin.home')) active @endif"
-                            href="{{ route('admin.home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
-                            href="{{ route('admin.estates.index') }}">Index</a>
-                    </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('admin.estates.trash')) active @endif"
-                            href="{{ route('admin.estates.trash') }}">Trash</a>
-                    </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('admin.estates.create')) active @endif"
-                            href="{{ route('admin.estates.create') }}">Aggiungi</a>
+                            href="{{ route('admin.estates.index') }}">Estates</a>
                     </li>
                 @else
                     <li class="nav-item">
@@ -48,7 +36,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('admin.home') }}">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('admin.estates.index') }}">Dashboard</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">Profile</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
