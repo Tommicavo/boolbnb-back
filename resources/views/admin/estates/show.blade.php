@@ -25,10 +25,20 @@
         </div>
     </div>
     <div class="card mb-3">
-        @if (count($estate->images))
-            <img style="height: 26rem; object-fit: cover;" src="{{ $estate->get_cover_path() }}" class="card-img-top"
-                alt="{{ $estate->title }}">
-        @endif
+        <div class="images-section d-flex justify-content-center">
+            <div class="box-cover">
+                <img src="{{ $estate->get_cover_path() }}" alt="{{ $estate->title }}">
+            </div>
+            <div class="boxes d-flex flex-column flex-wrap">
+                @foreach ($estate->images as $index => $image)
+                    @if ($index > 0)
+                        <div class="box"><img src="{{ asset('storage/' . $image->url) }}" alt=""></div>
+                    @endif
+                @endforeach
+
+            </div>
+        </div>
+
         <div class="card-body">
             <h5 class="card-title">{{ $estate->title }}</h5>
             <p class="card-text">{{ $estate->description }}</p>

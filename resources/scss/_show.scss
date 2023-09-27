@@ -4,3 +4,27 @@
     border-radius: 15px;
     border: 1px solid gray;
 }
+
+.box-cover{
+    height: 20rem;
+    width: 20rem;
+    background-color: blue;
+}
+.box{
+    background-color: red;
+    height: 5rem;
+    width: 10rem;
+
+}
+.images-section, .boxes{
+    gap: 1rem;
+}
+
+.boxes{
+    height: 300px;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

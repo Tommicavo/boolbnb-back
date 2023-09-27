@@ -52,7 +52,7 @@ class Estate extends Model
     {
         if ($this->images->isNotEmpty()) {
             return asset('storage/' . $this->images[0]->url);
-        } else return 'https://www.mrw.it/img/cope/0iwkf4_1609360688.jpg';
+        } else return 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png';
     }
 
     public function get_address()
