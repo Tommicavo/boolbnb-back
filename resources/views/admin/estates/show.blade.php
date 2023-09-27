@@ -23,8 +23,10 @@
         </div>
     </div>
     <div class="card mb-3">
-        <img style="height: 26rem; object-fit: cover;" src="{{ $estate->get_cover_path() }}" class="card-img-top"
-            alt="{{ $estate->title }}">
+        @if (count($estate->images))
+            <img style="height: 26rem; object-fit: cover;" src="{{ $estate->get_cover_path() }}" class="card-img-top"
+                alt="{{ $estate->title }}">
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{ $estate->title }}</h5>
             <p class="card-text">{{ $estate->description }}</p>
@@ -37,4 +39,5 @@
             <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
         </ul>
     </div>
+
 @endsection
