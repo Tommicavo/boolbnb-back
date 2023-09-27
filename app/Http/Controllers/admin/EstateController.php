@@ -87,12 +87,10 @@ class EstateController extends Controller
         $address = new Address();
         $address->fill($data);
 
-        $query = '';
+        $address_data = $address->toArray();
+        $query = $this->get_query($address_data);
 
-        foreach ($address->toArray() as $field) {
-            $query .= $field . '%20';
-        };
-        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&lat=37.337&lon=-121.89&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
 
         $jsonData = $response->json();
 
@@ -101,7 +99,6 @@ class EstateController extends Controller
         $address->estate_id = $estate->id;
 
         $address->save();
-
 
 
         // ############# IMAGES #############
@@ -295,5 +292,18 @@ class EstateController extends Controller
         return to_route('admin.estates.index')
             ->with('alertType', 'success')
             ->with('alertMessage', "$estates_count estates have been successfully restored!");
+    }
+
+    public function get_query($data)
+    {
+        $arr_query = [];
+        foreach ($data as $row) {
+            $words = explode(' ', $row);
+            foreach ($words as $word) {
+                $arr_query[] = "$word%20";
+            }
+        }
+        $query = implode($arr_query);
+        return substr($query, 0, strlen($query) - 3);
     }
 }
