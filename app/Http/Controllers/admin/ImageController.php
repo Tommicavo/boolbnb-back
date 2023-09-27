@@ -17,25 +17,6 @@ class ImageController extends Controller
     {
         //
     }
-    public function upload(Request $request, Estate $estate)
-    {
-        // Validazione delle immagini (tipo, dimensione, ecc.)
-        $request->validate([
-            'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
-        ]);
-
-        // Caricamento e associazione delle immagini all'appartamento
-        foreach ($request->file('images') as $image) {
-            $img_url = $image->store('estates_images');
-            $estate->images()->create([
-                'image_url' => $img_url,
-            ]);
-
-            return to_route('admin.estates.show', $estate->id)
-                ->with('success', 'Le immagini sono state caricate con successo.');
-        }
-    }
 
     /**
      * Show the form for creating a new resource.
