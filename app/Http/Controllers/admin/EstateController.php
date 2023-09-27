@@ -141,7 +141,7 @@ class EstateController extends Controller
 
         if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
 
-        return to_route('admin.estates.create', $estate)->with("type", "success")->with("message", "Annuncio inserito");
+        return to_route('admin.estates.show', $estate->id)->with("type", "success")->with("message", "Annuncio inserito");
     }
 
     /**
@@ -224,12 +224,14 @@ class EstateController extends Controller
         );
 
         $data = $request->all();
+        // dd($data);
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
 
         $estate = Estate::findOrFail($id);
         $estate->update($data);
+        $estate->address->update($data);
 
         // Delete multiple images before update
         Storage::deleteDirectory("estate_images/$estate->id");
@@ -255,7 +257,7 @@ class EstateController extends Controller
         if (!Arr::exists($data, 'services') && count($estate->services)) $estate->services()->detach();
         elseif (Arr::exists($data, 'services')) $estate->services()->sync($data['services']);
 
-        return to_route('admin.estates.create')->with('type', 'success')->with('message', 'Annuncio modificato con successo');
+        return to_route('admin.estates.show', $estate->id)->with('type', 'success')->with('message', 'Annuncio modificato con successo');
     }
 
     /**
