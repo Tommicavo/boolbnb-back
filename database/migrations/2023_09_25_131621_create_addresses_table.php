@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('toponymic');
             $table->string('street_name');
-            $table->tinyInteger('number');
+            $table->smallint('number');
             $table->char('zip_code', 5);
             $table->string('city');
             $table->string('latitude');
