@@ -9,6 +9,10 @@
                 <span><i class="fa-regular fa-square-plus"></i></span>
                 <span>Aggiungi un alloggio</span>
             </a>
+            <a href="{{ route('admin.estates.trash') }}" class="btn btn-danger">
+                <span><i class="fa-solid fa-trash-arrow-up"></i></span>
+                <span>Cestino</span>
+            </a>
         </div>
     </header>
     <div class="indexContent">
@@ -43,7 +47,7 @@
                                     <a class="btn btn-warning mx-3"
                                         href="{{ route('admin.estates.edit', $estate) }}">Modifica</a>
                                     <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST"
-                                        class="deleteForm trashEstate">
+                                        class="deleteForm trashEstate" data-name="{{ $estate->title }}">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit" data-bs-toggle="modal"
@@ -59,4 +63,8 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('scripts')
+    @vite(['resources/js/modalScript.js'])
 @endsection

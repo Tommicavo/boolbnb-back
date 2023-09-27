@@ -6,10 +6,6 @@
     <header class="d-flex justify-content-between align-items-center py-4">
         <h1>Trash Can</h1>
         <div class="headerLeft d-flex justify-content-center align-items-center gap-3">
-            <a class="btn btn-primary" href="{{ route('admin.home') }}">
-                <span><i class="fa-solid fa-house-user"></i></span>
-                <span>Home</span>
-            </a>
             <a class="btn btn-primary" href="{{ route('admin.estates.index') }}">
                 <span><i class="fa-solid fa-backward-fast"></i></span>
                 <span>Estates</span>
