@@ -96,6 +96,7 @@ class EstateController extends Controller
             ]
         );
         $data = $request->all();
+
         $images = $request->file('multiple_images');
 
         // Change is_visible switch value to a boolean one.
@@ -105,8 +106,6 @@ class EstateController extends Controller
         $estate->fill($data);
         $estate->user_id = Auth::user()->id;
         $estate->save();
-
-
 
         // ############# ADDRESS #############
         // Push address into DB
@@ -125,7 +124,6 @@ class EstateController extends Controller
         $address->estate_id = $estate->id;
 
         $address->save();
-
 
         // ############# IMAGES #############
         // Save multiple images
@@ -224,7 +222,6 @@ class EstateController extends Controller
         );
 
         $data = $request->all();
-        // dd($data);
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
@@ -232,6 +229,24 @@ class EstateController extends Controller
         $estate = Estate::findOrFail($id);
         $estate->update($data);
         $estate->address->update($data);
+
+        // ############# ADDRESS #############
+        // Update address into DB
+        $temp_address = new Address();
+        $temp_address->fill($data);
+
+        $address_data = $temp_address->toArray();
+        $query = $this->get_query($address_data);
+
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+
+        $jsonData = $response->json();
+
+        $estate->address->latitude = $jsonData['results'][0]['position']['lat'];
+        $estate->address->longitude = $jsonData['results'][0]['position']['lon'];
+        $estate->address->estate_id = $estate->id;
+
+        $estate->address->save();
 
         // Delete multiple images before update
         Storage::deleteDirectory("estate_images/$estate->id");
