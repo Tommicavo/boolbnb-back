@@ -47,4 +47,9 @@ class Estate extends Model
     {
         return $this->hasOne(Address::class);
     }
+
+    public function get_cover_path()
+    {
+        return asset('storage/' . $this->images[0]->url);
+    }
 }

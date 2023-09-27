@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="card mb-3">
-        <img style="height: 26rem; object-fit: cover;" src="{{ $estate->cover }}" class="card-img-top"
+        <img style="height: 26rem; object-fit: cover;" src="{{ $estate->get_cover_path() }}" class="card-img-top"
             alt="{{ $estate->title }}">
         <div class="card-body">
             <h5 class="card-title">{{ $estate->title }}</h5>

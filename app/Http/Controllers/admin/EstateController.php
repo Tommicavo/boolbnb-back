@@ -45,7 +45,6 @@ class EstateController extends Controller
             [
                 'title' => 'required|string|max:50',
                 'description' => 'nullable|string|max:300',
-                'cover' => 'nullable',
                 'rooms' => 'required|numeric:1,254',
                 'beds' => 'required|numeric:1,254',
                 'bathrooms' => 'required|numeric:1,254',
@@ -65,7 +64,6 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'cover.image' => "È possibile allegare solo file di tipo immagine."
             ]
         );
 
@@ -77,7 +75,6 @@ class EstateController extends Controller
 
         $estate = new Estate;
         $estate->fill($data);
-        $estate->cover = $images[0] ?? 'https://marcolanci.it/utils/placeholder.jpg';
         $estate->save();
 
 
@@ -146,7 +143,6 @@ class EstateController extends Controller
             [
                 'title' => 'required|string|max:50',
                 'description' => 'nullable|string|max:300',
-                'cover' => 'nullable|image',
                 'rooms' => 'required|numeric:1,254',
                 'beds' => 'required|numeric:1,254',
                 'bathrooms' => 'required|numeric:1,254',
@@ -166,7 +162,6 @@ class EstateController extends Controller
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
                 'price.required' => 'Il prezzo è obbligatorio.',
-                'cover.image' => "È possibile allegare solo file di tipo immagine."
             ]
         );
 
