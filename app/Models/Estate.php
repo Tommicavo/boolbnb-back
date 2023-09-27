@@ -50,6 +50,8 @@ class Estate extends Model
 
     public function get_cover_path()
     {
-        return asset('storage/' . $this->images[0]->url);
+        if ($this->images->isNotEmpty()) {
+            return asset('storage/' . $this->images[0]->url);
+        } else return 'https://www.mrw.it/img/cope/0iwkf4_1609360688.jpg';
     }
 }
