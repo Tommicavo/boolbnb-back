@@ -48,7 +48,7 @@
 
         {{-- Toponymic --}}
         <div class="mb-3 text-start col-2">
-            <label for="toponymic">Tipo</label>
+            <label for="toponymic">Via, Piazza, Vicolo...</label>
             <input type="text" id="toponymic" name="toponymic"
                 class="form-control @error('toponymic') is-invalid @elseif (old('toponymic')) is-valid @enderror"
                 value="{{ old('toponymic', $estate->address) }}" min="1" max="254" required>
@@ -61,7 +61,7 @@
 
         {{-- Street name --}}
         <div class="mb-3 text-start col-3">
-            <label for="street_name">Via</label>
+            <label for="street_name">Nome della via</label>
             <input type="text" id="street_name" name="street_name"
                 class="form-control @error('street_name') is-invalid @elseif (old('street_name')) is-valid @enderror"
                 value="{{ old('street_name', $estate->address) }}" min="1" max="254" required>
@@ -77,7 +77,7 @@
             <label for="number">Civico</label>
             <input type="number" id="number" name="number"
                 class="form-control @error('number') is-invalid @elseif (old('number')) is-valid @enderror"
-                value="{{ old('number', $estate->address) }}" min="1" max="254" required>
+                value="{{ old('number', $estate->address) }}" min="1" max="500" required>
             @error('number')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -181,6 +181,8 @@
         </div>
     </div>
 
+
+    {{-- Switch & Checboxes --}}
     <div class="d-flex justify-content-between my-3">
         {{-- Visible switch --}}
         <div class="form-check form-switch">
@@ -200,21 +202,6 @@
             @endforeach
         </div>
     </div>
-    {{-- !COVER --}}
-    {{-- Image/cover input --}}
-    {{-- <div class="col-10 text-start">
-        <div class="mb-3">
-            <label class="form-label" for="cover">Foto di Copertina</label>
-            <input type="file" id="cover" name="cover"
-                class="form-control @error('cover') is-invalid @elseif (old('cover')) is-valid @enderror"
-                value="{{ old('cover', $estate->cover) }}" required>
-        </div>
-        @error('cover')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-    </div> --}}
 
     {{-- Multiple images --}}
     <div class="col-10 text-start">
@@ -222,13 +209,13 @@
             <label class="form-label" for="multiple_images">Immagini</label>
             <input type="file" multiple id="multiple_images" name="multiple_images[]"
                 class="form-control @error('multiple_images') is-invalid @elseif (old('multiple_images')) is-valid @enderror"
-                value="{{ old('multiple_images', $estate->images) }}">
+                value="{{ old('url', $estate->images) }}">
+            @error('multiple_images')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
-        @error('multiple_images')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
     </div>
 
     {{-- !PUT IMAGES HERE --}}
