@@ -39,34 +39,61 @@ class EstateController extends Controller
     public function store(Request $request)
     {
 
-
         // Validation
         $request->validate(
             [
+                // Estate validation
                 'title' => 'required|string|max:50',
                 'description' => 'nullable|string|max:300',
                 'rooms' => 'required|numeric:1,254',
                 'beds' => 'required|numeric:1,254',
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
-                'price' => 'required|required|numeric:0.01'
+                'price' => 'required|numeric:0.01',
+
+                // Address validation
+                'toponymic' => 'required|string|max:15',
+                'street_name' => 'required|string|max:50',
+                'number' => 'required|numeric:1,500',
+                'zip_code' => 'required|numeric:10000,99999',
+                'city' => 'required|string|max:50',
+
+                // File validation
+                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
+                // Estate errors bag
                 'title.required' => 'Il titole è obbligatorio.',
                 'title.max' => 'Il titole deve essere lungo max 50 carattari.',
                 'description.max' => 'La descrizione deve essere lunga max 300 carattari.',
                 'rooms.required' => 'Il numero delle stanze è obbligatorio.',
-                'rooms.required' => 'Il numero delle stanze deve essere compreso tra 1 e 254.',
+                'rooms.numeric' => 'Il numero delle stanze deve essere compreso tra 1 e 254.',
                 'beds.required' => 'Il numero dei letti è obbligatorio.',
-                'beds.required' => 'Il numero dei letti deve essere compreso tra 1 e 254.',
+                'beds.numeric' => 'Il numero dei letti deve essere compreso tra 1 e 254.',
                 'bathrooms.required' => 'Il numero dei bagni è obbligatorio.',
-                'bathrooms.required' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
+                'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
-                'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
-                'price.required' => 'Il prezzo è obbligatorio.',
+                'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
+
+                // Address errors bag
+                'toponymic.required' => 'La particella è obbligatoria.',
+                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
+                'street_name.required' => 'Il nome della via è obbligatorio.',
+                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
+                'number.required' => 'Il numero civico è obbligatorio.',
+                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
+                'zip_code.required' => 'Il CAP è obbligatorio.',
+                'zip_code.numeric' => 'Il CAP deve essere un numero.',
+                'city.required' => 'La città è obbligatoria.',
+                'city.max' => 'La città deve essere lunga max 50 carattari.',
+
+                // Images errors bag
+                'multiple_images.required' => "È richiesta almeno un'immagine.",
+                'multiple_images.image' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
+                'multiple_images.mimes' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
+                'multiple_images.max' => 'I file devono pesare max 2Mb.'
             ]
         );
-
         $data = $request->all();
         $images = $request->file('multiple_images');
 
@@ -141,27 +168,58 @@ class EstateController extends Controller
         // Validation
         $request->validate(
             [
+                // Estate validation
                 'title' => 'required|string|max:50',
                 'description' => 'nullable|string|max:300',
                 'rooms' => 'required|numeric:1,254',
                 'beds' => 'required|numeric:1,254',
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
-                'price' => 'required|required|numeric:0.01'
+                'price' => 'required|numeric:0.01',
+
+                // Address validation
+                'toponymic' => 'required|string|max:15',
+                'street_name' => 'required|string|max:50',
+                'number' => 'required|numeric:1,500',
+                'zip_code' => 'required|numeric:10000,99999',
+                'city' => 'required|string|max:50',
+                'latitude' => 'required|regex:/^[-+]?([1-9]\d*(\.\d+)?|0(\.\d+)?|\.0+1)$/',
+                'longitude' => 'required|regex:/^[-+]?([1-9]\d*(\.\d+)?|0(\.\d+)?|\.0+1)$/',
+
+                // File validation
+                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
+                // Estate errors bag
                 'title.required' => 'Il titole è obbligatorio.',
                 'title.max' => 'Il titole deve essere lungo max 50 carattari.',
                 'description.max' => 'La descrizione deve essere lunga max 300 carattari.',
                 'rooms.required' => 'Il numero delle stanze è obbligatorio.',
-                'rooms.required' => 'Il numero delle stanze deve essere compreso tra 1 e 254.',
+                'rooms.numeric' => 'Il numero delle stanze deve essere compreso tra 1 e 254.',
                 'beds.required' => 'Il numero dei letti è obbligatorio.',
-                'beds.required' => 'Il numero dei letti deve essere compreso tra 1 e 254.',
+                'beds.numeric' => 'Il numero dei letti deve essere compreso tra 1 e 254.',
                 'bathrooms.required' => 'Il numero dei bagni è obbligatorio.',
-                'bathrooms.required' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
+                'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
-                'mq.required' => 'I mq devono essere compresi tra 20 e 1000.',
-                'price.required' => 'Il prezzo è obbligatorio.',
+                'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
+
+                // Address errors bag
+                'toponymic.required' => 'La particella è obbligatoria.',
+                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
+                'street_name.required' => 'Il nome della via è obbligatorio.',
+                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
+                'number.required' => 'Il numero civico è obbligatorio.',
+                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
+                'zip_code.required' => 'Il CAP è obbligatorio.',
+                'zip_code.numeric' => 'Il CAP deve essere un numero.',
+                'city.required' => 'La città è obbligatoria.',
+                'city.max' => 'La città deve essere lunga max 50 carattari.',
+
+                // Images errors bag
+                'multiple_images.required' => "È richiesta almeno un'immagine.",
+                'multiple_images.image' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
+                'multiple_images.mimes' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
+                'multiple_images.max' => 'I file devono pesare max 2Mb.'
             ]
         );
 
@@ -226,9 +284,8 @@ class EstateController extends Controller
         $estate = Estate::onlyTrashed()->findOrFail($id);
 
         // ! DA VERIFICARE CHE LA COVER E LE IMMAGINI SI CANCELLINO !
-        if ($estate->cover) Storage::delete($estate->cover);
         if ($estate->images) {
-            foreach ($estate->images as $image) Storage::delete($image);
+            Storage::deleteDirectory("estate_images/$estate->id");
         }
 
         if (count($estate->services)) $estate->services()->detach();
@@ -248,10 +305,10 @@ class EstateController extends Controller
         $estates_count = Estate::onlyTrashed()->count();
 
         foreach ($estates as $estate) {
+
             // ! DA VERIFICARE CHE LA COVER E LE IMMAGINI SI CANCELLINO !
-            if ($estate->cover) Storage::delete($estate->cover);
             if ($estate->images) {
-                foreach ($estate->images as $image) Storage::delete($image);
+                Storage::deleteDirectory("estate_images/$estate->id");
             }
 
             if (count($estate->services)) $estate->services()->detach();
