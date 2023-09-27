@@ -115,7 +115,7 @@ class EstateController extends Controller
 
         if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
 
-        return to_route('admin.estates.create', $estate, $address)->with("type", "success")->with("message", "Annuncio inserito");
+        return to_route('admin.estates.create', $estate)->with("type", "success")->with("message", "Annuncio inserito");
     }
 
     /**
