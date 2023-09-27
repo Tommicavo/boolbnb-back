@@ -185,8 +185,6 @@ class EstateController extends Controller
                 'number' => 'required|numeric:1,500',
                 'zip_code' => 'required|numeric:10000,99999',
                 'city' => 'required|string|max:50',
-                'latitude' => 'required|regex:/^[-+]?([1-9]\d*(\.\d+)?|0(\.\d+)?|\.0+1)$/',
-                'longitude' => 'required|regex:/^[-+]?([1-9]\d*(\.\d+)?|0(\.\d+)?|\.0+1)$/',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
