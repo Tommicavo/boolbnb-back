@@ -242,6 +242,25 @@ class EstateController extends Controller
 
         $images = $request->file('multiple_images');
 
+
+        // ############# ADDRESS #############
+        // Push address into DB
+        $address = new Address();
+        $address->fill($data);
+
+        $address_data = $address->toArray();
+        $query = $this->get_query($address_data);
+
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+
+        $jsonData = $response->json();
+
+        $address->latitude = $jsonData['results'][0]['position']['lat'];
+        $address->longitude = $jsonData['results'][0]['position']['lon'];
+        $address->estate_id = $estate->id;
+
+        $address->save();
+
         // Save multiple images
         if ($images) {
             foreach ($images as $image) {
