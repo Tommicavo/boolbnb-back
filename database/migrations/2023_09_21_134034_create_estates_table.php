@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->string('title')->required();
             $table->text('description');
-            $table->string('cover')->default('https://marcolanci.it/utils/placeholder.jpg');
             $table->unsignedTinyInteger('rooms')->default(1)->required();
             $table->unsignedTinyInteger('beds')->default(1)->required();
             $table->unsignedTinyInteger('bathrooms')->default(1)->required();
