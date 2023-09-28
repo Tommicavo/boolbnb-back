@@ -43,25 +43,10 @@ class Estate extends Model
         return $this->belongsToMany(Sponsorship::class);
     }
 
-    public function address()
-    {
-        return $this->hasOne(Address::class);
-    }
-
     public function get_cover_path()
     {
         if ($this->images->isNotEmpty()) {
             return asset('storage/' . $this->images[0]->url);
         } else return 'https://www.mrw.it/img/cope/0iwkf4_1609360688.jpg';
-    }
-
-    public function get_address()
-    {
-        $estate_address = $this->address->toponymic . ' ' .
-            $this->address->street_name . ' ' .
-            $this->address->number . ' ' .
-            $this->address->zip_code . ' ' .
-            $this->address->city;
-        return $estate_address;
     }
 }
