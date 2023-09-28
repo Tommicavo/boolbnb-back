@@ -34,13 +34,13 @@
             <p class="card-text">{{ $estate->description }}</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->get_address() }}</li>
+            <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->address }}</li>
             <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
             <li class="list-group-item"><strong>Bagni: </strong>{{ $estate->bathrooms }}</li>
             <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
             <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }}</li>
             <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
-            <li class="list-group-item d-flex"><strong>servizi: </strong>
+            <li class="list-group-item d-flex"><strong>Servizi: </strong>
                 @forelse($estate->services as $service)
                     <div class="service p-1 d-flex flex-column mx-2">
                         <h5 class="card-title text-center pb-3"> {{ $service?->label }}</h5>

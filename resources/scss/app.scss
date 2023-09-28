@@ -1,4 +1,13 @@
-@use "show" ;
+@use "show";
 @use "register" ;
 
 @import '~bootstrap/scss/bootstrap';
+
+#autocomplete {
+    position: absolute;
+    z-index: 1;
+}
+
+#autocomplete div {
+    cursor: pointer;
+}

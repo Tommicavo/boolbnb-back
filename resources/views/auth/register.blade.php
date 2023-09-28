@@ -5,6 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
+                
                     <div class="card-header">
                         <h2 class="text-center py-3">Pagina di registrazione</h2>
                         <div class="note">
@@ -25,6 +26,7 @@
                                     <span>Email</span>
                                     <span class="text-danger"><strong><sup>*</sup></strong></span>
                                 </label>
+
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
@@ -120,6 +122,7 @@
                             <div class="mb-4 row">
                                 <label for="birth_date" class="col-md-4 col-form-label text-md-right">Data di
                                     nascita</label>
+
                                 <div class="col-md-6">
                                     <input id="birth_date" type="date"
                                         class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
@@ -133,7 +136,7 @@
                                 </div>
                             </div>
 
-                            {{-- Registrati --}}
+                            {{-- Bottone Registrati --}}
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">Registrati</button>
