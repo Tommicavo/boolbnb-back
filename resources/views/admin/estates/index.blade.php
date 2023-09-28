@@ -3,7 +3,7 @@
 @section('title', 'Home')
 @section('content')
     <header class="d-flex justify-content-between align-items-center">
-        <h1 class="text-center py-3">Estates</h1>
+        <h1 class="text-center py-3">Alloggi</h1>
         <div class="headerRight">
             <a href="{{ route('admin.estates.create') }}" class="btn btn-success">
                 <span><i class="fa-regular fa-square-plus"></i></span>
@@ -26,7 +26,7 @@
                     <th scope="col">Superficie</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">Visibile</th>
-                    <th scope="col" class="text-center">Tasks</th>
+                    <th scope="col" class="text-center">Azioni</th>
                 </tr>
             </thead>
             <tbody>
