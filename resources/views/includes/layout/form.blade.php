@@ -189,7 +189,7 @@
         // Pick searched address input after 3 char
         input.addEventListener('input', function(e) {
             const query = e.target.value;
-            if (query.length < 3) {
+            if (query.length < 10) {
                 autocomplete.innerHTML = '';
                 return;
             }
@@ -206,16 +206,17 @@
                     results.forEach(element => {
                         const div = document.createElement('div');
                         div.textContent = element.address.freeformAddress;
+                        autocomplete.classList.remove('d-none');
 
                         div.addEventListener('click', function() {
                             input.value = element.address.freeformAddress;
                             autocomplete.innerHTML = '';
                             autocomplete.classList.add('d-none');
                             input.setAttribute("disabled", "");
+
                         });
                         autocomplete.appendChild(div);
                     });
-                    autocomplete.classList.remove('d-none');
 
                 }).catch(err => {
                     console.error(err)
