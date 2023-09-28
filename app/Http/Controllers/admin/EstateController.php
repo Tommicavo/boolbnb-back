@@ -83,18 +83,10 @@ class EstateController extends Controller
         // ############# ADDRESS #############
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $address = new Address();
-        $address->fill($data);
-
-        $address_data = $address->toArray();
-        $query = $this->get_query($address_data);
-
+        $query = $this->get_query($data['address']);
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
-
         $jsonData = $response->json();
-
         if (!count($jsonData['results'])) {
-
             return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
         }
 
@@ -107,12 +99,6 @@ class EstateController extends Controller
         $estate->fill($data);
         $estate->user_id = Auth::user()->id;
         $estate->save();
-
-        $address->latitude = $jsonData['results'][0]['position']['lat'];
-        $address->longitude = $jsonData['results'][0]['position']['lon'];
-        $address->estate_id = $estate->id;
-
-        $address->save();
 
         // ############# IMAGES #############
         // Save multiple images
@@ -199,35 +185,19 @@ class EstateController extends Controller
         $estate = Estate::findOrFail($id);
 
         // ############# ADDRESS #############
-        // Update address into DB
+        // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $temp_address = new Address();
-        $temp_address->fill($data);
-
-        $address_data = $temp_address->toArray();
-        $query = $this->get_query($address_data);
-
+        $query = $this->get_query($data['address']);
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
-
         $jsonData = $response->json();
-
         if (!count($jsonData['results'])) {
-
-            return  to_route('admin.estates.edit', $estate->id)->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente')->with('alertTitle', "$estate->title");
+            return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
         }
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
 
         $estate->update($data);
-        $estate->address->update($data);
-
-
-
-        $estate->address->latitude = $jsonData['results'][0]['position']['lat'];
-        $estate->address->longitude = $jsonData['results'][0]['position']['lon'];
-        $estate->address->estate_id = $estate->id;
-        $estate->address->save();
 
         // Delete multiple images before update
         Storage::deleteDirectory("estate_images/$estate->id");
