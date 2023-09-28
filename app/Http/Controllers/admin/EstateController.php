@@ -86,7 +86,6 @@ class EstateController extends Controller
         $query = $data['address'];
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
-        // dd($jsonData);
 
         // if (!count($jsonData['results'])) {
         //     return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
@@ -191,17 +190,17 @@ class EstateController extends Controller
         // ############# ADDRESS #############
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $query = $this->get_query($data['address']);
-
+        $query = $data['address'];
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
-        if (!count($jsonData['results'])) {
-            return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
-        }
+        // if (!count($jsonData['results'])) {
+        //     return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
+        // }
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
-
+        $estate->latitude = $jsonData['results'][0]['position']['lat'];
+        $estate->longitude = $jsonData['results'][0]['position']['lon'];
         $estate->update($data);
 
         // Delete multiple images before update
