@@ -50,7 +50,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-                'address' => 'required|string|max:50',
+                // 'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -68,8 +68,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-                'address.required' => "L'indirizzo è obbligatorio.",
-                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
+                // 'address.required' => "L'indirizzo è obbligatorio.",
+                // 'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
@@ -83,12 +83,14 @@ class EstateController extends Controller
         // ############# ADDRESS #############
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $query = $this->get_query($data['address']);
+        $query = $data['address'];
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
-        if (!count($jsonData['results'])) {
-            return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
-        }
+        // dd($jsonData);
+
+        // if (!count($jsonData['results'])) {
+        //     return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
+        // }
 
         $images = $request->file('multiple_images');
 
@@ -98,6 +100,8 @@ class EstateController extends Controller
         $estate = new Estate;
         $estate->fill($data);
         $estate->user_id = Auth::user()->id;
+        $estate->latitude = $jsonData['results'][0]['position']['lat'];
+        $estate->longitude = $jsonData['results'][0]['position']['lon'];
         $estate->save();
 
         // ############# IMAGES #############
@@ -188,6 +192,7 @@ class EstateController extends Controller
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
         $query = $this->get_query($data['address']);
+
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
         if (!count($jsonData['results'])) {
@@ -313,18 +318,5 @@ class EstateController extends Controller
         return to_route('admin.estates.index')
             ->with('alertType', 'success')
             ->with('alertMessage', "$estates_count L'annuncio è stato ripristinato!");
-    }
-
-    public function get_query($data)
-    {
-        $arr_query = [];
-        foreach ($data as $row) {
-            $words = explode(' ', $row);
-            foreach ($words as $word) {
-                $arr_query[] = "$word%20";
-            }
-        }
-        $query = implode($arr_query);
-        return substr($query, 0, strlen($query) - 3);
     }
 }

@@ -2,7 +2,7 @@ const input = document.getElementById('address');
 const autocomplete = document.getElementById('autocomplete');
 
 // Pick searched address input after 3 char
-input.addEventListener('input', function(e) {
+input.addEventListener('input', function (e) {
     const query = e.target.value;
     if (query.length < 10) {
         autocomplete.innerHTML = '';
@@ -23,12 +23,11 @@ input.addEventListener('input', function(e) {
                 div.textContent = element.address.freeformAddress;
                 autocomplete.classList.remove('d-none');
 
-                div.addEventListener('click', function() {
+                div.addEventListener('click', function () {
                     input.value = element.address.freeformAddress;
                     autocomplete.innerHTML = '';
                     autocomplete.classList.add('d-none');
-                    input.setAttribute("disabled", "");
-
+                    input.setAttribute("readonly", "readonly");
                 });
                 autocomplete.appendChild(div);
             });

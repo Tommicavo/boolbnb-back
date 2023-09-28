@@ -11,7 +11,7 @@ class Estate extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'rooms', 'beds', 'bathrooms', 'mq', 'is_visible', 'price', 'address'];
+    protected $fillable = ['title', 'description', 'rooms', 'beds', 'bathrooms', 'mq', 'is_visible', 'price', 'address', 'latitude', 'longitude'];
 
     public function category()
     {

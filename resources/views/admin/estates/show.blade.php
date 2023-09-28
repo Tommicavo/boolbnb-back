@@ -34,7 +34,7 @@
             <p class="card-text">{{ $estate->description }}</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->get_address() }}</li>
+            <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->address }}</li>
             <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
             <li class="list-group-item"><strong>Bagni: </strong>{{ $estate->bathrooms }}</li>
             <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
