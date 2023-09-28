@@ -214,6 +214,8 @@
                         });
                         autocomplete.appendChild(div);
                     });
+                }).catch(err => {
+                    console.error(err)
                 })
         });
     </script>
