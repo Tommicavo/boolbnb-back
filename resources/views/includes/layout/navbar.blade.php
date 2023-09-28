@@ -6,7 +6,7 @@
                 @auth
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
-                            href="{{ route('admin.estates.index') }}">Estates</a>
+                            href="{{ route('admin.estates.index') }}">Alloggi</a>
                     </li>
                 @else
                     <li class="nav-item">
@@ -21,11 +21,11 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}">Accedi</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('register') }}">Registrati</a>
                         </li>
                     @endif
                 @else
@@ -36,12 +36,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('admin.estates.index') }}">Dashboard</a>
-                            <a class="dropdown-item" href="{{ url('profile') }}">Profile</a>
+                            <a class="dropdown-item" href="{{ route('admin.estates.index') }}">Pannello di Controllo</a>
+                            <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                Logout
+                                Esci
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

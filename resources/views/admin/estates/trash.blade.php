@@ -4,18 +4,18 @@
 
 @section('content')
     <header class="d-flex justify-content-between align-items-center py-4">
-        <h1>Trash Can</h1>
+        <h1>Cestino</h1>
         <div class="headerLeft d-flex justify-content-center align-items-center gap-3">
             <a class="btn btn-primary" href="{{ route('admin.estates.index') }}">
                 <span><i class="fa-solid fa-backward-fast"></i></span>
-                <span>Estates</span>
+                <span>Alloggi</span>
             </a>
             <form action="{{ route('admin.estates.restoreAll') }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <button class="btn btn-success" type="submit">
                     <span><i class="fa-solid fa-recycle"></i></span>
-                    <span>Restore All</span>
+                    <span>Ripristina tutto</span>
                 </button>
             </form>
             <form action="{{ route('admin.estates.dropAll') }}" method="POST" class="deleteForm dropAllEstates">
@@ -23,7 +23,7 @@
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit" data-bs-toggle="modal" data-bs-target="#myModal">
                     <span><i class="fa-solid fa-explosion"></i></span>
-                    <span>Erase All</span>
+                    <span>Cancella tutto</span>
                 </button>
             </form>
         </div>
@@ -33,8 +33,8 @@
             <thead>
                 <tr>
                     <th scope="col" width="20%">#</th>
-                    <th scope="col" width="50%">Estate</th>
-                    <th scope="col" width="30%" class="text-center">Tasks</th>
+                    <th scope="col" width="50%">Alloggio</th>
+                    <th scope="col" width="30%" class="text-center">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,12 +49,12 @@
                                     @method('PATCH')
                                     <button class="btn btn-success" type="submit">
                                         <span><i class="fa-solid fa-recycle"></i></span>
-                                        <span>Restore</span>
+                                        <span>Ripristina</span>
                                     </button>
                                 </form>
                                 <a class="btn btn-primary" href="{{ route('admin.estates.show', $estate->id) }}">
                                     <span><i class="fa-solid fa-info"></i></span>
-                                    <span>Info</span>
+                                    <span>Informazioni</span>
                                 </a>
                                 <form action="{{ route('admin.estates.drop', $estate->id) }}" method="POST"
                                     class="deleteForm dropEstate" data-name="{{ $estate->title }}">
@@ -63,7 +63,7 @@
                                     <button class="btn btn-danger" type="submit" data-bs-toggle="modal"
                                         data-bs-target="#myModal">
                                         <span><i class="fa-solid fa-trash-can"></i></span>
-                                        <span>Erase</span>
+                                        <span>Cancella</span>
                                     </button>
                                 </form>
                             </div>
