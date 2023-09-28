@@ -50,7 +50,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-                // 'address' => 'required|string|max:50',
+                'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -68,8 +68,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-                // 'address.required' => "L'indirizzo è obbligatorio.",
-                // 'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
+                'address.required' => "L'indirizzo è obbligatorio.",
+                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
