@@ -60,7 +60,7 @@ class EstateController extends Controller
                 'city' => 'required|string|max:50',
 
                 // File validation
-                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ],
             [
                 // Estate errors bag
@@ -186,7 +186,7 @@ class EstateController extends Controller
                 'city' => 'required|string|max:50',
 
                 // File validation
-                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ],
             [
                 // Estate errors bag
