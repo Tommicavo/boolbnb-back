@@ -109,13 +109,14 @@ class EstateController extends Controller
 
         // ############# ADDRESS #############
         // Push address into DB
+        $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
         $address = new Address();
         $address->fill($data);
 
         $address_data = $address->toArray();
         $query = $this->get_query($address_data);
 
-        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
 
         $jsonData = $response->json();
 
@@ -232,13 +233,14 @@ class EstateController extends Controller
 
         // ############# ADDRESS #############
         // Update address into DB
+        $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
         $temp_address = new Address();
         $temp_address->fill($data);
 
         $address_data = $temp_address->toArray();
         $query = $this->get_query($address_data);
 
-        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&view=Unified&key=M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW");
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
 
         $jsonData = $response->json();
 
