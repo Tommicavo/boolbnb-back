@@ -16,6 +16,9 @@ return new class extends Migration
 
             $table->string('title')->required();
             $table->text('description');
+            $table->string('address');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->unsignedTinyInteger('rooms')->default(1)->required();
             $table->unsignedTinyInteger('beds')->default(1)->required();
             $table->unsignedTinyInteger('bathrooms')->default(1)->required();

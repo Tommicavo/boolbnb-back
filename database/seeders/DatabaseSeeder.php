@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             SponsorshipSeeder::class,
             ServiceSeeder::class,
             EstateSeeder::class,
-            AddressSeeder::class,
             ImageSeeder::class,
             MessageSeeder::class,
             VisitSeeder::class
