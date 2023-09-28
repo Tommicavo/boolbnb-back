@@ -35,4 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use Illuminate\Support\Facades\Http;
+
+Route::get('/proxy/{query}', function ($query) {
+    $url = "https://api.tomtom.com/search/2/search/$query.json";
+    $response = Http::get($url, [
+        'key' => 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW',
+        'limit' => 5
+    ]);
+
+    return response()->json($response->json());
+});
+
 require __DIR__ . '/auth.php';
