@@ -139,16 +139,27 @@
         </div>
 
         {{-- Dynamic Services Checkboxes --}}
-        <div class="d-flex justify-content-start">
-            @foreach ($services as $service)
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif
-                        id="tech-{{ $service->id }}" value="{{ $service->id }}" name="services[]">
-                    <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
+        <div class="services-contenier">
+            <div class="d-flex justify-content-start">
+                @foreach ($services as $service)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"
+                            @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif id="tech-{{ $service->id }}"
+                            value="{{ $service->id }}" name="services[]">
+                        <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
+
+                    </div>
+                @endforeach
+
+            </div>
+            @error('services')
+                <div class="text-danger">
+                    {{ $message }}
                 </div>
-            @endforeach
+            @enderror
         </div>
     </div>
+
 
     {{-- Multiple images --}}
     <div class="col-10 text-start">

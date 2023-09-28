@@ -14,11 +14,13 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         $services = [
-            ['label' => 'Parking', 'icon' => 'square-parking'],
+            ['label' => 'Parcheggio', 'icon' => 'square-parking'],
             ['label' => 'WiFi', 'icon' => 'wifi'],
-            ['label' => 'Kitchen', 'icon' => 'kitchen-set'],
+            ['label' => 'Cucina', 'icon' => 'kitchen-set'],
             ['label' => 'TV', 'icon' => 'tv'],
-            ['label' => 'Pool', 'icon' => 'water-ladder']
+            ['label' => 'Piscina', 'icon' => 'water-ladder'],
+            ['label' => 'Portineria', 'icon' => 'user-tie']
+
         ];
 
         foreach ($services as $service) {
