@@ -106,11 +106,11 @@ class EstateController extends Controller
         $address_data = $address->toArray();
         $query = $this->get_query($address_data);
 
-        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&lat=37.337&lon=-121.89&key=$api_key");
 
         $jsonData = $response->json();
 
-        if (!count($jsonData['results'])) {
+        if (count($jsonData['results']) == 0) {
 
             return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
         }
@@ -240,12 +240,11 @@ class EstateController extends Controller
         $address_data = $temp_address->toArray();
         $query = $this->get_query($address_data);
 
-        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
+        $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?storeResult=false&lat=37.337&lon=-121.89&key=$api_key");
 
         $jsonData = $response->json();
-
-        if (!count($jsonData['results'])) {
-
+        // dd($jsonData);
+        if (count($jsonData['results']) == 0 || $jsonData['results'][0]['address']['country'] != 'Italia' || $jsonData['results'][0]['address']['postalCode'] !=  $estate->address->zip_code) {
             return  to_route('admin.estates.edit', $estate->id)->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente')->with('alertTitle', "$estate->title");
         }
 
