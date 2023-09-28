@@ -97,16 +97,6 @@ class EstateController extends Controller
         );
         $data = $request->all();
 
-        $images = $request->file('multiple_images');
-
-        // Change is_visible switch value to a boolean one.
-        $data['is_visible'] = isset($data['is_visible']);
-
-        $estate = new Estate;
-        $estate->fill($data);
-        $estate->user_id = Auth::user()->id;
-        $estate->save();
-
         // ############# ADDRESS #############
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
@@ -119,6 +109,21 @@ class EstateController extends Controller
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
 
         $jsonData = $response->json();
+
+        if (!count($jsonData['results'])) {
+
+            return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
+        }
+
+        $images = $request->file('multiple_images');
+
+        // Change is_visible switch value to a boolean one.
+        $data['is_visible'] = isset($data['is_visible']);
+
+        $estate = new Estate;
+        $estate->fill($data);
+        $estate->user_id = Auth::user()->id;
+        $estate->save();
 
         $address->latitude = $jsonData['results'][0]['position']['lat'];
         $address->longitude = $jsonData['results'][0]['position']['lon'];
@@ -140,7 +145,7 @@ class EstateController extends Controller
 
         if (Arr::exists($data, 'services')) $estate->services()->attach($data['services']);
 
-        return to_route('admin.estates.show', $estate->id)->with("type", "success")->with("message", "Annuncio inserito");
+        return to_route('admin.estates.show', $estate->id)->with("alertType", "success")->with("message", "Annuncio inserito")->with('alertTitle', "$estate->title");
     }
 
     /**
@@ -224,12 +229,7 @@ class EstateController extends Controller
 
         $data = $request->all();
 
-        // Change is_visible switch value to boolean one.
-        $data['is_visible'] = isset($data['is_visible']);
-
         $estate = Estate::findOrFail($id);
-        $estate->update($data);
-        $estate->address->update($data);
 
         // ############# ADDRESS #############
         // Update address into DB
@@ -244,10 +244,22 @@ class EstateController extends Controller
 
         $jsonData = $response->json();
 
+        if (!count($jsonData['results'])) {
+
+            return  to_route('admin.estates.edit', $estate->id)->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente')->with('alertTitle', "$estate->title");
+        }
+
+        // Change is_visible switch value to boolean one.
+        $data['is_visible'] = isset($data['is_visible']);
+
+        $estate->update($data);
+        $estate->address->update($data);
+
+
+
         $estate->address->latitude = $jsonData['results'][0]['position']['lat'];
         $estate->address->longitude = $jsonData['results'][0]['position']['lon'];
         $estate->address->estate_id = $estate->id;
-
         $estate->address->save();
 
         // Delete multiple images before update
@@ -275,7 +287,7 @@ class EstateController extends Controller
         if (!Arr::exists($data, 'services') && count($estate->services)) $estate->services()->detach();
         elseif (Arr::exists($data, 'services')) $estate->services()->sync($data['services']);
 
-        return to_route('admin.estates.show', $estate->id)->with('type', 'success')->with('message', 'Annuncio modificato con successo');
+        return to_route('admin.estates.show', $estate->id)->with('alertType', 'success')->with('alertMessage', 'Annuncio modificato con successo')->with('alertTitle', "$estate->title");
     }
 
     /**
@@ -316,7 +328,7 @@ class EstateController extends Controller
         return to_route('admin.estates.trash')
             ->with('alertType', 'danger')
             ->with('alertTitle', "$estate->title")
-            ->with('alertMessage', 'has been successfully erased from Trash Can!');
+            ->with('alertMessage', "L'annuncio è stato cancellato correttamente!");
     }
 
     public function dropAll()
@@ -339,7 +351,7 @@ class EstateController extends Controller
 
         return to_route('admin.estates.index')
             ->with('alertType', 'danger')
-            ->with('alertMessage', "$estates_count estates have been successfully erased from Trash Can!");
+            ->with('alertMessage', "$estates_count annunci sono stati cancellati correttamente!");
     }
 
     public function restore(string $id)
@@ -351,7 +363,7 @@ class EstateController extends Controller
         return to_route('admin.estates.trash')
             ->with('alertType', 'success')
             ->with('alertTitle', "$estate->title")
-            ->with('alertMessage', 'has been successfully restored!');
+            ->with('alertMessage', "L'annuncio è stato ripristinato!");
     }
 
     public function restoreAll()
@@ -363,7 +375,7 @@ class EstateController extends Controller
 
         return to_route('admin.estates.index')
             ->with('alertType', 'success')
-            ->with('alertMessage', "$estates_count estates have been successfully restored!");
+            ->with('alertMessage', "$estates_count L'annuncio è stato ripristinato!");
     }
 
     public function get_query($data)
