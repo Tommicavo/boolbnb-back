@@ -211,6 +211,8 @@
                         div.addEventListener('click', function() {
                             input.value = element.address.freeformAddress;
                             autocomplete.innerHTML = '';
+                            autocomplete.classList.add('d-none');
+                            input.setAttribute("disabled", "");
                         });
                         autocomplete.appendChild(div);
                     });
@@ -220,10 +222,3 @@
         });
     </script>
 @endsection
-
-{{-- .catch(err => {
-    console.log(err)
-})
-.then(() => {
-    autocomplete.classList.add('d-none');
-}) --}}
