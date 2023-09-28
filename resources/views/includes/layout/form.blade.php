@@ -43,70 +43,14 @@
         <textarea type="text" id="description" name="description" class="form-control" maxlength="300">{{ old('description', $estate->description) }}</textarea>
     </div>
 
-    {{-- Address selectors --}}
+    {{-- Address --}}
     <div class="d-flex row justify-content-between">
-
-        {{-- Toponymic --}}
-        <div class="mb-3 text-start col-2">
-            <label for="toponymic">Via, Piazza, Vicolo...</label>
-            <input type="text" id="toponymic" name="toponymic"
-                class="form-control @error('toponymic') is-invalid @elseif (old('toponymic')) is-valid @enderror"
-                value="{{ old('toponymic', $estate->address->toponymic ?? '') }}" min="1" max="254"
-                required>
-            @error('toponymic')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        {{-- Street name --}}
-        <div class="mb-3 text-start col-3">
-            <label for="street_name">Nome della via</label>
-            <input type="text" id="street_name" name="street_name"
-                class="form-control @error('street_name') is-invalid @elseif (old('street_name')) is-valid @enderror"
-                value="{{ old('street_name', $estate->address->street_name ?? '') }}" min="1" max="254"
-                required>
-            @error('street_name')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        {{-- Number --}}
-        <div class="mb-3 text-start col-1">
-            <label for="number">Civico</label>
-            <input type="number" id="number" name="number"
-                class="form-control @error('number') is-invalid @elseif (old('number')) is-valid @enderror"
-                value="{{ old('number', $estate->address->number ?? '') }}" min="1" max="500" required>
-            @error('number')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        {{-- Zip Code --}}
-        <div class="mb-3 text-start col-1">
-            <label for="zip_code">CAP</label>
-            <input type="number" id="zip_code" name="zip_code"
-                class="form-control @error('zip_code') is-invalid @elseif (old('zip_code')) is-valid @enderror"
-                value="{{ old('zip_code', $estate->address->zip_code ?? '') }}" maxlength="5" minlength="5" required>
-            @error('zip_code')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        {{-- City --}}
-        <div class="mb-3 text-start col-3">
-            <label for="city">Città</label>
-            <input type="text" id="city" name="city"
-                class="form-control @error('city') is-invalid @elseif (old('city')) is-valid @enderror"
-                value="{{ old('city', $estate->address->city ?? '') }}" min="0.01" step="0.01" required>
-            @error('city')
+        <div class="mb-3 text-start col-6">
+            <label for="address">Indirizzo</label>
+            <input type="text" id="address" name="address"
+                class="form-control @error('address') is-invalid @elseif (old('address')) is-valid @enderror"
+                value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required>
+            @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
