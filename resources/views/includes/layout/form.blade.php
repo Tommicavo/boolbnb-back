@@ -202,7 +202,6 @@
                 .then(response => {
                     const results = response.data.results;
                     autocomplete.innerHTML = '';
-                    autocomplete.classList.remove('d-none');
 
                     results.forEach(element => {
                         const div = document.createElement('div');
@@ -216,6 +215,8 @@
                         });
                         autocomplete.appendChild(div);
                     });
+                    autocomplete.classList.remove('d-none');
+
                 }).catch(err => {
                     console.error(err)
                 })
