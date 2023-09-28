@@ -50,13 +50,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-
-                // Address validation
-                'toponymic' => 'required|string|max:15',
-                'street_name' => 'required|string|max:50',
-                'number' => 'required|numeric:1,500',
-                'zip_code' => 'required|numeric:10000,99999',
-                'city' => 'required|string|max:50',
+                'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -74,18 +68,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-
-                // Address errors bag
-                'toponymic.required' => 'La particella è obbligatoria.',
-                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
-                'street_name.required' => 'Il nome della via è obbligatorio.',
-                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
-                'number.required' => 'Il numero civico è obbligatorio.',
-                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
-                'zip_code.required' => 'Il CAP è obbligatorio.',
-                'zip_code.numeric' => 'Il CAP deve essere un numero.',
-                'city.required' => 'La città è obbligatoria.',
-                'city.max' => 'La città deve essere lunga max 50 carattari.',
+                'address.required' => "L'indirizzo è obbligatorio.",
+                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
@@ -181,13 +165,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-
-                // Address validation
-                'toponymic' => 'required|string|max:15',
-                'street_name' => 'required|string|max:50',
-                'number' => 'required|numeric:1,500',
-                'zip_code' => 'required|numeric:10000,99999',
-                'city' => 'required|string|max:50',
+                'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -205,18 +183,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-
-                // Address errors bag
-                'toponymic.required' => 'La particella è obbligatoria.',
-                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
-                'street_name.required' => 'Il nome della via è obbligatorio.',
-                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
-                'number.required' => 'Il numero civico è obbligatorio.',
-                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
-                'zip_code.required' => 'Il CAP è obbligatorio.',
-                'zip_code.numeric' => 'Il CAP deve essere un numero.',
-                'city.required' => 'La città è obbligatoria.',
-                'city.max' => 'La città deve essere lunga max 50 carattari.',
+                'address.required' => "L'indirizzo è obbligatorio.",
+                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
