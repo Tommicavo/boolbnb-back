@@ -50,6 +50,7 @@
             <input type="text" id="address" name="address"
                 class="form-control @error('address') is-invalid @elseif (old('address')) is-valid @enderror"
                 value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required>
+            <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
             @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -178,3 +179,49 @@
     </button>
     </form>
 </div>
+
+{{-- Scritps --}}
+@section('scripts')
+    <script>
+        const input = document.getElementById('address');
+        const autocomplete = document.getElementById('autocomplete');
+
+        // Pick searched address input after 3 char
+        input.addEventListener('input', function(e) {
+            const query = e.target.value;
+            if (query.length < 3) {
+                autocomplete.innerHTML = '';
+                return;
+            }
+
+            // Pick endpoint from backend
+            const endpoint = `/proxy/${query}`;
+
+            // AXIOS API Call
+            axios.get(endpoint)
+                .then(response => {
+                    const results = response.data.results;
+                    autocomplete.innerHTML = '';
+                    autocomplete.classList.remove('d-none');
+
+                    results.forEach(element => {
+                        const div = document.createElement('div');
+                        div.textContent = element.address.freeformAddress;
+
+                        div.addEventListener('click', function() {
+                            input.value = element.address.freeformAddress;
+                            autocomplete.innerHTML = '';
+                        });
+                        autocomplete.appendChild(div);
+                    });
+                })
+        });
+    </script>
+@endsection
+
+{{-- .catch(err => {
+    console.log(err)
+})
+.then(() => {
+    autocomplete.classList.add('d-none');
+}) --}}
