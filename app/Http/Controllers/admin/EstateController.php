@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
 use App\Models\Estate;
 use App\Models\Image;
 use App\Models\Service;
@@ -51,13 +50,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-
-                // Address validation
-                'toponymic' => 'required|string|max:15',
-                'street_name' => 'required|string|max:50',
-                'number' => 'required|numeric:1,500',
-                'zip_code' => 'required|numeric:10000,99999',
-                'city' => 'required|string|max:50',
+                'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -75,18 +68,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-
-                // Address errors bag
-                'toponymic.required' => 'La particella è obbligatoria.',
-                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
-                'street_name.required' => 'Il nome della via è obbligatorio.',
-                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
-                'number.required' => 'Il numero civico è obbligatorio.',
-                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
-                'zip_code.required' => 'Il CAP è obbligatorio.',
-                'zip_code.numeric' => 'Il CAP deve essere un numero.',
-                'city.required' => 'La città è obbligatoria.',
-                'city.max' => 'La città deve essere lunga max 50 carattari.',
+                'address.required' => "L'indirizzo è obbligatorio.",
+                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
@@ -100,18 +83,10 @@ class EstateController extends Controller
         // ############# ADDRESS #############
         // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $address = new Address();
-        $address->fill($data);
-
-        $address_data = $address->toArray();
-        $query = $this->get_query($address_data);
-
+        $query = $this->get_query($data['address']);
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
-
         $jsonData = $response->json();
-
         if (!count($jsonData['results'])) {
-
             return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
         }
 
@@ -124,12 +99,6 @@ class EstateController extends Controller
         $estate->fill($data);
         $estate->user_id = Auth::user()->id;
         $estate->save();
-
-        $address->latitude = $jsonData['results'][0]['position']['lat'];
-        $address->longitude = $jsonData['results'][0]['position']['lon'];
-        $address->estate_id = $estate->id;
-
-        $address->save();
 
         // ############# IMAGES #############
         // Save multiple images
@@ -182,13 +151,7 @@ class EstateController extends Controller
                 'bathrooms' => 'required|numeric:1,254',
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
-
-                // Address validation
-                'toponymic' => 'required|string|max:15',
-                'street_name' => 'required|string|max:50',
-                'number' => 'required|numeric:1,500',
-                'zip_code' => 'required|numeric:10000,99999',
-                'city' => 'required|string|max:50',
+                'address' => 'required|string|max:50',
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -206,18 +169,8 @@ class EstateController extends Controller
                 'bathrooms.numeric' => 'Il numero dei bagni deve essere compreso tra 1 e 254.',
                 'mq.required' => 'Il numero dei mq è obbligatorio.',
                 'mq.numeric' => 'I mq devono essere compresi tra 20 e 1000.',
-
-                // Address errors bag
-                'toponymic.required' => 'La particella è obbligatoria.',
-                'toponymic.max' => 'La particella deve essere lunga max 15 carattari.',
-                'street_name.required' => 'Il nome della via è obbligatorio.',
-                'street_name.max' => 'Il nome della via deve essere lunga max 50 carattari.',
-                'number.required' => 'Il numero civico è obbligatorio.',
-                'number.numeric' => 'Il numero civico deve essere compreso tra 1 e 500.',
-                'zip_code.required' => 'Il CAP è obbligatorio.',
-                'zip_code.numeric' => 'Il CAP deve essere un numero.',
-                'city.required' => 'La città è obbligatoria.',
-                'city.max' => 'La città deve essere lunga max 50 carattari.',
+                'address.required' => "L'indirizzo è obbligatorio.",
+                'address.max' => "L'indirizzo deve essere lungo max 50 carattari.",
 
                 // Images errors bag
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
@@ -232,35 +185,19 @@ class EstateController extends Controller
         $estate = Estate::findOrFail($id);
 
         // ############# ADDRESS #############
-        // Update address into DB
+        // Push address into DB
         $api_key = 'M67vYPGoqcGCwsgAOqnQFq8m8VRJHYoW';
-        $temp_address = new Address();
-        $temp_address->fill($data);
-
-        $address_data = $temp_address->toArray();
-        $query = $this->get_query($address_data);
-
+        $query = $this->get_query($data['address']);
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
-
         $jsonData = $response->json();
-
         if (!count($jsonData['results'])) {
-
-            return  to_route('admin.estates.edit', $estate->id)->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente')->with('alertTitle', "$estate->title");
+            return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
         }
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
 
         $estate->update($data);
-        $estate->address->update($data);
-
-
-
-        $estate->address->latitude = $jsonData['results'][0]['position']['lat'];
-        $estate->address->longitude = $jsonData['results'][0]['position']['lon'];
-        $estate->address->estate_id = $estate->id;
-        $estate->address->save();
 
         // Delete multiple images before update
         Storage::deleteDirectory("estate_images/$estate->id");
