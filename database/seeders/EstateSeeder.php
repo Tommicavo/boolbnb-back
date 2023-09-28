@@ -38,9 +38,12 @@ class EstateSeeder extends Seeder
             $estate_services = [];
             $estate_sponsorships = [];
 
+            $totalservices = count($service_ids);
+
             foreach ($service_ids as $service_id) {
                 if ($faker->boolean()) $estate_services[] = $service_id;
             }
+            if ($estate_services === [])  $estate_services[] = rand(1, $totalservices);
 
             foreach ($sponsorship_ids as $sponsorship_id) {
                 if ($faker->boolean()) $estate_sponsorships[] = $sponsorship_id;

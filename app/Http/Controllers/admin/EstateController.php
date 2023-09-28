@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class EstateController extends Controller
 {
@@ -51,6 +52,8 @@ class EstateController extends Controller
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
                 'address' => 'required|string|max:50',
+                'services' => 'required|array',
+
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -75,7 +78,12 @@ class EstateController extends Controller
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
                 'multiple_images.image' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
                 'multiple_images.mimes' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
-                'multiple_images.max' => 'I file devono pesare max 2Mb.'
+                'multiple_images.max' => 'I file devono pesare max 2Mb.',
+
+                // Services errors bag
+                'services.required' => "L'annuncio deve contenere almeno un servizio",
+                'services.array' => "L'annuncio deve contenere almeno un servizio",
+
             ]
         );
         $data = $request->all();
@@ -155,6 +163,8 @@ class EstateController extends Controller
                 'mq' => 'required|numeric:20,1000',
                 'price' => 'required|numeric:0.01',
                 'address' => 'required|string|max:50',
+                'services' => 'required|array',
+
 
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -179,7 +189,11 @@ class EstateController extends Controller
                 'multiple_images.required' => "È richiesta almeno un'immagine.",
                 'multiple_images.image' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
                 'multiple_images.mimes' => 'Le immagini devono essere di tipo jpeg,png,jpg,gif.',
-                'multiple_images.max' => 'I file devono pesare max 2Mb.'
+                'multiple_images.max' => 'I file devono pesare max 2Mb.',
+
+                // Services errors bag
+                'services.required' => "L'annuncio deve contenere almeno un servizio",
+                'services.array' => "L'annuncio deve contenere almeno un servizio",
             ]
         );
 
