@@ -20,7 +20,8 @@ class EstateController extends Controller
 
     public function show(string $id)
     {
-        $estate = Estate::where('id', $id)->first();
+        $images = Image::all();
+        $estate = Estate::where('id', $id)->with('images')->first();
         return response()->json($estate);
     }
 }
