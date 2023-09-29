@@ -1,11 +1,12 @@
 @extends('layouts.app')
+@section('title', 'Registrazione')
 
 @section('content')
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                
+
                     <div class="card-header">
                         <h2 class="text-center py-3">Pagina di registrazione</h2>
                         <div class="note">
@@ -81,19 +82,14 @@
 
                             {{-- Nome --}}
                             <div class="mb-4 row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">
-                                    <span>Nome</span>
-                                    <span class="text-danger"><strong><sup>*</sup></strong></span>
-                                </label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Nome</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name">
-
+                                        value="{{ old('name') }}" autocomplete="name">
                                     <div class="invalidField text-danger">
                                         <ul id="nameUl"></ul>
                                     </div>
-
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,7 +104,7 @@
                                 <div class="col-md-6">
                                     <input id="lastName" type="text"
                                         class="form-control @error('lastName') is-invalid @enderror" name="lastName"
-                                        value="{{ old('lastName') }}" autocomplete="lastName" autofocus>
+                                        value="{{ old('lastName') }}" autocomplete="lastName">
 
                                     @error('lastName')
                                         <span class="invalid-feedback" role="alert">
@@ -126,7 +122,7 @@
                                 <div class="col-md-6">
                                     <input id="birth_date" type="date"
                                         class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                        value="{{ old('birth_date') }}" required autocomplete="birth_date" autofocus>
+                                        value="{{ old('birth_date') }}" required autocomplete="birth_date">
 
                                     @error('birth_date')
                                         <span class="invalid-feedback" role="alert">
