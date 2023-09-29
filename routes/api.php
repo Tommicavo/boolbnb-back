@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\EstateController;
+use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\Api\UserController;
 */
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/services', [ServiceController::class, 'index']);
 
 // All API Estate Route
 Route::apiResource('estates', EstateController::class);
