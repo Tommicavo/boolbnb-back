@@ -10,7 +10,7 @@ Form.addEventListener("submit", function(event) {
     // Verifica se l'input text ha l'attributo 'readonly'
     if (!input.getAttribute("readonly")) {
         // Se non ha l'attributo 'readonly', impedisce l'invio del form
-        addressError.textContent = "L'indirizzo non è valido";
+        addressError.textContent = " non valido!";
         event.preventDefault();
     }
 });
@@ -59,5 +59,5 @@ input.addEventListener('input', function (e) {
             }).catch(err => {
                 console.error(err)
             })
-    }, 1000);
+    }, 200);
 });

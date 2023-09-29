@@ -47,17 +47,22 @@
     {{-- Address --}}
     <div class="d-flex row align-items-end">
         <div class="mb-3 text-start col-6">
-            <label for="address">Indirizzo</label>
-            <input autocomplete="off" type="text" id="address" name="address"
-                class="form-control @error('address') is-invalid @elseif (old('address')) is-valid @enderror"
-                value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required>
-            <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
-            <span id="addressError" class="text-danger"></span>
+            <label for="address">Indirizzo</label><span id="addressError" class="text-danger"></span>
             @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
+            <input autocomplete="off" type="text" id="address" name="address"
+                class="form-control @error('address') is-invalid @elseif (old('address')) is-valid @enderror"
+                value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required>
+            <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
+            {{-- <span id="addressError" class="text-danger"></span>
+            @error('address')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror --}}
         </div>
         <div id="reset-address" type="button" class="btn btn-danger col-2 mb-3">Reset address</div>
     </div>
