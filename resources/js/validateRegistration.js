@@ -94,21 +94,15 @@ registrationForm.addEventListener('submit', event => {
     // Name Validation
     const name = nameField.value;
 
-    if (!name)
-    {
-        const nameRequiredError = 'Il nome è obbligatorio';
-        nameErrors.push(nameRequiredError);
-    } else if (typeof name !== 'string')
-    {
-        const nameStringError = 'Il nome deve essere una stringa';
-        nameErrors.push(nameStringError);
-    }
-
     if (name.length > 50)
     {
         const nameLengthError = 'Il nome inserito supera i 50 caratteri';
         nameErrors.push(nameLengthError);
     }
+
+
+
+    
 
     emailErrors.forEach(error => {
         console.log(error);

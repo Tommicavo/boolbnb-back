@@ -32,13 +32,11 @@ class RegisteredUserController extends Controller
     {
         $request->validate(
             [
-                'name' => ['required', 'string', 'max:50'],
+                'name' => ['max:50'],
                 'email' => ['required', 'string', 'email:filter', 'max:255', 'unique:' . User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ],
             [
-                'name.required' => 'Il nome è obbligatorio',
-                'name.string' => 'Il nome  deve essere una stringa',
                 'name.max' => 'Il nome inserito supera 50 caratteri',
                 'email.required' => 'L\'email è obbligatoria',
                 'email.string' => 'L\'email deve essere una stringa',

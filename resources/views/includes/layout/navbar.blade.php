@@ -32,9 +32,12 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            @if (Auth::user()->name)
+                                {{ Auth::user()->name }}
+                            @else
+                                <i class="fa-solid fa-gear"></i>
+                            @endif
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.estates.index') }}">Pannello di Controllo</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
