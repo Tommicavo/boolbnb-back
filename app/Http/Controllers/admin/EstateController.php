@@ -131,16 +131,24 @@ class EstateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Estate $estate)
+    public function show(string $id)
     {
+        $estate = Estate::withTrashed()->findOrFail($id);
         return view('admin.estates.show', compact('estate'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estate $estate)
+    public function edit(string $id)
     {
+        $estate = Estate::findOrFail($id);
+
+        if (Auth::id() !== $estate->user_id) {
+            return to_route('admin.estates.show', $estate->id)
+                ->with('alertType', 'warning')
+                ->with('alertMessage', "Non sei l'autore dell' annuncio '$estate->title'!\nNon puoi modificarlo");
+        }
         $services = Service::all();
         $estate_service_ids = $estate->services->pluck('id')->toArray();
         return view('admin.estates.edit', compact('estate', 'services', 'estate_service_ids'));
