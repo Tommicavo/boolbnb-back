@@ -24,4 +24,10 @@ class EstateController extends Controller
         $estate = Estate::where('id', $id)->with('images')->first();
         return response()->json($estate);
     }
+
+    public function filter(Request $request)
+    {
+        $data = $request->all();
+        return response()->json($data);
+    }
 }
