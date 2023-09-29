@@ -264,7 +264,7 @@ class EstateController extends Controller
         return to_route('admin.estates.index')
             ->with('alertType', 'info')
             ->with('alertTitle', "$estate->title")
-            ->with('alertMessage', 'has been moved into Trash Can!');
+            ->with('alertMessage', 'è stato messo nel cestino!');
     }
 
     public function trash()
