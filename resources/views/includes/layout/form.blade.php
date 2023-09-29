@@ -3,11 +3,12 @@
     {{-- Dynamic Section --}}
     @if ($estate->exists)
         {{-- Edit section --}}
-        <form method="POST" action="{{ route('admin.estates.update', $estate) }}" enctype="multipart/form-data">
+        <form method="POST" id="Form" action="{{ route('admin.estates.update', $estate) }}"
+            enctype="multipart/form-data">
             @method('PUT')
         @else
             {{-- Create section --}}
-            <form method="POST" action="{{ route('admin.estates.store') }}" enctype="multipart/form-data">
+            <form method="POST" id="Form" action="{{ route('admin.estates.store') }}" enctype="multipart/form-data">
     @endif
 
     {{-- Token --}}
@@ -51,6 +52,7 @@
                 class="form-control @error('address') is-invalid @elseif (old('address')) is-valid @enderror"
                 value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required>
             <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
+            <span id="addressError" class="text-danger"></span>
             @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
