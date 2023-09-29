@@ -1,7 +1,26 @@
 const input = document.getElementById('address');
 const autocomplete = document.getElementById('autocomplete');
+const resetAddress = document.getElementById('reset-address');
+const Form = document.getElementById("Form");
+const addressError = document.getElementById("addressError")
 
 let timeoutId = null;
+
+Form.addEventListener("submit", function(event) {
+    // Verifica se l'input text ha l'attributo 'readonly'
+    if (!input.getAttribute("readonly")) {
+        // Se non ha l'attributo 'readonly', impedisce l'invio del form
+        addressError.textContent = "L'indirizzo non è valido";
+        event.preventDefault();
+    }
+});
+
+// Reset input value
+resetAddress.addEventListener('click', function() {
+    input.value = '';
+    input.setAttribute("readonly", "readonly");
+    input.removeAttribute("readonly", "readonly");
+})
 
 // Pick searched address input after 3 char
 input.addEventListener('input', function (e) {
