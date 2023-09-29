@@ -1,6 +1,6 @@
 const input = document.getElementById('address');
 const autocomplete = document.getElementById('autocomplete');
-const resetAddress = document.getElementById('reset-address')
+const resetAddress = document.getElementById('reset-address');
 
 let timeoutId = null;
 
