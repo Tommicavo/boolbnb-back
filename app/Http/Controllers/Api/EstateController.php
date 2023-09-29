@@ -17,4 +17,10 @@ class EstateController extends Controller
             'results' => $estates
         ]);
     }
+
+    public function show(string $id)
+    {
+        $estate = Estate::where('id', $id)->first();
+        return response()->json($estate);
+    }
 }
