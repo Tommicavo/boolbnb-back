@@ -27,17 +27,6 @@ class EstateController extends Controller
 
     public function filter(Request $request)
     {
-        // $data = $request->all();
-        // $estates = Estate::where('beds', '>=', $data['minBed'])
-        //     ->where('rooms', '>=', $data['minRoom'])
-        //     ->where('services', $data[]);
-
-
-        // return response()->json($data);
-
-
-
-
         $data = $request->all();
 
         // Estrai i servizi selezionati dall'array di servizi
