@@ -13,13 +13,13 @@ deleteForm.forEach(form => {
 
         if (form.classList.contains('trashEstate'))
         {
-            question = `Do you want to move '${title}' estate into Trash Can?`;
+            question = `Vuoi davvero spostare '${title}' nel cestino?`;
         } else if (form.classList.contains('dropEstate'))
         {
-            question = `Do you really want to erase '${title}' estate?\nThis action will be irreversible!`;
+            question = `Vuoi davvero cancellare definitivamente '${title}' ?\nL'azione è irreversibile!`;
         } else if (form.classList.contains('dropAllEstates'))
         {
-            question = `Do you really want to erase all these estates?\nThis action will be irreversible!`;
+            question = `Vuoi davvero cancellare tutti gli annunci definitivamente?\nL'azione è irreversibile!`;
         }
 
         modalMessage.innerText = question;
