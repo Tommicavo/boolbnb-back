@@ -44,7 +44,7 @@
     </div>
 
     {{-- Address --}}
-    <div class="d-flex row justify-content-between">
+    <div class="d-flex row align-items-end">
         <div class="mb-3 text-start col-6">
             <label for="address">Indirizzo</label>
             <input type="text" id="address" name="address"
@@ -57,6 +57,7 @@
                 </div>
             @enderror
         </div>
+        <div id="reset-address" type="button" class="btn btn-danger col-2 mb-3">Reset address</div>
     </div>
 
     {{-- Only numbers selectors --}}

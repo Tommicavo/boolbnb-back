@@ -1,7 +1,15 @@
 const input = document.getElementById('address');
 const autocomplete = document.getElementById('autocomplete');
+const resetAddress = document.getElementById('reset-address')
 
 let timeoutId = null;
+
+// Reset input value
+resetAddress.addEventListener('click', function() {
+    input.value = '';
+    input.setAttribute("readonly", "readonly");
+    input.removeAttribute("readonly", "readonly");
+})
 
 // Pick searched address input after 3 char
 input.addEventListener('input', function (e) {
