@@ -59,5 +59,5 @@ input.addEventListener('input', function (e) {
             }).catch(err => {
                 console.error(err)
             })
-    }, 1000);
+    }, 200);
 });
