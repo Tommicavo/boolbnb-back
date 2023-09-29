@@ -22,6 +22,9 @@ Route::get('/users', [UserController::class, 'index']);
 // All API Estate Route
 Route::apiResource('estates', EstateController::class);
 
+
+Route::get('estates/filter-by-title/{query}', [EstateController::class, 'filterByTitle']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

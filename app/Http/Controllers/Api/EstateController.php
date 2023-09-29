@@ -17,4 +17,11 @@ class EstateController extends Controller
             'results' => $estates
         ]);
     }
+
+    public function filterByTitle($query)
+    {
+        $estates = Estate::where('title', 'like', '%' . $query . '%')->with('images')->get();
+
+        return response()->json(['results' => $estates]);
+    }
 }
