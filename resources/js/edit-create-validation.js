@@ -38,12 +38,12 @@ inputsForm.addEventListener('submit', event => {
   // Title Validation
   const title = titleField.value;
 
-  if(!title){
+  if (!title) {
     const titleLengthError = 'Il titole è obbligatorio.'
     titleErrors.push(titleLengthError);
     errorsBag.push(titleErrors);
   }
-  if (title.length > 50){
+  if (title.length > 50) {
     const titleLengthError = 'Il titole deve essere lungo max 50 carattari.';
     titleErrors.push(titleLengthError);
     errorsBag.push(titleErrors);
@@ -61,7 +61,7 @@ inputsForm.addEventListener('submit', event => {
   // Description Validation
   const description = descriptionField.value;
 
-  if (description.length > 50){
+  if (description.length > 50) {
     const descriptionLengthError = 'La descrizione deve essere lunga max 300 carattari.';
     descriptionErrors.push(descriptionLengthError);
     errorsBag.push(descriptionErrors);
@@ -70,44 +70,38 @@ inputsForm.addEventListener('submit', event => {
     descriptionUl.appendChild(listItem);
   }
 
-
   // Rooms Validation
   const rooms = roomsField.value;
-  if(!rooms){
+  if (!rooms) {
     const roomsLengthError = 'Il numero delle stanze è obbligatorio.'
     roomsErrors.push(roomsLengthError);
     errorsBag.push(roomsErrors);
   }
-  if (rooms.length < 1 && rooms.length > 254){
+  if (Number(rooms) < 1 || Number(rooms) > 254) {
     const roomsLengthError = 'Il numero delle stanze deve essere compreso tra 1 e 254.';
     roomsErrors.push(roomsLengthError);
     errorsBag.push(roomsErrors);
   }
   roomsErrors.forEach(error => {
-    console.log(error);
     const listItem = document.createElement("li");
     listItem.innerText = error;
     roomsUl.appendChild(listItem);
   })
 
   // Services Validation
-  services.forEach(service =>{
-    if (service.hasAttribute('checked')){
+  services.forEach(service => {
+    if (service.checked) {
       servicesChecked.push('YES');
     }
-  })
-  if(!servicesChecked){
-    const servicesLengthError = 'L\'annuncio deve contenere almeno un servizio'
-    errorsBag.push(servicesLengthError);
+  });
+
+  if (servicesChecked.length === 0) {
+    const servicesLengthError = 'L\'annuncio deve contenere almeno un servizio';
+    errorsBag.push([servicesLengthError]);
     const listItem = document.createElement("li");
     listItem.innerText = servicesLengthError;
     servicesUl.appendChild(listItem);
   }
-   
-
-
-
-
 
   if (!errorsBag.length) inputsForm.submit();
 });
