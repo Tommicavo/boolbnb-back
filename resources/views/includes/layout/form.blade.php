@@ -31,6 +31,9 @@
         <input type="text" id="title" name="title"
             class="form-control @error('title') is-invalid @elseif (old('title')) is-valid @enderror"
             value="{{ old('title', $estate->title) }}" autofocus required>
+        <div class="invalidField text-danger">
+            <span id="error"></span>
+        </div>
         @error('title')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -202,4 +205,5 @@
 {{-- Scritps --}}
 @section('scripts')
     @Vite('resources/js/address-select-generator.js')
+    @Vite('resources/js/edit-create-validation.js')
 @endsection
