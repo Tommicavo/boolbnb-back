@@ -31,6 +31,9 @@
         <input type="text" id="title" name="title"
             class="form-control @error('title') is-invalid @elseif (old('title')) is-valid @enderror"
             value="{{ old('title', $estate->title) }}" autofocus required>
+        <div class="invalidField text-danger">
+            <ul id="titleUl"></ul>
+        </div>
         @error('title')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -42,6 +45,9 @@
     <div class="mb-3 col-12">
         <label class="form-label" for="description">Descrizione</label>
         <textarea type="text" id="description" name="description" class="form-control" maxlength="300">{{ old('description', $estate->description) }}</textarea>
+        <div class="invalidField text-danger">
+            <ul id="descriptionUl"></ul>
+        </div>
     </div>
 
     {{-- Address --}}
@@ -81,6 +87,9 @@
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
                 value="{{ old('rooms', $estate->rooms) }}" min="1" max="254" required>
+            <div class="invalidField text-danger">
+                <ul id="roomsUl"></ul>
+            </div>
             @error('rooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -94,6 +103,9 @@
             <input type="number" id="beds" name="beds"
                 class="form-control @error('beds') is-invalid @elseif (old('beds')) is-valid @enderror"
                 value="{{ old('beds', $estate->beds) }}" min="1" max="254" required>
+            <div class="invalidField text-danger">
+                <ul id="bedsUl"></ul>
+            </div>
             @error('beds')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -107,6 +119,9 @@
             <input type="number" id="bathrooms" name="bathrooms"
                 class="form-control @error('bathrooms') is-invalid @elseif (old('bathrooms')) is-valid @enderror"
                 value="{{ old('bathrooms', $estate->bathrooms) }}" min="1" max="254" required>
+            <div class="invalidField text-danger">
+                <ul id="bathroomsUl"></ul>
+            </div>
             @error('bathrooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -120,6 +135,9 @@
             <input type="number" id="mq" name="mq"
                 class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
                 value="{{ old('mq', $estate->mq) }}" min="20" max="1000" required>
+            <div class="invalidField text-danger">
+                <ul id="mqUl"></ul>
+            </div>
             @error('mq')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -133,6 +151,9 @@
             <input type="number" id="price" name="price"
                 class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
                 value="{{ old('price', $estate->price) }}" min="0.01" step="0.01" required>
+            <div class="invalidField text-danger">
+                <ul id="priceUl"></ul>
+            </div>
             @error('price')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -153,10 +174,12 @@
 
         {{-- Dynamic Services Checkboxes --}}
         <div class="services-contenier">
+
             <div class="d-flex justify-content-start">
                 @foreach ($services as $service)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox"
+
+                        <input class="form-check-input service" type="checkbox"
                             @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif id="tech-{{ $service->id }}"
                             value="{{ $service->id }}" name="services[]">
                         <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
@@ -164,6 +187,9 @@
                     </div>
                 @endforeach
 
+            </div>
+            <div class="invalidField text-danger mt-2">
+                <ul id="servicesUl"></ul>
             </div>
             @error('services')
                 <div class="text-danger">
@@ -207,4 +233,5 @@
 {{-- Scritps --}}
 @section('scripts')
     @Vite('resources/js/address-select-generator.js')
+    @Vite('resources/js/edit-create-validation.js')
 @endsection
