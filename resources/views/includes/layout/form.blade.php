@@ -32,7 +32,7 @@
             class="form-control @error('title') is-invalid @elseif (old('title')) is-valid @enderror"
             value="{{ old('title', $estate->title) }}" autofocus required>
         <div class="invalidField text-danger">
-            <span id="error"></span>
+            <ul id="titleUl"></ul>
         </div>
         @error('title')
             <div class="invalid-feedback">
@@ -45,6 +45,9 @@
     <div class="mb-3 col-12">
         <label class="form-label" for="description">Descrizione</label>
         <textarea type="text" id="description" name="description" class="form-control" maxlength="300">{{ old('description', $estate->description) }}</textarea>
+        <div class="invalidField text-danger">
+            <ul id="descriptionUl"></ul>
+        </div>
     </div>
 
     {{-- Address --}}
@@ -78,7 +81,10 @@
             <label for="rooms">Stanze</label>
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
-                value="{{ old('rooms', $estate->rooms) }}" min="1" max="254" required>
+                value="{{ old('rooms', $estate->rooms) }}" required>
+            <div class="invalidField text-danger">
+                <ul id="roomsUl"></ul>
+            </div>
             @error('rooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -154,9 +160,12 @@
             <div class="d-flex justify-content-start">
                 @foreach ($services as $service)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox"
+                        <input class="form-check-input service" type="checkbox"
                             @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif id="tech-{{ $service->id }}"
                             value="{{ $service->id }}" name="services[]">
+                        <div class="invalidField text-danger">
+                            <ul id="servicesUl"></ul>
+                        </div>
                         <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
 
                     </div>
