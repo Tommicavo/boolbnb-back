@@ -16,7 +16,23 @@ const roomsUl = document.getElementById('roomsUl');
 // const price = document.getElementById('price');
 const services = document.querySelectorAll('.service');
 const servicesUl = document.getElementById('servicesUl');
-console.log(services);
+
+
+function validateNumberField(field, min, max, errorMessage, errorsBag) {
+  const fieldValue = field.value;
+  const numberValue = Number(fieldValue);
+
+  if (isNaN(numberValue) || numberValue < min || numberValue > max) {
+    const errors = [errorMessage];
+    errorsBag.push(errors);
+    return errors;
+  }
+
+  return [];
+}
+
+
+const roomsErrors = validateNumberField(roomsField, 1, 254, 'Il numero delle stanze deve essere compreso tra 1 e 254.', errorsBag);
 
 
 
@@ -50,13 +66,10 @@ inputsForm.addEventListener('submit', event => {
   }
 
   titleErrors.forEach(error => {
-    console.log(error);
     const listItem = document.createElement("li");
     listItem.innerText = error;
     titleUl.appendChild(listItem);
   })
-
-
 
   // Description Validation
   const description = descriptionField.value;
@@ -69,6 +82,7 @@ inputsForm.addEventListener('submit', event => {
     listItem.innerText = descriptionErrors;
     descriptionUl.appendChild(listItem);
   }
+
 
   // Rooms Validation
   const rooms = roomsField.value;
