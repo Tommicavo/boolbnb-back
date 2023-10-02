@@ -98,6 +98,9 @@
             <input type="number" id="beds" name="beds"
                 class="form-control @error('beds') is-invalid @elseif (old('beds')) is-valid @enderror"
                 value="{{ old('beds', $estate->beds) }}" min="1" max="254" required>
+            <div class="invalidField text-danger">
+                <ul id="bedsUl"></ul>
+            </div>
             @error('beds')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -111,6 +114,9 @@
             <input type="number" id="bathrooms" name="bathrooms"
                 class="form-control @error('bathrooms') is-invalid @elseif (old('bathrooms')) is-valid @enderror"
                 value="{{ old('bathrooms', $estate->bathrooms) }}" min="1" max="254" required>
+            <div class="invalidField text-danger">
+                <ul id="bathroomsUl"></ul>
+            </div>
             @error('bathrooms')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -124,6 +130,9 @@
             <input type="number" id="mq" name="mq"
                 class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
                 value="{{ old('mq', $estate->mq) }}" min="20" max="1000" required>
+            <div class="invalidField text-danger">
+                <ul id="mqUl"></ul>
+            </div>
             @error('mq')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -137,6 +146,9 @@
             <input type="number" id="price" name="price"
                 class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
                 value="{{ old('price', $estate->price) }}" min="0.01" step="0.01" required>
+            <div class="invalidField text-danger">
+                <ul id="priceUl"></ul>
+            </div>
             @error('price')
                 <div class="invalid-feedback">
                     {{ $message }}
