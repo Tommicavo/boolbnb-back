@@ -23,8 +23,6 @@ resetAddress.addEventListener('click', function() {
 })
 
 
-
-
 // Pick searched address input after 3 char
 input.addEventListener('input', function (e) {
   
