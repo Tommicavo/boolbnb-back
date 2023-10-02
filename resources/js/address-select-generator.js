@@ -22,9 +22,14 @@ resetAddress.addEventListener('click', function() {
     input.removeAttribute("readonly", "readonly");
 })
 
+
+
+
 // Pick searched address input after 3 char
 input.addEventListener('input', function (e) {
+  
     clearTimeout(timeoutId);
+  
     timeoutId = setTimeout(() => {
         const query = e.target.value;
         if (query.length < 3) {
@@ -59,5 +64,7 @@ input.addEventListener('input', function (e) {
             }).catch(err => {
                 console.error(err)
             })
+          
     }, 200);
+    
 });
