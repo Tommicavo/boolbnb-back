@@ -81,7 +81,7 @@
             <label for="rooms">Stanze</label>
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
-                value="{{ old('rooms', $estate->rooms) }}" required>
+                value="{{ old('rooms', $estate->rooms) }}" min="1" max="254" required>
             <div class="invalidField text-danger">
                 <ul id="roomsUl"></ul>
             </div>
@@ -169,20 +169,22 @@
 
         {{-- Dynamic Services Checkboxes --}}
         <div class="services-contenier">
+
             <div class="d-flex justify-content-start">
                 @foreach ($services as $service)
                     <div class="form-check form-check-inline">
+
                         <input class="form-check-input service" type="checkbox"
                             @if (in_array($service->id, old('services', $estate_service_ids ?? []))) checked @endif id="tech-{{ $service->id }}"
                             value="{{ $service->id }}" name="services[]">
-                        <div class="invalidField text-danger">
-                            <ul id="servicesUl"></ul>
-                        </div>
                         <label class="form-check-label" for="tech-{{ $service->id }}">{{ $service->label }}</label>
 
                     </div>
                 @endforeach
 
+            </div>
+            <div class="invalidField text-danger mt-2">
+                <ul id="servicesUl"></ul>
             </div>
             @error('services')
                 <div class="text-danger">

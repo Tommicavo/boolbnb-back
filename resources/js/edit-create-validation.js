@@ -27,6 +27,12 @@ function validateNumberField(field, min, max, errorMessage, errorsBag) {
   return [];
 }
 
+function returnError(error, Ul) {
+  const listItem = document.createElement("li");
+  listItem.innerText = error;
+  Ul.appendChild(listItem);
+}
+
 inputsForm.addEventListener('submit', event => {
   event.preventDefault();
   const errorsBag = [];
@@ -47,6 +53,12 @@ inputsForm.addEventListener('submit', event => {
   const bathroomsErrors = validateNumberField(bathroomsField, 1, 254, 'Il numero dei bagni deve essere compreso tra 1 e 254.', errorsBag);
   const mqErrors = validateNumberField(mqField, 20, 1000, 'La metratura (mq) deve essere compresa tra 20 e 1000.', errorsBag);
   const priceErrors = validateNumberField(priceField, 1, 1000, 'Il prezzo deve essere compreso tra 1€ e 1.000€.', errorsBag);
+
+  returnError(roomsErrors, roomsUl);
+  returnError(bedsErrors, bedsUl);
+  returnError(bathroomsErrors, bathroomsUl);
+  returnError(mqErrors, metersUl);
+  returnError(priceErrors, priceUl);
 
   // Title Validation
   const title = titleField.value;
