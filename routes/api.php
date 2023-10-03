@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\API\EstateController;
 use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
@@ -21,6 +22,9 @@ use App\Http\Controllers\Api\UserController;
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services/filter', [EstateController::class, 'filter']);
+
+// Messages
+Route::post('/messages', [MessageController::class, 'store']);
 
 // All API Estate Route
 Route::apiResource('estates', EstateController::class);
