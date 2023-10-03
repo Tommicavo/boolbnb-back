@@ -9,7 +9,7 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'text'];
+    protected $fillable = ['name', 'email', 'text', 'estate_id'];
 
     public function estate()
     {

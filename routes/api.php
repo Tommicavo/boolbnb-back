@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\EstateController;
+use App\Http\Controllers\Api\MessageController as ApiMessageController;
 use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,8 @@ Route::post('/services/filter', [EstateController::class, 'filter']);
 // All API Estate Route
 Route::apiResource('estates', EstateController::class);
 
-
-Route::get('estates/filter-by-title/{query}', [EstateController::class, 'filterByTitle']);
+// Rotta per l'inserimento dei messaggi nello store
+Route::post('/messages', [ApiMessageController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
