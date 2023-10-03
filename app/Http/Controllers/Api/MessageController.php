@@ -50,7 +50,6 @@ class MessageController extends Controller
         $messages = new Message();
         $messages->fill($data);
         $messages->save();
-
         return response(null, 204);
     }
 

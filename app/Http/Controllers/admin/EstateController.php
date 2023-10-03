@@ -27,11 +27,12 @@ class EstateController extends Controller
 
     public function messages()
     {
-        $messages = Message::orderBy('updated_at', 'DESC')->get();
+        $userId = Auth::id();
 
-        // if (Auth::id() !== $messages->user_id) {
-        //     return abort(404);
-        // }
+        $messages = Message::whereHas('estate', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->orderBy('updated_at', 'DESC')->get();
+
         return view('admin.estates.messages', compact('messages'));
     }
 
