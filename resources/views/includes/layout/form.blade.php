@@ -83,7 +83,7 @@
     <div class="d-flex row justify-content-sm-start justify-content-md-between">
 
         {{-- Rooms --}}
-        <div class="mb-3 text-start col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
             <label for="rooms">Stanze</label>
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
@@ -99,7 +99,7 @@
         </div>
 
         {{-- Beds --}}
-        <div class="mb-3 text-start col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
             <label for="beds">Posti Letto</label>
             <input type="number" id="beds" name="beds"
                 class="form-control @error('beds') is-invalid @elseif (old('beds')) is-valid @enderror"
@@ -115,7 +115,7 @@
         </div>
 
         {{-- Bathrooms --}}
-        <div class="mb-3 text-start col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
             <label for="bathrooms">Bagni</label>
             <input type="number" id="bathrooms" name="bathrooms"
                 class="form-control @error('bathrooms') is-invalid @elseif (old('bathrooms')) is-valid @enderror"
@@ -131,7 +131,7 @@
         </div>
 
         {{-- Mq --}}
-        <div class="mb-3 text-start col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
             <label for="mq">Mq</label>
             <input type="number" id="mq" name="mq"
                 class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
@@ -147,7 +147,7 @@
         </div>
 
         {{-- Price --}}
-        <div class="mb-3 text-start col-sm-4 col-md-3 col-lg-2">
+        <div class="mb-3 text-start col-6 col-sm-4 col-md-3 col-lg-2">
             <label for="price">Prezzo a Notte</label>
             <input type="number" id="price" name="price"
                 class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
