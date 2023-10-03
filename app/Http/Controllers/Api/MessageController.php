@@ -9,23 +9,18 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
-   
-
     public function store(Request $request)
     {
         $data = $request->all();
-
 
         // Validation
         $validator = Validator::make(
             $data,
             [
-                'name' => 'string|max:50',
                 'email' => 'required|email',
                 'text' => 'required|string|max:300',
             ],
             [
-                'name.max' => 'Il nome deve contenere meno di 50 caratteri.',
                 'email.required' => 'Devi inserire una mail.',
                 'email.email' => 'L\'email non è valida.',
                 'text.required' => "Devi inserire il contenuto.",
@@ -38,11 +33,11 @@ class MessageController extends Controller
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $messages = new Message();
-        $messages->fill($data);
-        $messages->save();
-        return response(null, 204);
+        if (empty($data['name'])) $data['name'] = 'Anonimo';
+
+        $message = new Message();
+        $message->fill($data);
+        $message->save();
+        return response()->json($message);
     }
-    
-   
 }
