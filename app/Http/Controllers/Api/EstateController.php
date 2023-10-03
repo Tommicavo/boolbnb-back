@@ -11,17 +11,7 @@ class EstateController extends Controller
 {
     public function index()
     {
-        $estates = Estate::where('is_visible', true)->limit(15)->orderBy('updated_at', 'DESC')->with('images')->get();
-        return response()->json([
-            'results' => $estates
-        ]);
-    }
-
-    public function filterByTitle($query)
-    {
-        $estates = Estate::where('title', 'like', '%' . $query . '%')->with('images')->get();
-
-        return response()->json(['results' => $estates]);
+        //
     }
 
     public function show(string $id)
@@ -35,37 +25,22 @@ class EstateController extends Controller
     {
         $data = $request->all();
 
-        $withinRadiusEstates = [];
+        if (strlen($data['place']['address']) == 0) {
+            $estates = Estate::where('is_visible', true)->orderBy('updated_at', 'DESC')->with('services')->with('images')->get();
+            return response()->json($estates);
+        } else {
+            $withinRadiusEstates = [];
+            $place_lat = $data['place']['lat'];
+            $place_lon = $data['place']['lon'];
+            $radius = $data['radius'];
 
-        $place_lat = $data['place']['lat'];
-        $place_lon = $data['place']['lon'];
-        $radius = $data['radius'];
-        // $selectedServices = array_keys(array_filter($data['services'] ?? [])); // Get keys from truty item of services array
+            $estates = Estate::where('is_visible', true)->with('services')->with('images')->get();
 
-<<<<<<< HEAD
-        $estates = Estate::with('services')->get();
-        // // Get estates with minimum number of beds and rooms, and indicated services
-        // $estates = Estate::where('beds', '>=', $data['minBeds'] ?? 0)
-        //     ->where('rooms', '>=', $data['minRooms'] ?? 0)
-        //     ->whereHas('services', function ($query) use ($selectedServices) {
-        //         $query->whereIn('label', $selectedServices);
-        //     }, '=', count($selectedServices))
-        //     ->with('services')->get();
-=======
-        // Get estates with minimum number of beds and rooms, and indicated services
-        $estates = Estate::where('beds', '>=', $data['minBeds'] ?? 0)
-            ->where('rooms', '>=', $data['minRooms'] ?? 0)
-            ->whereHas('services', function ($query) use ($selectedServices) {
-                $query->whereIn('label', $selectedServices);
-            }, '=', count($selectedServices))
-            ->with('services')->with('images')->get();
->>>>>>> b8fb991958d344541652f4ac77c577572cf967ad
+            // Return an array of estates within the radius specified, sorted by distance
+            $withinRadiusEstates = $this->checkDistance($place_lat, $place_lon, $radius, $estates);
 
-        // Return an array of estates within the radius specified, sorted by distance
-        $withinRadiusEstates = $this->checkDistance($place_lat, $place_lon, $radius, $estates);
-
-        $output = compact('data', 'withinRadiusEstates');
-        return response()->json($output);
+            return response()->json($withinRadiusEstates);
+        }
     }
 
     public function checkDistance($place_lat, $place_lon, $r, $estates)

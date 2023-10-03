@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\UserController;
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
-Route::post('/services/filter', [EstateController::class, 'filter']);
+Route::post('/estates/filter', [EstateController::class, 'filter']);
 
 // All API Estate Route
 Route::apiResource('estates', EstateController::class);
