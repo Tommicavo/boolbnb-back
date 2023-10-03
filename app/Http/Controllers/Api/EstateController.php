@@ -11,7 +11,7 @@ class EstateController extends Controller
 {
     public function index()
     {
-        $estates = Estate::where('is_visible', true)->orderBy('updated_at', 'DESC')->with('images')->get();
+        $estates = Estate::where('is_visible', true)->limit(15)->orderBy('updated_at', 'DESC')->with('images')->get();
         return response()->json([
             'results' => $estates
         ]);
@@ -26,7 +26,8 @@ class EstateController extends Controller
 
     public function show(string $id)
     {
-        $estate = Estate::where('id', $id)->with('images')->first();
+        $estate = Estate::where('id', $id)->with('images')->with('services')->first();
+        if (!$estate) return response(null, 404);
         return response()->json($estate);
     }
 
@@ -41,6 +42,7 @@ class EstateController extends Controller
         $radius = $data['radius'];
         // $selectedServices = array_keys(array_filter($data['services'] ?? [])); // Get keys from truty item of services array
 
+<<<<<<< HEAD
         $estates = Estate::with('services')->get();
         // // Get estates with minimum number of beds and rooms, and indicated services
         // $estates = Estate::where('beds', '>=', $data['minBeds'] ?? 0)
@@ -49,6 +51,15 @@ class EstateController extends Controller
         //         $query->whereIn('label', $selectedServices);
         //     }, '=', count($selectedServices))
         //     ->with('services')->get();
+=======
+        // Get estates with minimum number of beds and rooms, and indicated services
+        $estates = Estate::where('beds', '>=', $data['minBeds'] ?? 0)
+            ->where('rooms', '>=', $data['minRooms'] ?? 0)
+            ->whereHas('services', function ($query) use ($selectedServices) {
+                $query->whereIn('label', $selectedServices);
+            }, '=', count($selectedServices))
+            ->with('services')->with('images')->get();
+>>>>>>> b8fb991958d344541652f4ac77c577572cf967ad
 
         // Return an array of estates within the radius specified, sorted by distance
         $withinRadiusEstates = $this->checkDistance($place_lat, $place_lon, $radius, $estates);
