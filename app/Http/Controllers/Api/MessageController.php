@@ -13,7 +13,7 @@ class MessageController extends Controller
     {
         $data = $request->all();
 
-        // Validation
+        // Validation form
         $validator = Validator::make(
             $data,
             [
