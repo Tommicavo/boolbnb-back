@@ -43,7 +43,6 @@ class EstateController extends Controller
             $place_lat = $data['place']['lat'];
             $place_lon = $data['place']['lon'];
             $radius = $data['radius'];
-
             $estates = Estate::where('is_visible', true)->with('services')->with('images')->get();
 
             // Return an array of estates within the radius specified, sorted by distance

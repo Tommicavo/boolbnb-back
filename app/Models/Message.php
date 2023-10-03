@@ -9,10 +9,10 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'text'];
+    protected $fillable = ['name', 'email', 'text', 'estate_id'];
 
     public function estate()
     {
-        return $this->belognsTo(Estate::class);
+        return $this->belongsTo(Estate::class);
     }
 }
