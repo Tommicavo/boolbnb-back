@@ -11,7 +11,7 @@ class EstateController extends Controller
 {
     public function index()
     {
-        $estates = Estate::where('is_visible', true)->orderBy('updated_at', 'DESC')->with('images')->get();
+        $estates = Estate::where('is_visible', true)->limit(15)->orderBy('updated_at', 'DESC')->with('images')->get();
         return response()->json([
             'results' => $estates
         ]);
@@ -47,7 +47,7 @@ class EstateController extends Controller
             ->whereHas('services', function ($query) use ($selectedServices) {
                 $query->whereIn('label', $selectedServices);
             }, '=', count($selectedServices))
-            ->with('services')->get();
+            ->with('services')->with('images')->get();
 
         // Return an array of estates within the radius specified, sorted by distance
         $withinRadiusEstates = $this->checkDistance($place_lat, $place_lon, $radius, $estates);
