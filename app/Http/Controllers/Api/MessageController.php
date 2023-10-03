@@ -9,86 +9,40 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+   
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'text' => 'required|string',
-        ], [
-            'name.required' => 'Il nome è obbligatorio',
-            'email.required' => 'l\'email è obbligatorio',
-            'text.required' => 'Il nome è obbligatorio',
-            'email.email' => 'l\'email non è valida',
-        ]);
 
+        // Validation
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => 'string|max:50',
+                'email' => 'required|email',
+                'text' => 'required|string|max:300',
+            ],
+            [
+                'name.max' => 'Il nome deve contenere meno di 50 caratteri.',
+                'email.required' => 'Devi inserire una mail.',
+                'email.email' => 'L\'email non è valida.',
+                'text.required' => "Devi inserire il contenuto.",
+                'text.max' => "Il corpo del messaggio deve contenere meno di 300 caratteri."
+            ]
+        );
+
+        // If validation fails, return errors bag & conver into object
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $new_message = new Message;
-
-        $new_message->fill($data);
-
-
-
-
-        $new_message->save();
-
-
-        return response()->json($new_message);
+        $messages = new Message();
+        $messages->fill($data);
+        $messages->save();
         return response(null, 204);
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Message $message)
-    {
-        //
-    }
+    
+   
 }

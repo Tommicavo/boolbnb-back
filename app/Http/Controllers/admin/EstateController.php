@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Image;
+use App\Models\Message;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -22,6 +23,17 @@ class EstateController extends Controller
     {
         $estates = Estate::orderBy('updated_at', 'DESC')->get();
         return view('admin.estates.index', compact('estates'));
+    }
+
+    public function messages()
+    {
+        $userId = Auth::id();
+
+        $messages = Message::whereHas('estate', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->orderBy('updated_at', 'DESC')->get();
+
+        return view('admin.estates.messages', compact('messages'));
     }
 
     /**

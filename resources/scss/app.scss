@@ -1,15 +1,26 @@
 @use "show";
 @use "register";
+@use './partials/mixin';
+@use './partials/vars' as *;
+@use './partials/resets';
+@use './partials/icons';
+@use './partials/searchPage';
 
 @import '~bootstrap/scss/bootstrap';
 
-#autocomplete {
-    position: absolute;
-    z-index: 1;
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-#autocomplete div {
-    cursor: pointer;
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #FFBD59;
+    }
 }
 
 ul li {
@@ -23,4 +34,42 @@ ul {
 .invalidField {
     margin: 0px;
     padding: 0px;
+}
+
+#autocomplete {
+    position: absolute;
+    z-index: 1;
+}
+
+#autocomplete div {
+    cursor: pointer;
+}
+
+// MESSAGES
+.message-container {
+    border: 2px solid $darkBlue;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $lightGray;
+    }
+
+    .truncated {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    #menu {
+        transform: none;
+        opacity: 0;
+
+        transition: opacity 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    }
 }

@@ -9,6 +9,10 @@
                 <span><i class="fa-regular fa-square-plus"></i></span>
                 <span>Aggiungi un alloggio</span>
             </a>
+            <a href="{{ route('admin.estates.messages') }}" class="btn btn-primary">
+                <span><i class="fa-regular fa-envelope"></i></span>
+                <span>Messaggi</span>
+            </a>
             <a href="{{ route('admin.estates.trash') }}" class="btn btn-danger">
                 <span><i class="fa-solid fa-trash-arrow-up"></i></span>
                 <span>Cestino</span>

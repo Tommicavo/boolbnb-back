@@ -8,6 +8,10 @@
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
                             href="{{ route('admin.estates.index') }}">Alloggi</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (request()->routeIs('admin.estates.messages')) active @endif"
+                            href="{{ route('admin.estates.messages') }}">Messaggi</a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('guest.home')) active @endif"
