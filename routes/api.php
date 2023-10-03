@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\UserController;
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
-Route::post('/services/filter', [EstateController::class, 'filter']);
+Route::post('/estates/filter', [EstateController::class, 'filter']);
 
 // Messages
 Route::post('/messages', [MessageController::class, 'store']);
