@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
-   
+
 
     public function store(Request $request)
     {
         $data = $request->all();
-
+        if (empty($data['name'])) {
+            $data['name'] = 'Anonimo';
+        }
 
         // Validation
         $validator = Validator::make(
@@ -39,10 +41,10 @@ class MessageController extends Controller
         }
 
         $messages = new Message();
+
         $messages->fill($data);
+
         $messages->save();
         return response(null, 204);
     }
-    
-   
 }
