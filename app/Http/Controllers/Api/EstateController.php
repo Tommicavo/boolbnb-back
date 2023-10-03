@@ -26,7 +26,8 @@ class EstateController extends Controller
 
     public function show(string $id)
     {
-        $estate = Estate::where('id', $id)->with('images')->first();
+        $estate = Estate::where('id', $id)->with('images')->with('services')->first();
+        if (!$estate) return response(null, 404);
         return response()->json($estate);
     }
 

@@ -1,5 +1,5 @@
 @use "show";
-@use "register" ;
+@use "register";
 
 @import '~bootstrap/scss/bootstrap';
 
@@ -10,4 +10,17 @@
 
 #autocomplete div {
     cursor: pointer;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0px;
+}
+
+.invalidField {
+    margin: 0px;
+    padding: 0px;
 }
