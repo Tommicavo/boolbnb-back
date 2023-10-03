@@ -18,6 +18,16 @@ class EstateController extends Controller
     {
         $estate = Estate::where('id', $id)->with('images')->with('services')->first();
         if (!$estate) return response(null, 404);
+
+        $prevEstate = Estate::where('id', '<', $id)->orderBy('id', 'DESC')->first();
+        if (!$prevEstate) $prevEstate = Estate::orderBy('id', 'DESC')->first();
+
+        $nextEstate = Estate::where('id', '>', $id)->first();
+        if (!$nextEstate) $nextEstate = Estate::orderBy('id')->first();
+
+        $estate->prevId = $prevEstate->id;
+        $estate->nextId = $nextEstate->id;
+
         return response()->json($estate);
     }
 
