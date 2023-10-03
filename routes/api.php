@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\EstateController;
 use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
