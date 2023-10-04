@@ -3,5 +3,10 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1>Pagina Iniziale</h1>
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <h1 class="my-4">Benvenuti su Boolbnb!</h1>
+        <div id="home-logo">
+            <img src="{{ url('display-logo') }}" alt="BoolBnB">
+        </div>
+    </div>
 @endsection

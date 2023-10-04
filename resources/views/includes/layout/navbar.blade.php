@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
@@ -42,7 +42,7 @@
                                 <i class="fa-solid fa-gear"></i>
                             @endif
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.estates.index') }}">Pannello di Controllo</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

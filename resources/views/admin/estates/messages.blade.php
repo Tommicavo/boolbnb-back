@@ -1,9 +1,14 @@
 @extends('layouts.app')
+@section('title', 'Messaggi')
 @section('content')
     @Auth
         <div class="mt-5">
-            <div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4>Lista dei messaggi ricevuti</h4>
+                <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+                    <span><i class="fa-solid fa-table-list"></i></span>
+                    <span class="d-none d-sm-inline"> Torna agli annunci</span>
+                </a>
             </div>
             @forelse($messages as $message)
                 <div class="my-1 message-container" data-bs-toggle="modal" data-bs-target="#myModal"
