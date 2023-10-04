@@ -46,7 +46,9 @@
                             <td>{{ $estate->is_visible }}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-info ms-3"
+                                        href="{{ route('admin.estates.promo', $estate) }}">Promuovi</a>
+                                    <a class="btn btn-info ms-3"
                                         href="{{ route('admin.estates.show', $estate) }}">Dettagli</a>
                                     <a class="btn btn-warning mx-3"
                                         href="{{ route('admin.estates.edit', $estate) }}">Modifica</a>

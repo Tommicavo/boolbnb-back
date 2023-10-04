@@ -20,6 +20,10 @@
     <!-- AXIOS -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <!-- Braintree Payment -->
+    <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.js"></script>
+
+
     <!-- Vite -->
     @vite(['resources/js/app.js'])
 

@@ -36,6 +36,17 @@ class EstateController extends Controller
         return view('admin.estates.messages', compact('messages'));
     }
 
+    public function promo(string $id)
+    {
+        $estate = Estate::findOrFail($id);
+
+        if (Auth::id() !== $estate->user_id) {
+            return abort(404);
+        }
+
+        return view('admin.estates.promo', compact('estate'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
