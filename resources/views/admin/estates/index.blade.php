@@ -52,6 +52,10 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
+
+                                    <a class="btn btn-info ms-3"
+                                        href="{{ route('admin.estates.promo', $estate) }}">Promuovi</a>
+                                        
                                     <a class="btn btn-info text-white" href="{{ route('admin.estates.show', $estate) }}">
                                         <span class="d-none d-md-inline">Dettagli</span>
                                         <span class="d-md-none"><i class="fa-solid fa-circle-info"></i></span>
@@ -61,6 +65,7 @@
                                         <span class="d-none d-md-inline">Modifica</span>
                                         <span class="d-md-none"><i class="fa-solid fa-wrench"></i></span>
                                     </a>
+
                                     <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST"
                                         class="deleteForm trashEstate" data-name="{{ $estate->title }}">
                                         @csrf
