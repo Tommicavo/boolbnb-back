@@ -1,33 +1,29 @@
 @extends('layouts.app')
 @section('content')
+    <div>
+        <span><strong>Annuncio</strong></span>
+        <span>: {{ $estate->title }} </span>
+    </div>
+    <div>
+        <span><strong>Autore</strong></span>
+        <span>: {{ $estate->user->name }} </span>
+    </div>
     <div class="container h-50">
         <div class=" d-flex row-cols-3 justify-content-center">
-            <div class="card col me-2">
-                <img src="http://[::1]:5173/public/Silver.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Silver</h5>
-                    <p class="card-text">Metti in evidenza il tuo annuncio per 24 ore!</p>
-                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-primary">
-                        <span>€2,99</span>
-                    </a>
+            @foreach ($sponsorships as $sponsorship)
+                <div class="card col me-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $sponsorship->name }}</h5>
+                        <h6>Sponsor di {{ $sponsorship->level }}° livello</h6>
+                        <p class="card-text py-2">Metti in evidenza il tuo annuncio per {{ $sponsorship->duration }} ore!</p>
+                        <form method="POST"
+                            action="{{ route('admin.estates.payments', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">{{ $sponsorship->price }}</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="card col me-2">
-                <img src="http://[::1]:5173/public/Gold.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Gold</h5>
-                    <p class="card-text">Metti in evidenza il tuo annuncio per 72 ore!</p>
-                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-primary">€5,99</a>
-                </div>
-            </div>
-            <div class="card col">
-                <img src="http://[::1]:5173/public/Platinum.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Platinum</h5>
-                    <p class="card-text">Metti in evidenza il tuo annuncio per 144 ore!</p>
-                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-primary">€9,99</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
