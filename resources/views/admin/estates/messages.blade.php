@@ -7,10 +7,12 @@
             </div>
             @forelse($messages as $message)
                 <div class="my-1 message-container" data-bs-toggle="modal" data-bs-target="#myModal"
-                    data-name="{{ $message->name }}" data-email="{{ $message->email }}" data-text="{{ $message->text }}">
+                    data-name="{{ $message->name }}" data-title="{{ $message->estate->title }}" data-email="{{ $message->email }}"
+                    data-text="{{ $message->text }}">
                     <ul class="mb-0">
-                        <li class="truncated"><strong>Nome: </strong>{{ $message->name }}...</li>
-                        <li class="truncated"><strong>Email: </strong>{{ $message->email }}...</li>
+                        <li><strong>Annuncio: </strong>{{ $message->estate->title }}</li>
+                        <li><strong>Nome: </strong>{{ $message->name }}</li>
+                        <li><strong>Email: </strong>{{ $message->email }}</li>
                         <li class="truncated"><strong>Testo: </strong>{{ $message->text }}...</li>
                     </ul>
                 </div>
