@@ -15,15 +15,21 @@
     @csrf
 
     {{-- Display Page title --}}
-    <h1 class="my-4">
-        @if ($estate->exists)
-            {{-- Edit section --}}
-            Modifica l'annuncio
-        @else
-            {{-- Create section --}}
-            Aggiungi un nuovo annuncio
-        @endif
-    </h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="my-4">
+            @if ($estate->exists)
+                {{-- Edit section --}}
+                Modifica l'annuncio
+            @else
+                {{-- Create section --}}
+                Aggiungi un nuovo annuncio
+            @endif
+        </h1>
+        <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+            <span><i class="fa-solid fa-table-list"></i></span>
+            <span class="d-none d-md-inline"> Torna agli annunci</span>
+        </a>
+    </div>
 
     {{-- Title --}}
     <div class="mb-3 col-12">
@@ -83,7 +89,7 @@
     <div class="d-flex row justify-content-sm-start justify-content-md-between">
 
         {{-- Rooms --}}
-        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-4 col-sm-4 col-md-2">
             <label for="rooms">Stanze</label>
             <input type="number" id="rooms" name="rooms"
                 class="form-control @error('rooms') is-invalid @elseif (old('rooms')) is-valid @enderror"
@@ -99,7 +105,7 @@
         </div>
 
         {{-- Beds --}}
-        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-4 col-sm-4 col-md-2">
             <label for="beds">Posti Letto</label>
             <input type="number" id="beds" name="beds"
                 class="form-control @error('beds') is-invalid @elseif (old('beds')) is-valid @enderror"
@@ -115,7 +121,7 @@
         </div>
 
         {{-- Bathrooms --}}
-        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
+        <div class="mb-3 text-start col-4 col-sm-4 col-md-2">
             <label for="bathrooms">Bagni</label>
             <input type="number" id="bathrooms" name="bathrooms"
                 class="form-control @error('bathrooms') is-invalid @elseif (old('bathrooms')) is-valid @enderror"
@@ -131,11 +137,14 @@
         </div>
 
         {{-- Mq --}}
-        <div class="mb-3 text-start col-6 col-sm-4 col-md-2">
-            <label for="mq">Mq</label>
-            <input type="number" id="mq" name="mq"
-                class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
-                value="{{ old('mq', $estate->mq) }}" min="20" max="1000" required>
+        <div class="mb-3 text-start col-6 col-md-3 col-lg-2">
+            <label for="mq">Superficie</label>
+            <div class="input-group">
+                <input type="number" id="mq" name="mq"
+                    class="form-control @error('mq') is-invalid @elseif (old('mq')) is-valid @enderror"
+                    value="{{ old('mq', $estate->mq) }}" min="20" max="1000" required>
+                <span class="input-group-text" id="basic-addon2">m²</span>
+            </div>
             <div class="invalidField text-danger">
                 <ul id="mqUl"></ul>
             </div>
@@ -147,11 +156,14 @@
         </div>
 
         {{-- Price --}}
-        <div class="mb-3 text-start col-6 col-sm-4 col-md-3 col-lg-2">
+        <div class="mb-3 text-start col-6 col-md-3 col-lg-2">
             <label for="price">Prezzo a Notte</label>
-            <input type="number" id="price" name="price"
-                class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
-                value="{{ old('price', $estate->price) }}" min="0.01" step="0.01" required>
+            <div class="input-group">
+                <input type="number" id="price" name="price"
+                    class="form-control @error('price') is-invalid @elseif (old('price')) is-valid @enderror"
+                    value="{{ old('price', $estate->price) }}" min="0.01" step="0.01" required>
+                <span class="input-group-text" id="basic-addon2">€</span>
+            </div>
             <div class="invalidField text-danger">
                 <ul id="priceUl"></ul>
             </div>

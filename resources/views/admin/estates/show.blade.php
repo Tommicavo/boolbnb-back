@@ -1,17 +1,12 @@
 @extends('layouts.app')
-
 @section('title', $estate->title)
-
-
-
 @section('content')
-
     <div class="d-flex justify-content-between align-items-center my-3">
-        <h1>Dettagli della casa</h1>
+        <h1>Dettagli annuncio</h1>
         <div class="d-flex justify-content-between">
             <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
                 <span><i class="fa-solid fa-table-list"></i></span>
-                <span class="d-none d-md-inline"> Torna alla lista</span>
+                <span class="d-none d-md-inline"> Torna agli annunci</span>
             </a>
             <div class="d-flex justify-content-end">
                 <a href="{{ route('admin.estates.edit', $estate) }}" class="btn btn-outline-warning mx-2">
@@ -60,5 +55,4 @@
             </li>
         </ul>
     </div>
-
 @endsection

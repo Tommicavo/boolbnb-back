@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Annunci')
 @section('content')
     <header class="d-flex justify-content-between align-items-center">
         <h1 class="text-center py-3">Alloggi</h1>
@@ -52,7 +52,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="{{ route('admin.estates.show', $estate) }}">
+                                    <a class="btn btn-info text-white" href="{{ route('admin.estates.show', $estate) }}">
                                         <span class="d-none d-md-inline">Dettagli</span>
                                         <span class="d-md-none"><i class="fa-solid fa-circle-info"></i></span>
                                     </a>
