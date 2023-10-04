@@ -1,5 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Offerte')
 @section('content')
+
     <div>
         <span><strong>Annuncio</strong></span>
         <span>: {{ $estate->title }} </span>
