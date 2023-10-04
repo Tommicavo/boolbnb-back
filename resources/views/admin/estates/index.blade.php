@@ -46,8 +46,8 @@
                             <td>{{ $estate->is_visible }}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary"
-                                        href="{{ route('admin.estates.show', $estate) }}">Promuovi</a>
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+                                        data-type="promo">Promuovi</a>
                                     <a class="btn btn-info ms-3"
                                         href="{{ route('admin.estates.show', $estate) }}">Dettagli</a>
                                     <a class="btn btn-warning mx-3"
@@ -73,4 +73,5 @@
 
 @section('scripts')
     @vite(['resources/js/modalScript.js'])
+    @vite(['resources/js/partershipModal.js'])
 @endsection
