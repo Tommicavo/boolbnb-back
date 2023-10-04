@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Offerte')
 @section('content')
     <div class="container h-50 mt-4">
         <div class="d-flex row-cols-3 row-cols-md-4 row-cols-xl-5 justify-content-center">
