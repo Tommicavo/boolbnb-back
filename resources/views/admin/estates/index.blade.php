@@ -43,7 +43,13 @@
                             <td>{{ $estate->bathrooms }}</td>
                             <td>{{ $estate->mq }}</td>
                             <td>{{ $estate->price }}</td>
-                            <td>{{ $estate->is_visible }}</td>
+                            <td>
+                                @if ($estate->is_visible)
+                                    SI
+                                @else
+                                    NO
+                                @endif
+                            </td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <a class="btn btn-primary"
