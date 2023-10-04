@@ -19,9 +19,9 @@
                         <h6>Sponsor di {{ $sponsorship->level }}° livello</h6>
                         <p class="card-text py-2">Metti in evidenza il tuo annuncio per {{ $sponsorship->duration }} ore!</p>
                         <form method="POST"
-                            action="{{ route('admin.estates.payments', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
+                            action="{{ route('admin.payments.validateCreditCard', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
                             @csrf
-                            <button type="submit" class="btn btn-primary">{{ $sponsorship->price }}</button>
+                            <button class="btn btn-dark" type="submit">{{ $sponsorship->price }}€</button>
                         </form>
                     </div>
                 </div>
@@ -29,3 +29,10 @@
         </div>
     </div>
 @endsection
+
+{{-- 
+<form method="POST"
+action="{{ route('admin.estates.payments', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
+@csrf
+<button type="submit" class="btn btn-primary">Acquista</button>
+</form> --}}

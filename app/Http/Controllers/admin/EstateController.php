@@ -48,27 +48,6 @@ class EstateController extends Controller
         return view('admin.estates.promo', $data);
     }
 
-    public function payments(string $estate_id, string $sponsorship_id)
-    {
-        $estate = Estate::findOrFail($estate_id);
-        $sponsorship = Sponsorship::findOrFail($sponsorship_id);
-
-        $start = now();
-        $stop = now()->addHours($sponsorship->duration);
-
-        $estate->sponsorships()->sync([
-            $sponsorship->id => [
-                'start' => $start,
-                'stop' => $stop,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-
-        return to_route('admin.estates.show', $estate->id)
-            ->with('success', "Sponsor acquistato correttamente!\nIl suo alloggio sarà sponsorizzato fino a $sponsorship->stop");
-    }
-
     /**
      * Show the form for creating a new resource.
      */

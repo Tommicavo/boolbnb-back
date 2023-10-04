@@ -10,24 +10,9 @@ use Braintree\Gateway;
 
 class SponsorshipController extends Controller
 {
-    private $gateway;
-
-    public function __construct()
-    {
-        // Qui stiamo inizializzando $gateway
-        $this->gateway = new Gateway([
-            'environment' => config('braintree.environment'),
-            'merchantId' => config('braintree.merchant_id'),
-            'publicKey' => config('braintree.public_key'),
-            'privateKey' => config('braintree.private_key')
-        ]);
-    }
-
     public function index()
     {
-        // Ora possiamo usare $gateway perché è stato inizializzato nel costruttore
-        $token = $this->gateway->clientToken()->generate();
-        return view('admin.estates.payments', compact('token'));
+        //
     }
 
     /**

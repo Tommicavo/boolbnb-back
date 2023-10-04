@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\EstateController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,11 @@ Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(f
     Route::delete('/estates/{estate}', [EstateController::class, 'destroy'])->name('estates.destroy'); // move estate into trash
     Route::delete('/estates/{estate}/drop', [EstateController::class, 'drop'])->name('estates.drop'); // drop estate from db
     Route::resource('estates', EstateController::class);
+
+    Route::resource('sponsorships', SponsorshipController::class);
+
+    Route::post('/payments/sponsorship/{estate}/{sponsorship}', [PaymentController::class, 'sponsorship'])->name('payments.sponsorship');
+    Route::post('/payments/validateCreditCard/{estate}/{sponsorship}', [PaymentController::class, 'validateCreditCard'])->name('payments.validateCreditCard');
 });
 
 
