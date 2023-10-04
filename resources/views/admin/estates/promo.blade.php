@@ -1,20 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Get the modal and the modalMessage element
-    const modal = document.getElementById('myModal');
-    const modalMessage = modal.querySelector('#modalMessage');
-    const dropBtn = modal.querySelector('#confirmDropBtn');
-    const btnClose = modal.querySelector('.btn-close');
-    const modalTitle = modal.querySelector('.modal-title');
-
-    // Add event listener to show data when modal is about to be shown
-    modal.addEventListener('show.bs.modal', function (event) {
-
-        // Button (or div in this case) that triggered the modal
-        const button = event.relatedTarget;
-
-        // Update the modal's content
-        modalMessage.innerHTML = `
-        <div class=" d-flex row-cols-3 justify-content-center">
+@extends('layouts.app')
+@section('content')
+    <div class=" d-flex row-cols-3 justify-content-center">
         <div class="card col me-2">
             <img src="http://[::1]:5173/public/Silver.png" class="card-img-top" alt="...">
             <div class="card-body">
@@ -40,9 +26,4 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </div>
     </div>
-        `;
-        modalTitle.innerText = `Promuovi il tuo annuncio!`;
-        dropBtn.classList.add('d-none');
-        btnClose.classList.add('d-none');
-    });
-});
+@endsection

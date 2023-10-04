@@ -22,11 +22,13 @@ Route::get('/', [HomeController::class, 'index'])->name('guest.home');
 Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(function () {
     Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
     Route::get('/estates/messages', [EstateController::class, 'messages'])->name('estates.messages'); // messages page
+    Route::get('/estates/{estate}/promo', [EstateController::class, 'promo'])->name('estates.promo'); // Promo page
     Route::patch('/estates/restore', [EstateController::class, 'restoreAll'])->name('estates.restoreAll'); // restore all estates
     Route::patch('/estates/{estate}/restore', [EstateController::class, 'restore'])->name('estates.restore'); // restore an estate
     Route::delete('/estates/drop', [EstateController::class, 'dropAll'])->name('estates.dropAll'); // drop all estates from db
     Route::delete('/estates/{estate}', [EstateController::class, 'destroy'])->name('estates.destroy'); // move estate into trash
     Route::delete('/estates/{estate}/drop', [EstateController::class, 'drop'])->name('estates.drop'); // drop estate from db
+
     Route::resource('estates', EstateController::class);
 });
 
