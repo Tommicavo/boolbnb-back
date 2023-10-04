@@ -306,7 +306,7 @@ class EstateController extends Controller
         return to_route('admin.estates.trash')
             ->with('alertType', 'danger')
             ->with('alertTitle', "$estate->title")
-            ->with('alertMessage', "L'annuncio è stato cancellato correttamente!");
+            ->with('alertMessage', "è stato cancellato correttamente!");
     }
 
     public function dropAll()
@@ -329,7 +329,7 @@ class EstateController extends Controller
 
         return to_route('admin.estates.index')
             ->with('alertType', 'danger')
-            ->with('alertMessage', "$estates_count annunci sono stati cancellati correttamente!");
+            ->with('alertMessage', "Tutti gli annunci sono stati cancellati correttamente!");
     }
 
     public function restore(string $id)
@@ -341,7 +341,7 @@ class EstateController extends Controller
         return to_route('admin.estates.trash')
             ->with('alertType', 'success')
             ->with('alertTitle', "$estate->title")
-            ->with('alertMessage', "L'annuncio è stato ripristinato!");
+            ->with('alertMessage', "è stato ripristinato!");
     }
 
     public function restoreAll()
@@ -353,6 +353,6 @@ class EstateController extends Controller
 
         return to_route('admin.estates.index')
             ->with('alertType', 'success')
-            ->with('alertMessage', "$estates_count L'annuncio è stato ripristinato!");
+            ->with('alertMessage', "Tutti gli annunci sono stati ripristinati!");
     }
 }
