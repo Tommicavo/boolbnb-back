@@ -45,9 +45,9 @@
                             <td class="text-center">{{ $estate->price }} €</td>
                             <td class="text-center">
                                 @if ($estate->is_visible)
-                                    SI
+                                    <i class="text-success fa-solid fa-circle-check"></i>
                                 @else
-                                    NO
+                                    <i class="text-danger fa-solid fa-circle-xmark"></i>
                                 @endif
                             </td>
                             <td>
@@ -72,8 +72,8 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit" data-bs-toggle="modal"
                                             data-bs-target="#myModal">
-                                            <span class="d-none d-lg-inline">Elimina</span>
-                                            <span class="d-lg-none"><i class="fa-solid fa-trash-can"></i></span>
+                                            <span class="d-none d-xl-inline">Elimina</span>
+                                            <span class="d-xl-none"><i class="fa-solid fa-trash-can"></i></span>
                                         </button>
                                     </form>
                                 </div>
