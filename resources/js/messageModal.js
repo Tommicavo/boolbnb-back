@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const name = button.getAttribute('data-name');
         const email = button.getAttribute('data-email');
         const text = button.getAttribute('data-text');
+        const title = button.getAttribute('data-title');
 
         // Update the modal's content
         modalMessage.innerHTML = `
             <ul class="mb-0">
+                <li><strong>Annuncio: </strong>${title}</li>
                 <li><strong>Nome: </strong>${name}</li>
                 <li><strong>Email: </strong>${email}</li>
                 <li><strong>Testo: </strong>${text}</li>
