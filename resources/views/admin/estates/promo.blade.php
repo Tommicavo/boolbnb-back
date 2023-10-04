@@ -17,7 +17,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Gold</h5>
                     <p class="card-text">Metti in evidenza il tuo annuncio per 72 ore!</p>
-                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-dark">€ 5,99</a>
+                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-dark">
+                        <span>€ 5,99</span>
+                    </a>
                 </div>
             </div>
             <div class="card col">
@@ -25,7 +27,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Platinum</h5>
                     <p class="card-text">Metti in evidenza il tuo annuncio per 144 ore!</p>
-                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-dark">€ 9,99</a>
+                    <a href="{{ route('admin.estates.payments') }}" class="btn btn-dark">
+                        <span>€ 9,99</span>
+                    </a>
                 </div>
             </div>
         </div>
