@@ -6,7 +6,6 @@
 <body>
     <div id="app">
         @include('includes.layout.navbar')
-
         <main>
             <div class="container">
                 @include('includes.layout.modal')

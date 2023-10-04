@@ -36,6 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Rotta per il logo SVG
+Route::get('/display-logo', function () {
+    return response()->file(resource_path('img/BOOLlogo.svg'));
+});
+
 use Illuminate\Support\Facades\Http;
 
 Route::get('/proxy/{query}', function ($query) {

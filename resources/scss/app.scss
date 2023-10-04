@@ -1,5 +1,6 @@
 @use "show";
 @use "register";
+@use './partials/logo';
 @use './partials/mixin';
 @use './partials/vars' as *;
 @use './partials/resets';
