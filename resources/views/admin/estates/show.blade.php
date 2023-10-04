@@ -9,16 +9,21 @@
     <div class="d-flex justify-content-between align-items-center my-3">
         <h1>Dettagli della casa</h1>
         <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary me-5">Torna alla lista</a>
+            <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+                <span><i class="fa-solid fa-table-list"></i></span>
+                <span class="d-none d-md-inline"> Torna alla lista</span>
+            </a>
             <div class="d-flex justify-content-end">
-                <a href="{{ route('admin.estates.edit', $estate) }}" class="btn btn-outline-warning">
-                    <i class="fas fa-pencil"></i> Modifica
+                <a href="{{ route('admin.estates.edit', $estate) }}" class="btn btn-outline-warning mx-2">
+                    <span><i class="fas fa-pencil"></i></span>
+                    <span class="d-none d-md-inline"> Modifica</span>
                 </a>
-                <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST" class="delete-form ms-2">
+                <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST" class="delete-form">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i> Elimina
+                        <span><i class="fas fa-trash"></i></span>
+                        <span class="d-none d-md-inline"> Elimina</span>
                     </button>
                 </form>
             </div>
@@ -38,21 +43,21 @@
             <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
             <li class="list-group-item"><strong>Bagni: </strong>{{ $estate->bathrooms }}</li>
             <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
-            <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }}</li>
+            <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }} m²</li>
             <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
-            <li class="list-group-item d-flex"><strong>Servizi: </strong>
-                @forelse($estate->services as $service)
-                    <div class="service p-1 d-flex flex-column mx-2">
-                        <h5 class="card-title text-center pb-3"> {{ $service?->label }}</h5>
-                        <i class="text-center fa-solid fa-{{ $service->icon }} fa-2xl"></i>
-                    </div>
-
-                @empty
-                    -
-                @endforelse
-
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <div><strong>Servizi: </strong></div>
+                <div class="d-flex flex-wrap justify-content-start">
+                    @forelse($estate->services as $service)
+                        <div class="service d-flex flex-column just m-1 p-1">
+                            <span class="card-title text-center pb-2"> {{ $service?->label }}</span>
+                            <i class="text-center fa-solid fa-{{ $service->icon }} fa-xl"></i>
+                        </div>
+                    @empty
+                        -
+                    @endforelse
+                </div>
             </li>
-
         </ul>
     </div>
 
