@@ -23,7 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('guest.home');
 Route::prefix('/admin')->middleware('auth', 'verified')->name('admin.')->group(function () {
     Route::get('/estates/trash', [EstateController::class, 'trash'])->name('estates.trash'); // trash page
     Route::get('/estates/messages', [EstateController::class, 'messages'])->name('estates.messages'); // messages page
-    Route::get('/estates/payments', [SponsorshipController::class, 'index'])->name('estates.payments'); //Payments
+    Route::post('/estates/payments/{estate}/{sponsorship}', [EstateController::class, 'payments'])->name('estates.payments'); //Payments
     Route::get('/estates/{estate}/promo', [EstateController::class, 'promo'])->name('estates.promo'); // Promo page
     Route::patch('/estates/restore', [EstateController::class, 'restoreAll'])->name('estates.restoreAll'); // restore all estates
     Route::patch('/estates/{estate}/restore', [EstateController::class, 'restore'])->name('estates.restore'); // restore an estate

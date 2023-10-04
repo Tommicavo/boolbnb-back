@@ -7,6 +7,7 @@ use App\Models\Estate;
 use App\Models\Image;
 use App\Models\Message;
 use App\Models\Service;
+use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +40,33 @@ class EstateController extends Controller
     public function promo(string $id)
     {
         $estate = Estate::findOrFail($id);
-
         if (Auth::id() !== $estate->user_id) {
             return abort(404);
         }
+        $sponsorships = Sponsorship::all();
+        $data = compact('estate', 'sponsorships');
+        return view('admin.estates.promo', $data);
+    }
 
-        return view('admin.estates.promo', compact('estate'));
+    public function payments(string $estate_id, string $sponsorship_id)
+    {
+        $estate = Estate::findOrFail($estate_id);
+        $sponsorship = Sponsorship::findOrFail($sponsorship_id);
+
+        $start = now();
+        $stop = now()->addHours($sponsorship->duration);
+
+        $estate->sponsorships()->sync([
+            $sponsorship->id => [
+                'start' => $start,
+                'stop' => $stop,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        return to_route('admin.estates.show', $estate->id)
+            ->with('success', "Sponsor acquistato correttamente!\nIl suo alloggio sarà sponsorizzato fino a $sponsorship->stop");
     }
 
     /**
