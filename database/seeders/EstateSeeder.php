@@ -35,7 +35,6 @@ class EstateSeeder extends Seeder
             $new_estate->save();
 
             $estate_services = [];
-            $estate_sponsorships = [];
 
             $totalservices = count($service_ids);
 
