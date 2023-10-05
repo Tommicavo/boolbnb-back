@@ -45,11 +45,15 @@
                             <td class="text-center d-none d-md-table-cell">{{ $estate->mq }} m²</td>
                             <td class="text-center">{{ $estate->price }} €</td>
                             <td class="text-center">
-                                @forelse($estate->sponsorships as $sponsorship)
-                                    {{ $sponsorship->name }}
-                                @empty
-                                    NO
-                                @endforelse
+                                @if ($estate->sponsorships->count() >= 2)
+                                    {{ $estate->sponsorships->last()->name }}
+                                @else
+                                    @forelse($estate->sponsorships as $sponsorship)
+                                        {{ $sponsorship->name }}
+                                    @empty
+                                        NO
+                                    @endforelse
+                                @endif
                             </td>
                             <td class="text-center">
                                 @if ($estate->is_visible)
