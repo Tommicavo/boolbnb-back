@@ -58,9 +58,12 @@
 
     {{-- Address --}}
     <div class="row align-items-end ">
-        <div class="mb-3 d-flex text-start justify-content-between">
+        <div class="mb-3 d-flex text-start justify-content-between align-items-end">
             <div class="col-11">
-                <label for="address">Indirizzo</label><span id="addressError" class="text-danger"></span>
+                <div class="invalidField text-danger mt-2">
+                    <ul id="messagesUl"></ul>
+                </div>
+                <label for="address">Indirizzo</label>
                 @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -71,6 +74,7 @@
                     value="{{ old('address', $estate->address ?? '') }}" min="1" max="254" required
                     @if ($estate->address) readonly='readonly' @endif>
                 <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
+
                 {{-- <span id="addressError" class="text-danger"></span>
             @error('address')
                 <div class="invalid-feedback">
@@ -78,9 +82,12 @@
                 </div>
             @enderror --}}
             </div>
-            <div id="reset-address" type="button" class="btn btn-danger align-items-end mt-4 ms-1"><i
-                    class="fa-solid fa-xmark"></i>
+            <div class="col-1">
+                <div id="reset-address" type="button" class="btn btn-danger align-items-end mt-4 ms-1"><i
+                        class="fa-solid fa-xmark"></i>
+                </div>
             </div>
+
         </div>
 
     </div>

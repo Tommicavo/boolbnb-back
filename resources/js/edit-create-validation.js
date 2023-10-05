@@ -15,6 +15,9 @@ const priceField = document.getElementById('price');
 const priceUl = document.getElementById('priceUl');
 const services = document.querySelectorAll('.service');
 const servicesUl = document.getElementById('servicesUl');
+const messagesUl = document.getElementById('messagesUl');
+const input = document.getElementById('address');
+
 
 function validateNumberField(field, min, max, errorMessage, errorsBag) {
   const fieldValue = field.value;
@@ -105,6 +108,15 @@ inputsForm.addEventListener('submit', event => {
     listItem.innerText = servicesLengthError;
     servicesUl.appendChild(listItem);
   }
+  if (!input.getAttribute("readonly")) {
+    // Se non ha l'attributo 'readonly', impedisce l'invio del form
+   
+    const addressError = 'L\'indirizzo non è valido';
+    errorsBag.push([addressError]);
+    const listItem = document.createElement("li");
+    listItem.innerText = addressError;
+    messagesUl.appendChild(listItem);
+}
 
   if (!errorsBag.length) inputsForm.submit();
 });

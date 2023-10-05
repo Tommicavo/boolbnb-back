@@ -6,15 +6,6 @@ const addressError = document.getElementById("addressError")
 
 let timeoutId = null;
 
-Form.addEventListener("submit", function(event) {
-    // Verifica se l'input text ha l'attributo 'readonly'
-    if (!input.getAttribute("readonly")) {
-        // Se non ha l'attributo 'readonly', impedisce l'invio del form
-        addressError.textContent = " non valido!";
-        event.preventDefault();
-    }
-});
-
 // Reset input value
 resetAddress.addEventListener('click', function() {
     input.value = '';
