@@ -41,7 +41,7 @@ class EstateController extends Controller
     {
         $estate = Estate::findOrFail($id);
         if (Auth::id() !== $estate->user_id) {
-            return abort(404);
+            return abort(401);
         }
         $sponsorships = Sponsorship::all();
         $data = compact('estate', 'sponsorships');
@@ -160,7 +160,7 @@ class EstateController extends Controller
         $estate = Estate::withTrashed()->findOrFail($id);
 
         if (Auth::id() !== $estate->user_id) {
-            return abort(404);
+            return abort(401);
         }
 
         return view('admin.estates.show', compact('estate'));
@@ -174,7 +174,7 @@ class EstateController extends Controller
         $estate = Estate::findOrFail($id);
 
         if (Auth::id() !== $estate->user_id) {
-            return abort(404);
+            return abort(401);
         }
         $services = Service::all();
         $estate_service_ids = $estate->services->pluck('id')->toArray();
