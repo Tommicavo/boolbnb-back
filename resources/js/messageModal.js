@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = button.getAttribute('data-email');
         const text = button.getAttribute('data-text');
         const title = button.getAttribute('data-title');
+        const created_at = button.getAttribute('data-data');
 
         // Update the modal's content
         modalMessage.innerHTML = `
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li><strong>Annuncio: </strong>${title}</li>
                 <li><strong>Nome: </strong>${name}</li>
                 <li><strong>Email: </strong>${email}</li>
+                <li><strong>Data: </strong>${created_at}</li>
                 <li><strong>Testo: </strong>${text}</li>
             </ul>
         `;

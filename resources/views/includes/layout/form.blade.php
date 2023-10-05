@@ -15,8 +15,8 @@
     @csrf
 
     {{-- Display Page title --}}
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="my-4">
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <h1>
             @if ($estate->exists)
                 {{-- Edit section --}}
                 Modifica l'annuncio
