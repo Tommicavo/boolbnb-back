@@ -26,7 +26,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col" class="d-none d-md-table-cell">Testo</th>
-                            <th scope="col">Data</th>
+                            <th scope="col">Data e Ora</th>
                             <th scope="col" class="text-center">Visualizza</th>
                         </tr>
                     </thead>
@@ -37,13 +37,13 @@
                                 <td>{{ $message->name }}</td>
                                 <td>{{ $message->email }}</td>
                                 <td class="d-none d-md-table-cell">{{ substr($message->text, 0, 30) }}...</td>
-                                <td>{{ $message->created_at }}</td>
+                                <td>{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
                                             data-name="{{ $message->name }}" data-title="{{ $message->estate->title }}"
                                             data-email="{{ $message->email }}" data-text="{{ $message->text }}"
-                                            data-data="{{ $message->created_at }}">
+                                            data-data="{{ $message->created_at->format('d/m/Y H:i:s') }}">
                                             <span class="d-none d-lg-inline">Dettagli</span>
                                             <span class="d-lg-none"><i class="fa-solid fa-eye"></i></span>
                                         </a>
