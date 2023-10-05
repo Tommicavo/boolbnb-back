@@ -24,12 +24,13 @@
             <thead>
                 <tr>
                     <th scope="col">Alloggio</th>
-                    <th scope="col" class="text-center d-none d-md-table-cell">Stanze</th>
+                    {{-- <th scope="col" class="text-center d-none d-md-table-cell">Stanze</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Letti</th>
-                    <th scope="col" class="text-center d-none d-lg-table-cell">Bagni</th>
+                    <th scope="col" class="text-center d-none d-lg-table-cell">Bagni</th> --}}
                     <th scope="col" class="text-center d-none d-md-table-cell">Superficie</th>
                     <th scope="col" class="text-center">Prezzo</th>
                     <th scope="col" class="text-center">Visibile</th>
+                    <th scope="col" class="text-center">Sponsor</th>
                     <th scope="col" class="text-center">Azioni</th>
                 </tr>
             </thead>
@@ -38,9 +39,9 @@
                     @if (Auth::id() === $estate->user_id)
                         <tr>
                             <th>{{ $estate->title }}</th>
-                            <td class="text-center d-none d-md-table-cell">{{ $estate->rooms }}</td>
+                            {{-- <td class="text-center d-none d-md-table-cell">{{ $estate->rooms }}</td>
                             <td class="text-center d-none d-lg-table-cell">{{ $estate->beds }}</td>
-                            <td class="text-center d-none d-lg-table-cell">{{ $estate->bathrooms }}</td>
+                            <td class="text-center d-none d-lg-table-cell">{{ $estate->bathrooms }}</td> --}}
                             <td class="text-center d-none d-md-table-cell">{{ $estate->mq }} m²</td>
                             <td class="text-center">{{ $estate->price }} €</td>
                             <td class="text-center">
@@ -50,6 +51,7 @@
                                     <i class="text-danger fa-solid fa-circle-xmark"></i>
                                 @endif
                             </td>
+                            <td class="text-center">{{ $estate->getSponsorEndDate() }}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <a class="btn btn-dark me-2 me-md-3" href="{{ route('admin.estates.promo', $estate) }}">
@@ -65,7 +67,6 @@
                                         <span class="d-none d-lg-inline">Modifica</span>
                                         <span class="d-lg-none"><i class="fa-solid fa-wrench"></i></span>
                                     </a>
-
                                     <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST"
                                         class="deleteForm trashEstate" data-name="{{ $estate->title }}">
                                         @csrf

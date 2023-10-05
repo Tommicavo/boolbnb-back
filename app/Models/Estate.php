@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,5 +49,28 @@ class Estate extends Model
         if ($this->images->isNotEmpty()) {
             return asset('storage/' . $this->images[0]->url);
         } else return 'https://www.mrw.it/img/cope/0iwkf4_1609360688.jpg';
+    }
+
+    public function getSponsorEndDate()
+    {
+        if ($this->sponsorships->isNotEmpty()) {
+            $latestSponsorship = $this->sponsorships()
+                ->where('stop', '>', now())
+                ->orderBy('stop', 'desc')
+                ->withPivot('stop')
+                ->first();
+
+            if ($latestSponsorship) {
+                $sponsorEndDate = Carbon::parse($latestSponsorship->pivot->stop);
+                $formattedSponsorDate = $sponsorEndDate->format('d/m/y');
+                $output = "Fino a $formattedSponsorDate";
+            } else {
+                $output = 'No';
+            }
+        } else {
+            $output = 'No';
+        }
+
+        return $output;
     }
 }
