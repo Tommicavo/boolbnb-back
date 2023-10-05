@@ -75,12 +75,6 @@
                     @if ($estate->address) readonly='readonly' @endif>
                 <div id="autocomplete" class="autocomplete-list p-2 bg-light d-none"></div>
 
-                {{-- <span id="addressError" class="text-danger"></span>
-            @error('address')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror --}}
             </div>
             <div class="col-1">
                 <div id="reset-address" type="button" class="btn btn-danger align-items-end mt-4 ms-1"><i
