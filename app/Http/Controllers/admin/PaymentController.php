@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Sponsorship;
 use Braintree\Gateway;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -36,7 +37,6 @@ class PaymentController extends Controller
         $estate = Estate::findOrFail($estate_id);
         $sponsorship = Sponsorship::findOrFail($sponsorship_id);
 
-        // Initialize the Braintree gateway
         $gateway = new Gateway([
             'environment' => env('BRAINTREE_ENV', 'sandbox'),
             'merchantId' => env('BRAINTREE_MERCHANT_ID'),
@@ -54,10 +54,28 @@ class PaymentController extends Controller
 
         if ($result->success) {
 
-            $start = now();
-            $stop = now()->addHours($sponsorship->duration);
+            // Controlla se l'estate ha sponsorizzazioni
+            if ($estate->sponsorships->isNotEmpty()) {
+                // Trova l'ultima non scaduta
+                $latestSponsorship = $estate->sponsorships()
+                    ->where('stop', '>', now())
+                    ->orderBy('stop', 'desc')
+                    ->withPivot('start', 'stop') // Include i dati della tabella ponte
+                    ->first();
 
-            $estate->sponsorships()->sync([
+                if ($latestSponsorship) {
+                    $start = Carbon::parse($latestSponsorship->pivot->stop);
+                    $stop = $start->clone()->addHours($sponsorship->duration);
+                } else {
+                    $start = now();
+                    $stop = now()->addHours($sponsorship->duration);
+                }
+            } else {
+                $start = now();
+                $stop = now()->addHours($sponsorship->duration);
+            }
+
+            $estate->sponsorships()->attach([
                 $sponsorship->id => [
                     'start' => $start,
                     'stop' => $stop,
