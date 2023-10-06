@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li><strong>Annuncio: </strong>${title}</li>
                 <li><strong>Nome: </strong>${name}</li>
                 <li><strong>Email: </strong>${email}</li>
-                <li><strong>Data: </strong>${created_at}</li>
+                <li><strong>Data e Ora: </strong>${created_at}</li>
                 <li><strong>Testo: </strong>${text}</li>
             </ul>
         `;

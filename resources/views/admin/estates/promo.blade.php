@@ -2,15 +2,15 @@
 @section('title', 'Offerte')
 @section('content')
 
-    <div>
+    <div class="mt-4 mb-2">
         <span><strong>Annuncio</strong></span>
         <span>: {{ $estate->title }} </span>
     </div>
     <div>
         <span><strong>Autore</strong></span>
-        <span>: {{ $estate->user->name }} </span>
+        <span>: {{ $estate->user->name ? $estate->user->name : 'anonimo' }} </span>
     </div>
-    <div class="container h-50">
+    <div class="container h-50 mt-4">
         <div class=" d-flex row-cols-3 justify-content-center">
             @foreach ($sponsorships as $sponsorship)
                 <div class="card col me-2">
