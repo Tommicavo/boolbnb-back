@@ -1,14 +1,17 @@
 @extends('layouts.app')
+@section('title', 'Pagamento')
 @section('content')
-    <div class="container payment-div">
-        <div id="dropin-wrapper">
-            <div id="dropin-container"></div>
+    <div class="d-flex justify-content-center">
+        <div class="payment-div">
+            <div id="dropin-wrapper">
+                <div id="dropin-container"></div>
+            </div>
+            <form method="POST" id="paymentBtn"
+                action="{{ route('admin.payments.sponsorship', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
+                @csrf
+                <button type="submit" class="btn btn-primary">Acquista</button>
+            </form>
         </div>
-        <form method="POST" id="paymentBtn"
-            action="{{ route('admin.payments.sponsorship', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
-            @csrf
-            <button type="submit" class="btn btn-primary">Acquista</button>
-        </form>
         <div class="spinnerContainer d-flex justify-content-center align-items-center">
             <div id="paymentSpinner" class="spinner-border text-primary d-none" role="status"></div>
         </div>

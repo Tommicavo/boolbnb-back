@@ -5,6 +5,7 @@
 @use './partials/vars' as *;
 @use './partials/resets';
 @use './partials/icons';
+@use './partials/payment';
 @use './partials/searchPage';
 
 @import '~bootstrap/scss/bootstrap';
@@ -113,8 +114,4 @@ ul {
 .button--green:hover {
     background-color: #8bdda8;
     color: white;
-}
-
-.payment-div{
-    width: 40%;
 }
