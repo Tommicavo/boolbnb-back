@@ -19,6 +19,7 @@
             </a>
         </div>
     </header>
+    <canvas id="myChart"></canvas>
     <div class="indexContent">
         <table class="table mt-3 align-middle table-light">
             <thead>
@@ -88,4 +89,5 @@
 
 @section('scripts')
     @vite(['resources/js/modalScript.js'])
+    @vite(['resources/js/charts.js'])
 @endsection
