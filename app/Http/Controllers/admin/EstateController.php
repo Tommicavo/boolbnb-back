@@ -25,34 +25,24 @@ class EstateController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
-        // Estate visits in a day
-        $visits = Visit::with('estate')
-            ->whereHas('estate', function ($query) use ($userId) {
-                $query->where('user_id', $userId);
-            })
-            ->select('estate_id', DB::raw('DATE(date) as day'), 'ip_address')
-            ->groupBy('estate_id', DB::raw('DATE(date)'), 'ip_address')
-            ->get();
-
-        // Estates grouping
-        $estatesVisits = $visits
-            ->groupBy('estate_id')
-            ->map(function ($dateGroups) {
-                return collect($dateGroups)->count();
-            });
-
-        // Create filtered array for charts
-        $visitsData = $estatesVisits->map(function ($count, $estateId) use ($visits) {
-            return [
-                'title' => optional($visits->firstWhere('estate_id', $estateId))->estate->title,
-                'visits_count' => $count
-            ];
-        })->values();
-
+        $currentYear = date('Y');
         $estates = Estate::orderBy('updated_at', 'DESC')->get();
 
-        return view('admin.estates.index', compact('estates', 'visitsData'));
+
+        // Visits filtered by currrent year, months, all estates for singole id, and ip address count only 1 visit every day
+        $monthlyVisitsData = DB::table('visits')
+            ->join('estates', 'visits.estate_id', '=', 'estates.id')
+            ->where('estates.user_id', $userId)
+            ->whereYear('visits.created_at', $currentYear)
+            ->select(DB::raw('MONTH(visits.created_at) as month'), DB::raw('COUNT(DISTINCT DATE(visits.created_at), visits.ip_address) as count'))
+            ->groupBy(DB::raw('MONTH(visits.created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+        $allMonths = array_fill(1, 12, 0);
+        $monthlyVisits = $monthlyVisitsData + $allMonths;
+        $monthlyVisitsJSON = json_encode($monthlyVisits);
+
+        return view('admin.estates.index', compact('estates', 'monthlyVisitsJSON'));
     }
 
     public function messages()

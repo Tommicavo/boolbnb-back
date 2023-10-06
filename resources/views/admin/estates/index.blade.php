@@ -20,10 +20,14 @@
         </div>
     </header>
 
+
+    {{-- Charts --}}
     <div class="container w-50">
-        <canvas id="myChart" data-visits="{{ $visitsData }}"></canvas>
+        <canvas id="myChart" data-type="list" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
     </div>
 
+
+    {{-- Table --}}
     <div class="indexContent">
         <table class="table mt-3 align-middle table-light">
             <thead>

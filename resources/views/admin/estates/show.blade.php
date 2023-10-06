@@ -33,27 +33,34 @@
             <h5 class="card-title">{{ $estate->title }}</h5>
             <p class="card-text">{{ $estate->description }}</p>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->address }}</li>
-            <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
-            <li class="list-group-item"><strong>Bagni: </strong>{{ $estate->bathrooms }}</li>
-            <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
-            <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }} m²</li>
-            <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
-            <li class="list-group-item d-flex align-items-center justify-content-between">
-                <div><strong>Servizi: </strong></div>
-                <div class="d-flex flex-wrap justify-content-start">
-                    @forelse($estate->services as $service)
-                        <div class="service d-flex flex-column just m-1 p-1">
-                            <span class="card-title text-center pb-2"> {{ $service?->label }}</span>
-                            <i class="text-center fa-solid fa-{{ $service->icon }} fa-xl"></i>
+        <div class="d-flex justify-content-between">
+            <div class="list">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->address }}</li>
+                    <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
+                    <li class="list-group-item"><strong>Bagni: </strong>{{ $estate->bathrooms }}</li>
+                    <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
+                    <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }} m²</li>
+                    <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
+                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                        <div><strong>Servizi: </strong></div>
+                        <div class="d-flex flex-wrap justify-content-start">
+                            @forelse($estate->services as $service)
+                                <div class="service d-flex flex-column just m-1 p-1">
+                                    <span class="card-title text-center pb-2"> {{ $service?->label }}</span>
+                                    <i class="text-center fa-solid fa-{{ $service->icon }} fa-xl"></i>
+                                </div>
+                            @empty
+                                -
+                            @endforelse
                         </div>
-                    @empty
-                        -
-                    @endforelse
-                </div>
-            </li>
-        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="charts">
+                <canvas id="myChart" data-type="detail" data-visits="{{ $visitsData }}"></canvas>
+            </div>
+        </div>
     </div>
 
     <div class="result">
@@ -62,4 +69,7 @@
         @endif
     </div>
 
+@endsection
+@section('scripts')
+    {{-- @vite(['resources/js/charts.js']) --}}
 @endsection
