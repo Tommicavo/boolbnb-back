@@ -9,7 +9,7 @@ class Visit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'ip_address'];
+    protected $fillable = ['ip_address', 'estate_id'];
 
     public function estate()
     {
