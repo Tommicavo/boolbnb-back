@@ -28,5 +28,33 @@ nav{
 }
 a{
     font-size: 1rem;
+    font-weight: bold;
+}
+#navbarDropdown:hover, #navbarDropdown:focus{
+    color: $logo-color;
+
 }
 
+ .navbar-nav #nav-link.active, .navbar-nav #nav-link.show {
+    color:  $logo-color;
+    padding-bottom: 20px;
+   /*  border-bottom: 3px solid  $logo-color; */
+} 
+
+.navbar-nav #nav-link.active::after,
+.navbar-nav #nav-link.show::after {
+    content: ""; /* Aggiungi un contenuto vuoto */
+    display: block;
+    width: 70%; /* Larghezza del bordo inferiore al 70% del link */
+    height: 3px; /* Altezza del bordo inferiore (spessore) */
+    background-color: $logo-color; /* Colore del bordo inferiore */
+    margin: 0 auto; /* Centra il bordo inferiore orizzontalmente */
+    margin-bottom: -24px;
+    margin-top: 17px;
+}
+
+
+.navbar-nav li{
+    width: 120px;
+    text-align: center;
+}
