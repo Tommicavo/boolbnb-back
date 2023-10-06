@@ -22,8 +22,13 @@
 
 
     {{-- Charts --}}
-    <div class="container w-50">
-        <canvas id="myChart" data-type="list" data-content="{{ $monthlyVisitsJSON }}"></canvas>
+    <div class="charts d-flex">
+        <div class="container w-50">
+            <canvas id="myChartVisits" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
+        </div>
+        <div class="container w-50">
+            <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
+        </div>
     </div>
 
 

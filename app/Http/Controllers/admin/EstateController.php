@@ -42,7 +42,21 @@ class EstateController extends Controller
         $monthlyVisits = $monthlyVisitsData + $allMonths;
         $monthlyVisitsJSON = json_encode($monthlyVisits);
 
-        return view('admin.estates.index', compact('estates', 'monthlyVisitsJSON'));
+        // Messages counter filtered by month
+        $monthlyMessagesData = DB::table('messages')
+            ->join('estates', 'messages.estate_id', '=', 'estates.id')
+            ->where('estates.user_id', $userId)
+            ->whereYear('messages.created_at', $currentYear)
+            ->select(DB::raw('MONTH(messages.created_at) as month'), DB::raw('COUNT(messages.id) as count'))
+            ->groupBy(DB::raw('MONTH(messages.created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $allMonths = array_fill(1, 12, 0);
+        $monthlyMessages = array_replace($allMonths, $monthlyMessagesData);
+        $monthlyMessagesJSON = json_encode($monthlyMessages);
+
+        return view('admin.estates.index', compact('estates', 'monthlyVisitsJSON', 'monthlyMessagesJSON'));
     }
 
     public function messages()
@@ -193,12 +207,21 @@ class EstateController extends Controller
             ->toArray();
 
         $allMonths = array_fill(1, 12, 0);
-
         $monthlyVisits = array_replace($allMonths, $monthlyVisitsData);
-
         $monthlyVisitsJSON = json_encode($monthlyVisits);
 
-        return view('admin.estates.show', compact('estate', 'monthlyVisitsJSON'));
+        $monthlyMessagesData = DB::table('messages')
+            ->where('estate_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->select(DB::raw('MONTH(messages.created_at) as month'), DB::raw('COUNT(messages.id) as count'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $monthlyMessages = array_replace($allMonths, $monthlyMessagesData);
+        $monthlyMessagesJSON = json_encode($monthlyMessages);
+
+        return view('admin.estates.show', compact('estate', 'monthlyVisitsJSON', 'monthlyMessagesJSON'));
     }
 
     /**

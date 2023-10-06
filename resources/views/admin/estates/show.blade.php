@@ -57,9 +57,14 @@
                     </li>
                 </ul>
             </div>
-            {{-- Charts --}}
+        </div>
+        {{-- Charts --}}
+        <div class="charts d-flex">
             <div class="container w-50">
-                <canvas id="myChart" data-type="detail" data-content="{{ $monthlyVisitsJSON }}"></canvas>
+                <canvas id="myChartVisits" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
+            </div>
+            <div class="container w-50">
+                <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
             </div>
         </div>
     </div>
