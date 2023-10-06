@@ -24,6 +24,7 @@
             <thead>
                 <tr>
                     <th scope="col">Alloggio</th>
+                    <th scope="col" class="text-center d-none d-md-table-cell">Stanze</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Stanze</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Letti</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Bagni</th>
@@ -31,6 +32,7 @@
                     <th scope="col" class="text-center">Prezzo</th>
                     <th scope="col" class="text-center">Sponsor</th>
                     <th scope="col" class="text-center">Visibile</th>
+                    <th scope="col" class="text-center">Sponsor</th>
                     <th scope="col" class="text-center">Azioni</th>
                 </tr>
             </thead>
@@ -39,6 +41,7 @@
                     @if (Auth::id() === $estate->user_id)
                         <tr>
                             <th>{{ $estate->title }}</th>
+                            <td class="text-center d-none d-md-table-cell">{{ $estate->rooms }}</td>
                             <td class="text-center d-none d-lg-table-cell">{{ $estate->rooms }}</td>
                             <td class="text-center d-none d-lg-table-cell">{{ $estate->beds }}</td>
                             <td class="text-center d-none d-lg-table-cell">{{ $estate->bathrooms }}</td>
@@ -58,6 +61,14 @@
                             <td class="text-center">
                                 @if ($estate->is_visible)
                                     <i class="text-success fa-solid fa-circle-check"></i>
+                                @else
+                                    <i class="text-danger fa-solid fa-circle-xmark"></i>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if ($estate->getSponsorEndDate() !== null)
+                                    <span
+                                        class="badge rounded-pill text-bg-success">{{ $estate->getSponsorEndDate() }}</span>
                                 @else
                                     <i class="text-danger fa-solid fa-circle-xmark"></i>
                                 @endif
