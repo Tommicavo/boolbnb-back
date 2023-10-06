@@ -13,6 +13,6 @@ class Visit extends Model
 
     public function estate()
     {
-        return $this->belognsTo(Estate::class);
+        return $this->belongsTo(Estate::class);
     }
 }

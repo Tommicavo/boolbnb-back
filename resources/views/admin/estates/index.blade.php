@@ -19,7 +19,11 @@
             </a>
         </div>
     </header>
-    <canvas id="myChart"></canvas>
+
+    <div class="container w-50">
+        <canvas id="myChart" data-visits="{{ $visitsData }}"></canvas>
+    </div>
+
     <div class="indexContent">
         <table class="table mt-3 align-middle table-light">
             <thead>
@@ -53,7 +57,8 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-dark me-2 me-md-3" href="{{ route('admin.estates.promo', $estate) }}">
+                                    <a class="btn btn-dark me-2 me-md-3"
+                                        href="{{ route('admin.estates.promo', $estate) }}">
                                         <span class="d-none d-lg-inline">Promuovi</span>
                                         <span class="d-lg-none"><i class="fa-solid fa-comment-dollar"></i></span>
                                     </a>

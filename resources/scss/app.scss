@@ -1,5 +1,6 @@
 @use "show";
 @use "register";
+@use "charts";
 @use './partials/logo';
 @use './partials/mixin';
 @use './partials/vars' as *;
@@ -63,7 +64,7 @@ ul {
     }
 }
 
-.spinnerContainer #paymentSpinner.spinner-border{
+.spinnerContainer #paymentSpinner.spinner-border {
     width: 300px;
     height: 300px;
     font-size: 1rem;

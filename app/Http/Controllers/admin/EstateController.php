@@ -8,9 +8,11 @@ use App\Models\Image;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsorship;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -22,8 +24,35 @@ class EstateController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
+
+        // Estate visits in a day
+        $visits = Visit::with('estate')
+            ->whereHas('estate', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->select('estate_id', DB::raw('DATE(date) as day'), 'ip_address')
+            ->groupBy('estate_id', DB::raw('DATE(date)'), 'ip_address')
+            ->get();
+
+        // Estates grouping
+        $estatesVisits = $visits
+            ->groupBy('estate_id')
+            ->map(function ($dateGroups) {
+                return collect($dateGroups)->count();
+            });
+
+        // Create filtered array for charts
+        $visitsData = $estatesVisits->map(function ($count, $estateId) use ($visits) {
+            return [
+                'title' => optional($visits->firstWhere('estate_id', $estateId))->estate->title,
+                'visits_count' => $count
+            ];
+        })->values();
+
         $estates = Estate::orderBy('updated_at', 'DESC')->get();
-        return view('admin.estates.index', compact('estates'));
+
+        return view('admin.estates.index', compact('estates', 'visitsData'));
     }
 
     public function messages()
