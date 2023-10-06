@@ -27,6 +27,7 @@ class EstateController extends Controller
 
         $estate->prevId = $prevEstate->id;
         $estate->nextId = $nextEstate->id;
+        $estate->endSponsor = $estate->getSponsorEndDate();
 
         return response()->json($estate);
     }
@@ -36,7 +37,10 @@ class EstateController extends Controller
         $data = $request->all();
 
         if (strlen($data['place']['address']) == 0) {
-            $estates = Estate::where('is_visible', true)->orderBy('updated_at', 'DESC')->with('services')->with('images')->get();
+            $estates = Estate::where('is_visible', true)->with('services')->with('images')->get();
+            foreach ($estates as $estate) $estate->endSponsor = $estate->getSponsorEndDate();
+            $estates = $estates->sortByDesc('updated_at')->values();
+            $estates = $estates->sortByDesc('endSponsor')->values();
             return response()->json($estates);
         } else {
             $requiredServices = array_keys(array_filter($data['services']));
@@ -52,8 +56,25 @@ class EstateController extends Controller
                 }, '=', count($requiredServices))
                 ->with('services')->with('images')->get();
 
-            // Return an array of estates within the radius specified, sorted by distance
+            // Return estates within the radius specified
             $withinRadiusEstates = $this->checkDistance($place_lat, $place_lon, $radius, $estates);
+
+            // Add end sponsor date to each estates
+            foreach ($withinRadiusEstates as $estate) $estate->endSponsor = $estate->getSponsorEndDate();
+
+            // Sort estates by sponsor
+            // If both estate in comparison has null or not null sponsor, sort them by distance
+            usort($withinRadiusEstates, function ($a, $b) {
+                if (!is_null($a->endSponsor) && !is_null($b->endSponsor)) {
+                    return $a->distance - $b->distance;
+                } elseif (!is_null($a->endSponsor)) {
+                    return -1;
+                } elseif (!is_null($b->endSponsor)) {
+                    return 1;
+                } else {
+                    return $a->distance - $b->distance;
+                }
+            });
 
             return response()->json($withinRadiusEstates);
         }
@@ -88,12 +109,6 @@ class EstateController extends Controller
                 $withinRadiusEstates[] = $estate;
             }
         }
-
-        // Sort array estates by distance
-        usort($withinRadiusEstates, function ($a, $b) {
-            if ($a->distance == $b->distance) return 0;
-            return ($a->distance > $b->distance) ? 1 : -1;
-        });
 
         return $withinRadiusEstates;
     }
