@@ -1,6 +1,6 @@
-<header>
+<header id="header">
 
-    <nav id="fixed" class="navbar navbar-expand  shadow-sm">
+    <nav id="fixed" class="navbar navbar-expand">
         <a class="ms-5" href="http://localhost:5173/">
             <div class="logo flex-shrink-0 d-none d-sm-block my-3 mx-3">
                 <img src="{{ url('/boolBNB-logo.png') }}" alt="Logo BoolBnB" class="logo">

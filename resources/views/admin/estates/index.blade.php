@@ -7,15 +7,15 @@
         <div class="headerRight">
             <a href="{{ route('admin.estates.create') }}" class="btn btn-success">
                 <span><i class="fa-regular fa-square-plus"></i></span>
-                <span class="d-none d-md-inline">Aggiungi un alloggio</span>
+                <span class=" d-md-inline">Aggiungi un alloggio</span>
             </a>
             <a href="{{ route('admin.estates.messages') }}" class="btn btn-primary">
                 <span><i class="fa-regular fa-envelope"></i></span>
-                <span class="d-none d-md-inline">Messaggi</span>
+                <span class=" d-md-inline">Messaggi</span>
             </a>
             <a href="{{ route('admin.estates.trash') }}" class="btn btn-danger">
                 <span><i class="fa-solid fa-trash-arrow-up"></i></span>
-                <span class="d-none d-md-inline">Cestino</span>
+                <span class=" d-md-inline">Cestino</span>
             </a>
         </div>
     </header>
