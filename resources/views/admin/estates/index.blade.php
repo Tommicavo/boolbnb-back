@@ -23,7 +23,7 @@
 
     {{-- Charts --}}
     <div class="container w-50">
-        <canvas id="myChart" data-type="list" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
+        <canvas id="myChart" data-type="list" data-content="{{ $monthlyVisitsJSON }}"></canvas>
     </div>
 
 

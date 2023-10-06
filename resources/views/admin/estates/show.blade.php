@@ -57,8 +57,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="charts">
-                <canvas id="myChart" data-type="detail" data-visits="{{ $visitsData }}"></canvas>
+            {{-- Charts --}}
+            <div class="container w-50">
+                <canvas id="myChart" data-type="detail" data-content="{{ $monthlyVisitsJSON }}"></canvas>
             </div>
         </div>
     </div>
@@ -71,5 +72,5 @@
 
 @endsection
 @section('scripts')
-    {{-- @vite(['resources/js/charts.js']) --}}
+    @vite(['resources/js/charts.js'])
 @endsection

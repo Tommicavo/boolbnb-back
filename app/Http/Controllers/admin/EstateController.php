@@ -182,7 +182,23 @@ class EstateController extends Controller
             return abort(401);
         }
 
-        return view('admin.estates.show', compact('estate'));
+        $currentYear = date('Y');
+
+        $monthlyVisitsData = DB::table('visits')
+            ->where('estate_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(DISTINCT ip_address) as count'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $allMonths = array_fill(1, 12, 0);
+
+        $monthlyVisits = array_replace($allMonths, $monthlyVisitsData);
+
+        $monthlyVisitsJSON = json_encode($monthlyVisits);
+
+        return view('admin.estates.show', compact('estate', 'monthlyVisitsJSON'));
     }
 
     /**
