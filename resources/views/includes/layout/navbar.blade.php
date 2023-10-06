@@ -1,6 +1,14 @@
-<nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand  shadow-sm">
+
     <div class="container">
+        <a href="http://localhost:5173/">
+            <div class="logo flex-shrink-0 d-none d-sm-block my-3 mx-3">
+                <img src="{{ url('/boolBNB-logo.png') }}" alt="Logo BoolBnB" class="logo">
+            </div>
+        </a>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 @auth
@@ -13,23 +21,27 @@
                             href="{{ route('admin.estates.messages') }}">Messaggi</a>
                     </li>
                 @else
-                    <li class="nav-item">
+                    {{--   <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('guest.home')) active @endif"
                             href="{{ route('guest.home') }}">Home</a>
-                    </li>
+                    </li> --}}
                 @endauth
+
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
+                    {{-- 
+                    <i class="fa-solid fa-user-gear fa-2xl"></i> --}}
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Accedi</a>
+                        <a class="nav-link" id="nav-link" href="{{ route('login') }}">Accedi</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                            <a class="nav-link" id="nav-link" href="{{ route('register') }}">Registrati</a>
                         </li>
                     @endif
                 @else

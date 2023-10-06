@@ -1,0 +1,32 @@
+@import 'partials/_vars';
+
+
+img{
+    height: 60px;
+}
+
+nav{
+    background-color: $darkGray;
+    color: white;
+    height: 80px;
+}
+.navbar-nav .nav-link {
+    color: white;
+}
+
+
+#nav-link:hover, #nav-link:focus {
+    color: $logo-color;
+}
+
+.my-badge{
+    background-color: $logo-color;
+}
+
+.nav-link-out{
+    color: rgb(161, 161, 161);
+}
+a{
+    font-size: 1rem;
+}
+
