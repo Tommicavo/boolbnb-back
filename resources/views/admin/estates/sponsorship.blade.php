@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container w-50">
+    <div class="container payment-div">
         <div id="dropin-wrapper">
             <div id="dropin-container"></div>
         </div>

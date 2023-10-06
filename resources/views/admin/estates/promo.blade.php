@@ -8,7 +8,7 @@
     </div>
     <div>
         <span><strong>Autore</strong></span>
-        <span>: {{ $estate->user->name }} </span>
+        <span>: {{ $estate->user->name ? $estate->user->name : 'anonimo' }} </span>
     </div>
     <div class="container h-50">
         <div class=" d-flex row-cols-3 justify-content-center">
