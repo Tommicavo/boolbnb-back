@@ -47,8 +47,8 @@
             {{-- 
             <i class="fa-solid fa-user-gear fa-2xl"></i> --}}
 
-            <li class="nav-item">
-                <a class="nav-link" id="nav-link" href="{{ route('login') }}">Accedi</a>
+            <li class="nav-item" id="login">
+                <a class="nav-link " id="nav-link" href="{{ route('login') }}">Accedi</a>
             </li>
             @if (Route::has('register'))
                 <li class="nav-item">
