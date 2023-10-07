@@ -19,6 +19,18 @@
             </a>
         </div>
     </header>
+    {{-- Charts --}}
+    <div class="charts d-flex">
+        <div class="container w-50">
+            <canvas id="myChartVisits" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
+        </div>
+        <div class="container w-50">
+            <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
+        </div>
+    </div>
+
+
+    {{-- Table --}}
     <div class="indexContent d-flex align-items-center justify-content-center">
         <table class="table mt-3 align-middle table-light">
             <thead>
@@ -111,4 +123,5 @@
 
 @section('scripts')
     @vite(['resources/js/modalScript.js'])
+    @vite(['resources/js/charts.js'])
 @endsection

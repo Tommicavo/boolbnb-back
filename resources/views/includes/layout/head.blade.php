@@ -23,6 +23,8 @@
     <!-- Braintree Payment -->
     <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.js"></script>
 
+    {{-- ChartJS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Vite -->
     @vite(['resources/js/app.js'])

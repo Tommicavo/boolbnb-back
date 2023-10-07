@@ -8,9 +8,11 @@ use App\Models\Image;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsorship;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -22,8 +24,39 @@ class EstateController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
+        $currentYear = date('Y');
         $estates = Estate::orderBy('updated_at', 'DESC')->get();
-        return view('admin.estates.index', compact('estates'));
+
+
+        // Visits filtered by currrent year, months, all estates for singole id, and ip address count only 1 visit every day
+        $monthlyVisitsData = DB::table('visits')
+            ->join('estates', 'visits.estate_id', '=', 'estates.id')
+            ->where('estates.user_id', $userId)
+            ->whereYear('visits.created_at', $currentYear)
+            ->select(DB::raw('MONTH(visits.created_at) as month'), DB::raw('COUNT(DISTINCT DATE(visits.created_at), visits.ip_address) as count'))
+            ->groupBy(DB::raw('MONTH(visits.created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+        $allMonths = array_fill(1, 12, 0);
+        $monthlyVisits = $monthlyVisitsData + $allMonths;
+        $monthlyVisitsJSON = json_encode($monthlyVisits);
+
+        // Messages counter filtered by month
+        $monthlyMessagesData = DB::table('messages')
+            ->join('estates', 'messages.estate_id', '=', 'estates.id')
+            ->where('estates.user_id', $userId)
+            ->whereYear('messages.created_at', $currentYear)
+            ->select(DB::raw('MONTH(messages.created_at) as month'), DB::raw('COUNT(messages.id) as count'))
+            ->groupBy(DB::raw('MONTH(messages.created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $allMonths = array_fill(1, 12, 0);
+        $monthlyMessages = array_replace($allMonths, $monthlyMessagesData);
+        $monthlyMessagesJSON = json_encode($monthlyMessages);
+
+        return view('admin.estates.index', compact('estates', 'monthlyVisitsJSON', 'monthlyMessagesJSON'));
     }
 
     public function messages()
@@ -163,7 +196,32 @@ class EstateController extends Controller
             return abort(401);
         }
 
-        return view('admin.estates.show', compact('estate'));
+        $currentYear = date('Y');
+
+        $monthlyVisitsData = DB::table('visits')
+            ->where('estate_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(DISTINCT ip_address) as count'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $allMonths = array_fill(1, 12, 0);
+        $monthlyVisits = array_replace($allMonths, $monthlyVisitsData);
+        $monthlyVisitsJSON = json_encode($monthlyVisits);
+
+        $monthlyMessagesData = DB::table('messages')
+            ->where('estate_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->select(DB::raw('MONTH(messages.created_at) as month'), DB::raw('COUNT(messages.id) as count'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $monthlyMessages = array_replace($allMonths, $monthlyMessagesData);
+        $monthlyMessagesJSON = json_encode($monthlyMessages);
+
+        return view('admin.estates.show', compact('estate', 'monthlyVisitsJSON', 'monthlyMessagesJSON'));
     }
 
     /**
