@@ -26,35 +26,40 @@ class EstateController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $currentYear = date('Y');
-        $estates = Estate::orderBy('updated_at', 'DESC')->get();
+        $estates = Estate::where('user_id', $userId)->orderBy('updated_at', 'DESC')->get();
 
+        $startDate = Carbon::now()->subYear()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
 
-        // Visits filtered by currrent year, months, all estates for singole id, and ip address count only 1 visit every day
+        $last12Months = collect([]);
+
+        for ($i = 11; $i >= 0; $i--) {
+            $date = Carbon::now()->subMonths($i);
+            $last12Months->put($date->format('Y-m'), 0);
+        }
+
+        // Visits data
         $monthlyVisitsData = DB::table('visits')
             ->join('estates', 'visits.estate_id', '=', 'estates.id')
             ->where('estates.user_id', $userId)
-            ->whereYear('visits.created_at', $currentYear)
-            ->select(DB::raw('MONTH(visits.created_at) as month'), DB::raw('COUNT(DISTINCT DATE(visits.created_at), visits.ip_address) as count'))
-            ->groupBy(DB::raw('MONTH(visits.created_at)'))
-            ->pluck('count', 'month')
-            ->toArray();
-        $allMonths = array_fill(1, 12, 0);
-        $monthlyVisits = $monthlyVisitsData + $allMonths;
+            ->whereBetween('visits.created_at', [$startDate, $endDate])
+            ->select(DB::raw('DATE_FORMAT(visits.created_at, "%Y-%m") as month_year'), DB::raw('COUNT(DISTINCT DATE(visits.created_at), visits.ip_address) as count'))
+            ->groupBy(DB::raw('DATE_FORMAT(visits.created_at, "%Y-%m")'))
+            ->pluck('count', 'month_year');
+
+        $monthlyVisits = $last12Months->merge($monthlyVisitsData)->values();
         $monthlyVisitsJSON = json_encode($monthlyVisits);
 
-        // Messages counter filtered by month
+        // Messages data
         $monthlyMessagesData = DB::table('messages')
             ->join('estates', 'messages.estate_id', '=', 'estates.id')
             ->where('estates.user_id', $userId)
-            ->whereYear('messages.created_at', $currentYear)
-            ->select(DB::raw('MONTH(messages.created_at) as month'), DB::raw('COUNT(messages.id) as count'))
-            ->groupBy(DB::raw('MONTH(messages.created_at)'))
-            ->pluck('count', 'month')
-            ->toArray();
+            ->whereBetween('messages.created_at', [$startDate, $endDate])
+            ->select(DB::raw('DATE_FORMAT(messages.created_at, "%Y-%m") as month_year'), DB::raw('COUNT(messages.id) as count'))
+            ->groupBy(DB::raw('DATE_FORMAT(messages.created_at, "%Y-%m")'))
+            ->pluck('count', 'month_year');
 
-        $allMonths = array_fill(1, 12, 0);
-        $monthlyMessages = array_replace($allMonths, $monthlyMessagesData);
+        $monthlyMessages = $last12Months->merge($monthlyMessagesData)->values();
         $monthlyMessagesJSON = json_encode($monthlyMessages);
 
         return view('admin.estates.index', compact('estates', 'monthlyVisitsJSON', 'monthlyMessagesJSON'));
