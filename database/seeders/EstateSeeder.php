@@ -24,7 +24,6 @@ class EstateSeeder extends Seeder
         $user_ids = User::pluck('id')->toArray();
         $category_ids = Category::pluck('id')->toArray();
         $service_ids = Service::pluck('id')->toArray();
-        $sponsorship_ids = Sponsorship::pluck('id')->toArray();
 
         foreach ($estates as $estate) {
             $new_estate = new Estate();
@@ -36,7 +35,6 @@ class EstateSeeder extends Seeder
             $new_estate->save();
 
             $estate_services = [];
-            $estate_sponsorships = [];
 
             $totalservices = count($service_ids);
 
@@ -45,12 +43,7 @@ class EstateSeeder extends Seeder
             }
             if ($estate_services === [])  $estate_services[] = rand(1, $totalservices);
 
-            foreach ($sponsorship_ids as $sponsorship_id) {
-                if ($faker->boolean()) $estate_sponsorships[] = $sponsorship_id;
-            }
-
             $new_estate->services()->attach($estate_services);
-            $new_estate->sponsorships()->attach($estate_sponsorships);
         }
     }
 }

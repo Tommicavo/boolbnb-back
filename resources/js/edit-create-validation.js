@@ -112,10 +112,9 @@ inputsForm.addEventListener('submit', event => {
     // Se non ha l'attributo 'readonly', impedisce l'invio del form
    
     const addressError = 'L\'indirizzo non è valido';
+    const messagesLi = document.getElementById("messagesLi");
     errorsBag.push([addressError]);
-    const listItem = document.createElement("li");
-    listItem.innerText = addressError;
-    messagesUl.appendChild(listItem);
+    messagesLi.innerText = addressError;
 }
 
   if (!errorsBag.length) inputsForm.submit();

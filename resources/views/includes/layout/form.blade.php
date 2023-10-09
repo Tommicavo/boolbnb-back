@@ -61,7 +61,9 @@
         <div class="mb-3 d-flex text-start justify-content-between align-items-end">
             <div class="col-11">
                 <div class="invalidField text-danger mt-2">
-                    <ul id="messagesUl"></ul>
+                    <ul>
+                        <li id="messagesLi"></li>
+                    </ul>
                 </div>
                 <label for="address">Indirizzo</label>
                 @error('address')

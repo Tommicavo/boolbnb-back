@@ -34,7 +34,7 @@
             <thead>
                 <tr>
                     <th scope="col" width="20%">#</th>
-                    <th scope="col" width="50%">Alloggio</th>
+                    <th scope="col" width="50%">Annuncio</th>
                     <th scope="col" width="30%" class="text-center">Azioni</th>
                 </tr>
             </thead>
