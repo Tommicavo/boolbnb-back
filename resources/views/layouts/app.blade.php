@@ -7,7 +7,7 @@
     <div id="app">
         @include('includes.layout.navbar')
         <main>
-            <div class="container">
+            <div class="container" id="container">
                 @include('includes.layout.modal')
                 @include('includes.layout.alert')
                 @yield('content')
