@@ -14,9 +14,9 @@ class SponsorshipSeeder extends Seeder
     public function run(): void
     {
         $sponsorships = [
-            ['name' => 'Bronzo', 'level' => 1, 'duration' => 24, 'price' => 2.99],
-            ['name' => 'Argento', 'level' => 2, 'duration' => 72, 'price' => 5.99],
-            ['name' => 'Oro', 'level' => 3, 'duration' => 144, 'price' => 9.99],
+            ['name' => 'Silver', 'level' => 1, 'duration' => 24, 'price' => 2.99],
+            ['name' => 'Gold', 'level' => 2, 'duration' => 72, 'price' => 5.99],
+            ['name' => 'Platinum', 'level' => 3, 'duration' => 144, 'price' => 9.99],
         ];
         foreach ($sponsorships as $sponsorship) {
             $new_sponsorship = new Sponsorship();
