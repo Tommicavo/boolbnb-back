@@ -9,7 +9,7 @@
             <form method="POST" id="paymentBtn"
                 action="{{ route('admin.payments.sponsorship', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
                 @csrf
-                <button type="submit" class="btn btn-primary">Acquista</button>
+                <button type="submit" class="bt bt-blue">Acquista</button>
             </form>
         </div>
         <div class="spinnerContainer d-flex justify-content-center align-items-center">
