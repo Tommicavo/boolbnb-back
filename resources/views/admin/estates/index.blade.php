@@ -42,7 +42,6 @@
                     <th scope="col" class="text-center d-none d-lg-table-cell">Bagni</th>
                     <th scope="col" class="text-center d-none d-md-table-cell">Superficie</th>
                     <th scope="col" class="text-center">Prezzo</th>
-                    <th scope="col" class="text-center">Sponsor</th>
                     <th scope="col" class="text-center">Visibile</th>
                     <th scope="col" class="text-center">Sponsor</th>
                     <th scope="col" class="text-center">Azioni</th>
@@ -59,17 +58,6 @@
                             <td class="text-center d-none d-lg-table-cell">{{ $estate->bathrooms }}</td>
                             <td class="text-center d-none d-md-table-cell">{{ $estate->mq }} m²</td>
                             <td class="text-center">{{ $estate->price }} €</td>
-                            <td class="text-center">
-                                @if ($estate->sponsorships->count() >= 2)
-                                    {{ $estate->sponsorships->last()->name }}
-                                @else
-                                    @forelse($estate->sponsorships as $sponsorship)
-                                        {{ $sponsorship->name }}
-                                    @empty
-                                        NO
-                                    @endforelse
-                                @endif
-                            </td>
                             <td class="text-center">
                                 @if ($estate->is_visible)
                                     <i class="text-success fa-solid fa-circle-check"></i>
