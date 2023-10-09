@@ -25,7 +25,7 @@
                 Aggiungi un nuovo annuncio
             @endif
         </h1>
-        <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+        <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
             <span><i class="fa-solid fa-table-list"></i></span>
             <span class="d-none d-md-inline"> Torna agli annunci</span>
         </a>
@@ -79,7 +79,7 @@
 
             </div>
             <div class="col-1">
-                <div id="reset-address" type="button" class="btn btn-danger align-items-end mt-4 ms-1"><i
+                <div id="reset-address" type="button" class="bt bt-red align-items-end mt-4 ms-1"><i
                         class="fa-solid fa-xmark"></i>
                 </div>
             </div>
@@ -230,7 +230,7 @@
     {{-- !PUT IMAGES HERE --}}
 
     {{-- Button --}}
-    <button class="btn btn-outline-success mb-2">
+    <button class="bt bt-blue mb-2">
         @if ($estate->exists)
             {{-- Edit section --}}
             Salva
