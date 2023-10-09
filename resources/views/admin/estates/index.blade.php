@@ -3,11 +3,11 @@
 @section('title', 'Annunci')
 @section('content')
     <header class="d-flex justify-content-between align-items-center mt-3">
-        <h1 class="text-center">Alloggi</h1>
+        <h1 class="text-center">I tuoi annunci</h1>
         <div class="headerRight">
             <a href="{{ route('admin.estates.create') }}" class="btn btn-success">
                 <span><i class="fa-regular fa-square-plus"></i></span>
-                <span class="d-none d-md-inline">Aggiungi un alloggio</span>
+                <span class="d-none d-md-inline">Aggiungi un annuncio</span>
             </a>
             <a href="{{ route('admin.estates.messages') }}" class="btn btn-primary">
                 <span><i class="fa-regular fa-envelope"></i></span>
@@ -35,7 +35,7 @@
         <table class="table mt-3 align-middle table-light">
             <thead>
                 <tr>
-                    <th scope="col">Alloggio</th>
+                    <th scope="col">Annuncio</th>
                     <th scope="col" class="text-center d-none d-md-table-cell">Stanze</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Stanze</th>
                     <th scope="col" class="text-center d-none d-lg-table-cell">Letti</th>
