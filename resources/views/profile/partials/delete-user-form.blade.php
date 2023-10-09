@@ -10,13 +10,14 @@
     </header>
 
     <!-- Modal trigger button -->
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-account">
-        {{__('Cancella Account')}}
+    <button type="button" class="bt bt-red" data-bs-toggle="modal" data-bs-target="#delete-account">
+        {{ __('Cancella Account') }}
     </button>
 
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="delete-account" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="delete-account" aria-hidden="true">
+    <div class="modal fade" id="delete-account" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="delete-account" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -32,7 +33,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+                    <button type="button" class="bt bt-dark-g" data-bs-dismiss="modal">Cancella</button>
 
                     <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
                         @csrf
@@ -41,17 +42,18 @@
 
                         <div class="input-group">
 
-                            <input id="password" name="password" type="password" class="form-control" placeholder="{{ __('Password') }}" />
+                            <input id="password" name="password" type="password" class="form-control"
+                                placeholder="{{ __('Password') }}" />
 
                             @error('password')
-                            <span class="invalid-feedback mt-2" role="alert">
-                                <strong>{{ $errors->userDeletion->get('password')}}</strong>
-                            </span>
+                                <span class="invalid-feedback mt-2" role="alert">
+                                    <strong>{{ $errors->userDeletion->get('password') }}</strong>
+                                </span>
                             @enderror
 
 
 
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="bt bt-red">
                                 {{ __('Cancella Account') }}
                             </button>
                             <!--  -->

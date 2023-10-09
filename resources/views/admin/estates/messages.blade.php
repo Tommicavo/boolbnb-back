@@ -6,7 +6,7 @@
             @if ($messages->isEmpty())
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3>Non ci sono messaggi da visualizzare</h3>
-                    <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+                    <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
                         <span><i class="fa-solid fa-table-list"></i></span>
                         <span class="d-none d-md-inline"> Torna agli annunci</span>
                     </a>
@@ -14,7 +14,7 @@
             @else
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3>Lista dei messaggi ricevuti</h3>
-                    <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+                    <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
                         <span><i class="fa-solid fa-table-list"></i></span>
                         <span class="d-none d-md-inline"> Torna agli annunci</span>
                     </a>
@@ -41,7 +41,7 @@
                                     <td>{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+                                            <a class="bt bt-blue" data-bs-toggle="modal" data-bs-target="#myModal"
                                                 data-name="{{ $message->name }}" data-title="{{ $message->estate->title }}"
                                                 data-email="{{ $message->email }}" data-text="{{ $message->text }}"
                                                 data-data="{{ $message->created_at->format('d/m/Y H:i:s') }}">

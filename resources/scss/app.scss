@@ -1,6 +1,8 @@
 @use "show";
 @use "register";
 @use "charts";
+@use "buttons";
+@use "header";
 @use './partials/logo';
 @use './partials/mixin';
 @use './partials/vars' as *;
@@ -11,6 +13,10 @@
 @use './partials/promo';
 
 @import '~bootstrap/scss/bootstrap';
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
 
 body {
     margin: 0;
