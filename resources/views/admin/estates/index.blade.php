@@ -7,7 +7,6 @@
         <div class="headerRight">
             <a href="{{ route('admin.estates.create') }}" class="btn btn-success">
                 <span><i class="fa-regular fa-square-plus"></i></span>
-
                 <span class="d-none d-md-inline">Aggiungi un annuncio</span>
             </a>
             <a href="{{ route('admin.estates.messages') }}" class="btn btn-primary">
@@ -29,8 +28,6 @@
             <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
         </div>
     </div>
-
-
     {{-- Table --}}
     <div class="indexContent d-flex align-items-center justify-content-center">
         <table class="table mt-3 align-middle table-light">
