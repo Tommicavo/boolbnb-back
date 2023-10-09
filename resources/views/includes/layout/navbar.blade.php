@@ -6,7 +6,7 @@
                 @auth
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.index')) active @endif"
-                            href="{{ route('admin.estates.index') }}">Alloggi</a>
+                            href="{{ route('admin.estates.index') }}">Annunci</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @if (request()->routeIs('admin.estates.messages')) active @endif"
