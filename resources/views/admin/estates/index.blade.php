@@ -5,15 +5,15 @@
     <header class="d-flex justify-content-between align-items-center mt-3">
         <h1 class="text-center">I tuoi annunci</h1>
         <div class="headerRight">
-            <a href="{{ route('admin.estates.create') }}" class="btn btn-success">
+            <a href="{{ route('admin.estates.create') }}" class="bt bt-gold">
                 <span><i class="fa-regular fa-square-plus"></i></span>
                 <span class="d-none d-md-inline">Aggiungi un annuncio</span>
             </a>
-            <a href="{{ route('admin.estates.messages') }}" class="btn btn-primary">
+            <a href="{{ route('admin.estates.messages') }}" class="bt bt-blue">
                 <span><i class="fa-regular fa-envelope"></i></span>
                 <span class=" d-md-inline">Messaggi</span>
             </a>
-            <a href="{{ route('admin.estates.trash') }}" class="btn btn-danger">
+            <a href="{{ route('admin.estates.trash') }}" class="bt bt-red">
                 <span><i class="fa-solid fa-trash-arrow-up"></i></span>
                 <span class=" d-md-inline">Cestino</span>
             </a>
@@ -73,16 +73,16 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-dark me-2 me-lg-3"
+                                    <a class="bt bt-dark-g me-2 me-lg-3"
                                         href="{{ route('admin.estates.promo', $estate) }}">
                                         <span class="d-none d-lg-inline">Promuovi</span>
                                         <span class="d-lg-none"><i class="fa-solid fa-comment-dollar"></i></span>
                                     </a>
-                                    <a class="btn btn-info text-white" href="{{ route('admin.estates.show', $estate) }}">
+                                    <a class="bt bt-blue text-white" href="{{ route('admin.estates.show', $estate) }}">
                                         <span class="d-none d-xl-inline">Dettagli</span>
                                         <span class="d-xl-none"><i class="fa-solid fa-circle-info"></i></span>
                                     </a>
-                                    <a class="btn btn-warning text-white mx-2 mx-lg-3"
+                                    <a class="bt bt-gold text-white mx-2 mx-lg-3"
                                         href="{{ route('admin.estates.edit', $estate) }}">
                                         <span class="d-none d-xl-inline">Modifica</span>
                                         <span class="d-xl-none"><i class="fa-solid fa-wrench"></i></span>
@@ -91,7 +91,7 @@
                                         class="deleteForm trashEstate" data-name="{{ $estate->title }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit" data-bs-toggle="modal"
+                                        <button class="bt bt-red" type="submit" data-bs-toggle="modal"
                                             data-bs-target="#myModal">
                                             <span class="d-none d-xl-inline">Elimina</span>
                                             <span class="d-xl-none"><i class="fa-solid fa-trash-can"></i></span>

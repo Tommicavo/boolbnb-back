@@ -4,19 +4,19 @@
     <div class="d-flex justify-content-between align-items-center my-3">
         <h1>Dettagli annuncio</h1>
         <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.estates.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
                 <span><i class="fa-solid fa-table-list"></i></span>
                 <span class="d-none d-md-inline"> Torna agli annunci</span>
             </a>
             <div class="d-flex justify-content-end">
-                <a href="{{ route('admin.estates.edit', $estate) }}" class="btn btn-outline-warning mx-2">
+                <a href="{{ route('admin.estates.edit', $estate) }}" class="bt bt-gold mx-2">
                     <span><i class="fas fa-pencil"></i></span>
                     <span class="d-none d-md-inline"> Modifica</span>
                 </a>
                 <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST" class="delete-form">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-outline-danger">
+                    <button class="bt bt-red">
                         <span><i class="fas fa-trash"></i></span>
                         <span class="d-none d-md-inline"> Elimina</span>
                     </button>

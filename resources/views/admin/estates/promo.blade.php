@@ -21,7 +21,7 @@
                         <form method="POST"
                             action="{{ route('admin.payments.validateCreditCard', ['estate' => $estate->id, 'sponsorship' => $sponsorship->id]) }}">
                             @csrf
-                            <button class="btn btn-dark" type="submit">{{ $sponsorship->price }}€</button>
+                            <button class="bt bt-dark-g" type="submit">{{ $sponsorship->price }}€</button>
                         </form>
                     </div>
                 </div>
