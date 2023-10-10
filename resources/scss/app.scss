@@ -6,6 +6,7 @@
 @use './partials/payment';
 @use './partials/searchPage';
 @use './partials/promo';
+@use './partials/graphs';
 
 @use "show";
 @use "register";
@@ -24,6 +25,8 @@
 body {
     margin: 0;
     padding: 0;
+        display: block;
+    
 }
 
 #container {
@@ -34,9 +37,6 @@ a {
     text-decoration: none;
     transition: color 0.3s ease;
 
-    &:hover {
-        color: #FFBD59;
-    }
 }
 
 ul li {
@@ -83,8 +83,6 @@ ul {
     height: 300px;
     font-size: 1rem;
 }
-
-
 
 
 @media screen and (max-width: 768px) {

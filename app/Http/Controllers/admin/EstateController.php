@@ -158,10 +158,6 @@ class EstateController extends Controller
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
 
-        // if (!count($jsonData['results'])) {
-        //     return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
-        // }
-
         $images = $request->file('multiple_images');
 
         // Change is_visible switch value to a boolean one.
@@ -290,7 +286,6 @@ class EstateController extends Controller
                 'address' => 'required|string|max:50',
                 'services' => 'required|array',
 
-
                 // File validation
                 'multiple_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ],
@@ -332,9 +327,6 @@ class EstateController extends Controller
         $query = $data['address'];
         $response = Http::get("https://api.tomtom.com/search/2/geocode/$query.json?&key=$api_key");
         $jsonData = $response->json();
-        // if (!count($jsonData['results'])) {
-        //     return to_route('admin.estates.create')->with('alertType', 'danger')->with('alertMessage', 'Indirizzo è inesistente');
-        // }
 
         // Change is_visible switch value to boolean one.
         $data['is_visible'] = isset($data['is_visible']);
@@ -349,10 +341,8 @@ class EstateController extends Controller
             $image->delete();
         };
 
-        $images = $request->file('multiple_images');
-
-
         // Save multiple images
+        $images = $request->file('multiple_images');
         if ($images) {
             foreach ($images as $image) {
                 $img_path = Storage::putFile("estate_images/$estate->id", $image);
@@ -395,7 +385,6 @@ class EstateController extends Controller
     {
         $estate = Estate::onlyTrashed()->findOrFail($id);
 
-        // ! DA VERIFICARE CHE LA COVER E LE IMMAGINI SI CANCELLINO !
         if ($estate->images) {
             Storage::deleteDirectory("estate_images/$estate->id");
         }
@@ -418,7 +407,6 @@ class EstateController extends Controller
 
         foreach ($estates as $estate) {
 
-            // ! DA VERIFICARE CHE LA COVER E LE IMMAGINI SI CANCELLINO !
             if ($estate->images) {
                 Storage::deleteDirectory("estate_images/$estate->id");
             }

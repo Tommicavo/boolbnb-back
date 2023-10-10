@@ -18,7 +18,6 @@
                     <h5 class="card-title">{{ $estate->title }}</h5>
                     <p class="card-text">{{ $estate->address }}</p>
                     <p class="card-text py-3">"{{ $estate->description }}"</p>
-
                 </div>
             </div>
         </div>

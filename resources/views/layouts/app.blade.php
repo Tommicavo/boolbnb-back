@@ -4,7 +4,9 @@
 @include('includes.layout.head')
 
 <body>
+
     <div id="app">
+
         @include('includes.layout.navbar')
         <main>
             <div class="container" id="container">

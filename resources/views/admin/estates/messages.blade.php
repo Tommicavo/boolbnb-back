@@ -8,7 +8,7 @@
                     <h3>Non ci sono messaggi da visualizzare</h3>
                     <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
                         <span><i class="fa-solid fa-table-list"></i></span>
-                        <span class="d-none d-md-inline"> Torna agli annunci</span>
+                        <span class="d-none d-md-inline"> Torna ai tuoi annunci</span>
                     </a>
                 </div>
             @else
@@ -16,7 +16,7 @@
                     <h3>Lista dei messaggi ricevuti</h3>
                     <a href="{{ route('admin.estates.index') }}" class="bt bt-dark-g">
                         <span><i class="fa-solid fa-table-list"></i></span>
-                        <span class="d-none d-md-inline"> Torna agli annunci</span>
+                        <span class="d-none d-md-inline"> Torna ai tuoi annunci</span>
                     </a>
                 </div>
                 <div class="d-flex justify-content-center">
