@@ -234,18 +234,5 @@ return [
         "mq" => 95,
         "is_visible" => true,
         "price" => 260.00,
-    ],
-    [
-        "title" => 'Villa Bollate',
-        "description" => 'Villa con giardino a Bollate',
-        "address" => 'Via XX Settembre 15, 20021 Bollate',
-        "latitude" => '45.53936',
-        "longitude" => '9.11568',
-        "rooms" => 5,
-        "beds" => 4,
-        "bathrooms" => 3,
-        "mq" => 200,
-        "is_visible" => true,
-        "price" => 600.00,
     ]
 ];
