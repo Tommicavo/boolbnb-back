@@ -36,10 +36,6 @@ li {
     transition: color 0.3s ease;
 }
 
-li:hover {
-
-    color: #FFBD59;
-}
 
 #menuToggle {
     display: block;
@@ -49,6 +45,10 @@ li:hover {
     z-index: 1;
     -webkit-user-select: none;
     user-select: none;
+
+        li:hover {
+        color: #FFBD59;
+        }
 }
 
 #menuToggle input {
