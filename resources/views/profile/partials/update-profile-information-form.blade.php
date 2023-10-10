@@ -1,5 +1,5 @@
 <section>
-    <header>
+    <div>
         <h2 class="text-secondary">
             {{ __('Informazioni del profilo') }}
         </h2>
@@ -7,7 +7,7 @@
         <p class="mt-1 text-muted">
             {{ __('Aggiorna le informazioni relative al profilo del tuo account ed il tuo indirizzo email.') }}
         </p>
-    </header>
+    </div>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
@@ -73,7 +73,7 @@
                         el.style.display = 'block';
                     }
                 </script>
-                <p id='profile-status' class="fs-5 text-muted">{{ __('Salvato.') }}</p>
+                <p id='profile-status' class="fs-5 text-muted mb-0">{{ __('Salvato.') }}</p>
             @endif
         </div>
     </form>
