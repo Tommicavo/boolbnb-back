@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
-    <link rel="icon" href="@yield('icon', Vite::asset('resources/img/boolBNB-logo.png'))" type="images/png">
+    <link rel="icon" href="@yield('icon', Vite::asset('resources/img/boolBNB-logo-CROP.png'))" type="image/png">
 
     {{-- <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

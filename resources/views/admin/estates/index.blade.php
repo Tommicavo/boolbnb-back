@@ -11,11 +11,11 @@
             </a>
             <a href="{{ route('admin.estates.messages') }}" class="bt bt-blue">
                 <span><i class="fa-regular fa-envelope"></i></span>
-                <span class=" d-md-inline">Messaggi</span>
+                <span class="d-none d-md-inline">Messaggi</span>
             </a>
             <a href="{{ route('admin.estates.trash') }}" class="bt bt-red">
                 <span><i class="fa-solid fa-trash-arrow-up"></i></span>
-                <span class=" d-md-inline">Cestino</span>
+                <span class="d-none d-lg-inline">Cestino</span>
             </a>
         </div>
     </header>
