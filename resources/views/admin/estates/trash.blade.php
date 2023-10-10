@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($estates as $estate)
+                @forelse ($estates as $estate)
                     <tr>
                         <td> {{ $estate->id }} </td>
                         <td> {{ $estate->title }} </td>
@@ -70,7 +70,13 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="3">
+                            <h2>Il cestino è vuoto</h2>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
