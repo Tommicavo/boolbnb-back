@@ -12,9 +12,9 @@
                 <button type="submit" class="bt bt-blue">Acquista</button>
             </form>
         </div>
-        <div class="spinnerContainer d-flex justify-content-center align-items-center">
-            <div id="paymentSpinner" class="spinner-border text-primary d-none" role="status"></div>
-        </div>
+    </div>
+    <div class="spinnerContainer d-flex justify-content-center align-items-center">
+        <div id="paymentSpinner" class="spinner-border text-primary d-none" role="status"></div>
     </div>
 @endsection
 
