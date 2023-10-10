@@ -1,4 +1,4 @@
-<header id="header" class="d-flex align-items-center justify-content-between container-fluid">
+<header id="header" class="d-flex align-items-center justify-content-between container-fluid ps-4">
     <a href="http://localhost:5173/">
         <div class="flex-shrink-0 d-none d-sm-block">
             <img src="{{ url('/BOOLlogo.svg') }}" alt="Logo BoolBnB" class="logo">
