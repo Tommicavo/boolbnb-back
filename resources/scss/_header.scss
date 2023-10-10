@@ -101,9 +101,9 @@ li {
 
 #menu {
     position: absolute;
-    width: 300px;
-    margin: -100px 0 0 0;
-    padding: 25px;
+    width: 350px;
+    margin: -115px 0 0 0;
+   /*  padding: 25px; */
     padding-top: 125px;
     right: -100px;
     border-radius: 15px;
@@ -120,6 +120,9 @@ li {
 #menu li {
     padding: 10px 0;
     font-size: 22px;
+    padding-left: 15px;
+    transition: background-color  0.5s ease;
+    border-radius: 15px;
 }
 
 
@@ -138,7 +141,10 @@ li {
 }
 
 .hamburger_li {
-    color: #213644
+    color: #213644;
+    &:hover{
+        background-color:#FFBD59;
+    }
 }
 
 .hamburger {
