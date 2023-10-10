@@ -34,12 +34,16 @@
                     </a>
 
                 @endguest
-                <a href="http://127.0.0.1:8000/admin/estates">
-                    <li class="hamburger_li">I miei Appartamenti</li>
-                </a>
-                <a href="http://127.0.0.1:8000/admin/estates/messages">
-                    <li class="hamburger_li">Messaggi</li>
-                </a>
+                @auth
+
+                    <a href="http://127.0.0.1:8000/admin/estates">
+                        <li class="hamburger_li">I miei Appartamenti</li>
+                    </a>
+                    <a href="http://127.0.0.1:8000/admin/estates/messages">
+                        <li class="hamburger_li">Messaggi</li>
+                    </a>
+                @endauth
+
                 <a href="http://localhost:5173/SearchPage">
                     <li class="hamburger_li">Ricerca avanzata</li>
                 </a>
