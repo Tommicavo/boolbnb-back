@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li><strong>Testo: </strong>${text}</li>
             </ul>
         `;
-
         modalTitle.innerText = `Messaggio da: ${name}`;
         dropBtn.classList.add('d-none');
         btnClose.classList.add('d-none');

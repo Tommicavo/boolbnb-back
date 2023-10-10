@@ -23,12 +23,22 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="ps-1 pe-3"><i class="fa-solid fa-camera-retro"></i> Pic</th>
-                                <th class="pe-3"><i class="fa-solid fa-house"></i> Annuncio</th>
-                                <th class="pe-3"><i class="fa-solid fa-user"></i> Nome</th>
-                                <th class="pe-3"><i class="fa-solid fa-envelope"></i> Email</th>
-                                <th class="d-none d-md-table-cell pe-3"><i class="fa-solid fa-file-lines"></i> Testo</th>
-                                <th class="pe-3"><i class="fa-solid fa-calendar-days"></i> Data e Ora</th>
+                                <th class="text-center"><i class="fa-solid fa-camera-retro"></i></th>
+                                <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-house"></i> <span
+                                        class="d-none d-lg-inline">
+                                        Annuncio</span></th>
+                                <th class="d-md-table-cell text-center text-xl-start px-3"><i class="fa-solid fa-user"></i>
+                                    <span class="d-none d-lg-inline">
+                                        Nome</span>
+                                </th>
+                                <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-envelope"></i> <span
+                                        class="d-none d-lg-inline">
+                                        Email</span></th>
+                                <th class="d-none d-xl-table-cell px-3"><i class="fa-solid fa-file-lines"></i> Testo</th>
+                                <th class="px-3 px-3 text-center text-xl-start"><i class="fa-solid fa-calendar-days"></i> <span
+                                        class="d-none d-lg-inline">
+                                        Data e Ora</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,13 +48,12 @@
                                     <th class="pt-1"><img width="50px" height="50px" class="rounded"
                                             src="{{ $message->estate->get_cover_path() }}" alt="{{ $message->estate->title }}">
                                     </th>
-                                    <th class="px-1">{{ $message->estate->title }}</th>
-                                    <td class="px-1">{{ $message->name }}</td>
-                                    <td class="px-1">{{ $message->email }}</td>
-                                    <td class="px-1" class="d-none d-md-table-cell">
-                                        {{ substr($message->text, 0, 30) }}...
+                                    <th class="px-3">{{ $message->estate->title }}</th>
+                                    <td class="px-3">{{ $message->name }}</td>
+                                    <td class="px-3">{{ $message->email }}</td>
+                                    <td class="d-none d-xl-table-cell px-3">{{ substr($message->text, 0, 30) }}...
                                     </td>
-                                    <td class="px-1">{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
+                                    <td class="px-3 text-center">{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
