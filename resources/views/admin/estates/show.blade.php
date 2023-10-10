@@ -34,7 +34,7 @@
             <p class="card-text">{{ $estate->description }}</p>
         </div>
         <div class="d-flex justify-content-between">
-            <div class="list">
+            <div class="list infoEstate">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Indirizzo: </strong>{{ $estate->address }}</li>
                     <li class="list-group-item"><strong>Stanze: </strong>{{ $estate->rooms }}</li>
@@ -42,17 +42,12 @@
                     <li class="list-group-item"><strong>Posti Letto: </strong>{{ $estate->beds }}</li>
                     <li class="list-group-item"><strong>Metri Quadri: </strong>{{ $estate->mq }} m²</li>
                     <li class="list-group-item"><strong>Prezzo a notte: </strong>{{ $estate->price }} €</li>
-                    <li class="list-group-item d-flex align-items-center justify-content-between">
-                        <div><strong>Servizi: </strong></div>
-                        <div class="d-flex flex-wrap justify-content-start">
-                            @forelse($estate->services as $service)
-                                <div class="service d-flex flex-column just m-1 p-1">
-                                    <span class="card-title text-center pb-2"> {{ $service?->label }}</span>
-                                    <i class="text-center fa-solid fa-{{ $service->icon }} fa-xl"></i>
-                                </div>
-                            @empty
-                                -
-                            @endforelse
+                    <li class="list-group-item d-flex align-items-center">
+                        <div class="me-3"><strong>Servizi: </strong></div>
+                        <div class="d-flex gap-3">
+                            @foreach ($estate->services as $service)
+                                <i class="text-center fa-solid fa-{{ $service->icon }} iconService"></i>
+                            @endforeach
                         </div>
                     </li>
                 </ul>
