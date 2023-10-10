@@ -75,8 +75,8 @@
                                 <div class="d-flex justify-content-center">
                                     <a class="bt bt-dark-g me-2 me-lg-3"
                                         href="{{ route('admin.estates.promo', $estate) }}">
-                                        <span class="d-none d-lg-inline">Promuovi</span>
-                                        <span class="d-lg-none"><i class="fa-solid fa-comment-dollar"></i></span>
+                                        <span class="d-none d-xl-inline">Promuovi</span>
+                                        <span class="d-xl-none"><i class="fa-solid fa-comment-dollar"></i></span>
                                     </a>
                                     <a class="bt bt-blue" href="{{ route('admin.estates.show', $estate) }}">
                                         <span class="d-none d-xl-inline">Dettagli</span>

@@ -216,9 +216,24 @@
     <div class="col-12 text-start">
         <div class="mb-3">
             <label class="form-label" for="multiple_images">Immagini</label>
+            @if (count($estate->images) > 0)
+                <div id="oldImages">
+                    <div class="text-center py-2">Immagini attuali</div>
+                    <div class="row gap-3">
+                        @foreach ($estate->images as $image)
+                            <div class="col-12 col-md-2 p-2">
+                                <img class="previewImages" src="{{ asset('storage/' . $image->url) }}"
+                                    alt="">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
             <input type="file" multiple id="multiple_images" name="multiple_images[]"
                 class="form-control @error('multiple_images') is-invalid @elseif (old('multiple_images')) is-valid @enderror"
-                value="{{ old('url', $estate->images) }}">
+                value="{{ old('multiple_images', $estate->images) }}">
+            <div id="previewTitle" class="text-center py-2">Nessuna immagine attualmente selezionata</div>
+            <div id="rowImages" class="row gap-3"></div>
             @error('multiple_images')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -246,4 +261,5 @@
 @section('scripts')
     @Vite('resources/js/address-select-generator.js')
     @Vite('resources/js/edit-create-validation.js')
+    @Vite('resources/js/imagesPreview.js')
 @endsection
