@@ -20,36 +20,31 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <table class="table align-middle table-light">
+                    <table>
                         <thead>
                             <tr>
-                                <th scope="col">Annuncio</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Email</th>
-                                <th scope="col" class="d-none d-md-table-cell">Testo</th>
-                                <th scope="col">Data e Ora</th>
-                                <th scope="col" class="text-center">Visualizza</th>
+                                <th class="ps-1 pe-3"><i class="fa-solid fa-camera-retro"></i> Pic</th>
+                                <th class="pe-3"><i class="fa-solid fa-house"></i> Annuncio</th>
+                                <th class="pe-3"><i class="fa-solid fa-user"></i> Nome</th>
+                                <th class="pe-3"><i class="fa-solid fa-envelope"></i> Email</th>
+                                <th class="d-none d-md-table-cell pe-3"><i class="fa-solid fa-file-lines"></i> Testo</th>
+                                <th class="pe-3"><i class="fa-solid fa-calendar-days"></i> Data e Ora</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($messages as $message)
-                                <tr>
-                                    <th scope="row">{{ $message->estate->title }}</th>
-                                    <td>{{ $message->name }}</td>
-                                    <td>{{ $message->email }}</td>
-                                    <td class="d-none d-md-table-cell">{{ substr($message->text, 0, 30) }}...</td>
-                                    <td>{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <a class="bt bt-blue" data-bs-toggle="modal" data-bs-target="#myModal"
-                                                data-name="{{ $message->name }}" data-title="{{ $message->estate->title }}"
-                                                data-email="{{ $message->email }}" data-text="{{ $message->text }}"
-                                                data-data="{{ $message->created_at->format('d/m/Y H:i:s') }}">
-                                                <span class="d-none d-lg-inline">Dettagli</span>
-                                                <span class="d-lg-none"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                        </div>
+                                <tr data-bs-toggle="modal" data-bs-target="#myModal" data-content="{{ $message }}"
+                                    data-title="{{ $message->estate->title }}">
+                                    <th class="pt-1"><img width="50px" height="50px" class="rounded"
+                                            src="{{ $message->estate->get_cover_path() }}" alt="{{ $message->estate->title }}">
+                                    </th>
+                                    <th class="px-1">{{ $message->estate->title }}</th>
+                                    <td class="px-1">{{ $message->name }}</td>
+                                    <td class="px-1">{{ $message->email }}</td>
+                                    <td class="px-1" class="d-none d-md-table-cell">
+                                        {{ substr($message->text, 0, 30) }}...
                                     </td>
+                                    <td class="px-1">{{ $message->created_at->format('d/m/Y H:i:s') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
