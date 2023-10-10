@@ -26,6 +26,9 @@
                 @endauth
 
                 @guest
+                    <a href="http://localhost:5173/">
+                        <li class="hamburger_li">Annunci</li>
+                    </a>
                     <a href="http://127.0.0.1:8000/register">
                         <li class="hamburger_li">Registrati</li>
                     </a>

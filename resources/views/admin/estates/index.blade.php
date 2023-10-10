@@ -78,12 +78,11 @@
                                         <span class="d-none d-lg-inline">Promuovi</span>
                                         <span class="d-lg-none"><i class="fa-solid fa-comment-dollar"></i></span>
                                     </a>
-                                    <a class="bt bt-blue text-white" href="{{ route('admin.estates.show', $estate) }}">
+                                    <a class="bt bt-blue" href="{{ route('admin.estates.show', $estate) }}">
                                         <span class="d-none d-xl-inline">Dettagli</span>
                                         <span class="d-xl-none"><i class="fa-solid fa-circle-info"></i></span>
                                     </a>
-                                    <a class="bt bt-gold text-white mx-2 mx-lg-3"
-                                        href="{{ route('admin.estates.edit', $estate) }}">
+                                    <a class="bt bt-gold mx-2 mx-lg-3" href="{{ route('admin.estates.edit', $estate) }}">
                                         <span class="d-none d-xl-inline">Modifica</span>
                                         <span class="d-xl-none"><i class="fa-solid fa-wrench"></i></span>
                                     </a>
