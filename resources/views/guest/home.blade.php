@@ -9,6 +9,6 @@
             <div id="home-logo">
                 <img src="{{ url('display-logo') }}" alt="BoolBnB">
             </div>
+        </a>
     </div>
-    </a>
 @endsection
