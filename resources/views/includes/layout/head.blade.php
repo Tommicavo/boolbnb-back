@@ -8,7 +8,6 @@
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
     <link rel="icon" href="@yield('icon', Vite::asset('resources/img/boolBNB-logo-CROP.png'))" type="image/png">
 
-
     <style>
         body {
             display: none

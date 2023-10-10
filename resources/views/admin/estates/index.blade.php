@@ -19,6 +19,7 @@
             </a>
         </div>
     </header>
+
     {{-- Charts --}}
     <div class="charts d-flex">
         <div class="container w-50">
@@ -28,42 +29,48 @@
             <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
         </div>
     </div>
+
     {{-- Table --}}
     <div class="indexContent d-flex align-items-center justify-content-center">
-        <table class="table mt-3 align-middle table-light">
+        <table class="mt-3 align-middle">
             <thead>
                 <tr>
-                    <th scope="col">Annuncio</th>
-                    <th scope="col" class="text-center d-none d-md-table-cell">Stanze</th>
-                    <th scope="col" class="text-center d-none d-lg-table-cell">Stanze</th>
-                    <th scope="col" class="text-center d-none d-lg-table-cell">Letti</th>
-                    <th scope="col" class="text-center d-none d-lg-table-cell">Bagni</th>
-                    <th scope="col" class="text-center d-none d-md-table-cell">Superficie</th>
-                    <th scope="col" class="text-center">Prezzo</th>
-                    <th scope="col" class="text-center">Visibile</th>
-                    <th scope="col" class="text-center">Sponsor</th>
-                    <th scope="col" class="text-center">Azioni</th>
+                    <th class="text-center ps-2"><i class="fa-solid fa-camera-retro"></i></th>
+                    <th class="ps-3 text-center text-lg-start" colspan="3"><i class="fa-solid fa-house"></i><span
+                            class="d-none d-lg-inline">
+                            Annuncio</span></th>
+                    <th class="d-none d-md-table-cell text-center text-xl-start px-3"><i
+                            class="fa-solid fa-layer-group"></i><span class="d-none d-xl-inline"> Superficie</span></th>
+                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-sack-dollar"></i><span
+                            class="d-none d-xl-inline">
+                            Prezzo</span></th>
+                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-eye"></i><span
+                            class="d-none d-xl-inline">
+                            Visibile</span></th>
+                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-arrow-trend-up"></i><span
+                            class="d-none d-xl-inline">
+                            Sponsor</span></th>
+                    <th class="text-end px-3 text-center"><i class="fa-solid fa-gears"></i><span class="d-none d-lg-inline">
+                            Azioni</span></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($estates as $estate)
                     @if (Auth::id() === $estate->user_id)
-                        <tr>
-                            <th>{{ $estate->title }}</th>
-                            <td class="text-center d-none d-md-table-cell">{{ $estate->rooms }}</td>
-                            <td class="text-center d-none d-lg-table-cell">{{ $estate->rooms }}</td>
-                            <td class="text-center d-none d-lg-table-cell">{{ $estate->beds }}</td>
-                            <td class="text-center d-none d-lg-table-cell">{{ $estate->bathrooms }}</td>
-                            <td class="text-center d-none d-md-table-cell">{{ $estate->mq }} m²</td>
-                            <td class="text-center">{{ $estate->price }} €</td>
-                            <td class="text-center">
+                        <tr class="dynamic-tr" data-estate="{{ $estate }}">
+                            <td class="pt-1"><img width="50px" height="50px" class="rounded"
+                                    src="{{ $estate->get_cover_path() }}" alt="{{ $estate->title }}"></td>
+                            <td class="px-3" colspan="3">{{ $estate->title }}</td>
+                            <td class="d-none d-md-table-cell px-3">{{ $estate->mq }} m²</td>
+                            <td class="px-3">{{ $estate->price }} €</td>
+                            <td class="px-3">
                                 @if ($estate->is_visible)
                                     <i class="text-success fa-solid fa-circle-check"></i>
                                 @else
                                     <i class="text-danger fa-solid fa-circle-xmark"></i>
                                 @endif
                             </td>
-                            <td class="text-center">
+                            <td class="px-3">
                                 @if ($estate->getSponsorEndDate() !== null)
                                     <span
                                         class="badge rounded-pill text-bg-success">{{ $estate->getSponsorEndDate() }}</span>
@@ -71,16 +78,13 @@
                                     <i class="text-danger fa-solid fa-circle-xmark"></i>
                                 @endif
                             </td>
-                            <td>
+                            <td class="px-3">
                                 <div class="d-flex justify-content-center">
-                                    <a class="bt bt-dark-g me-2 me-lg-3"
-                                        href="{{ route('admin.estates.promo', $estate) }}">
+
+                                    <a class="bt bt-dark-g" href="{{ route('admin.estates.promo', $estate) }}">
                                         <span class="d-none d-xl-inline">Promuovi</span>
                                         <span class="d-xl-none"><i class="fa-solid fa-comment-dollar"></i></span>
-                                    </a>
-                                    <a class="bt bt-blue" href="{{ route('admin.estates.show', $estate) }}">
-                                        <span class="d-none d-xl-inline">Dettagli</span>
-                                        <span class="d-xl-none"><i class="fa-solid fa-circle-info"></i></span>
+
                                     </a>
                                     <a class="bt bt-gold mx-2 mx-lg-3" href="{{ route('admin.estates.edit', $estate) }}">
                                         <span class="d-none d-xl-inline">Modifica</span>
@@ -109,4 +113,5 @@
 @section('scripts')
     @vite(['resources/js/modalScript.js'])
     @vite(['resources/js/charts.js'])
+    @vite(['resources/js/dynamicTr.js'])
 @endsection
