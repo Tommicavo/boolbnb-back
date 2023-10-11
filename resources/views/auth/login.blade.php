@@ -65,6 +65,12 @@
                                         {{ __('Accedi') }}
                                     </button>
 
+                                    <a href="http://127.0.0.1:8000/register">
+                                        <button type="button" class="bt bt-blue">
+                                            Registrati
+                                        </button>
+                                    </a>
+
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Hai dimenticato la password?') }}
