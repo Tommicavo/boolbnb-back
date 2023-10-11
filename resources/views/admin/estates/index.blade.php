@@ -21,7 +21,7 @@
     </header>
 
     {{-- Charts --}}
-    @if ($estates)
+    @if (count($estates) > 0)
 
         <div class="charts d-flex">
             <div class="container w-50">
@@ -111,7 +111,13 @@
                         @endif
                     @endforeach
                 @else
-                    <h2 class="text-center mt-5">Non hai pubblicato alcun annuncio</h2>
+                    <div class="text-center">
+                        <h2 class="text-center mt-5">Non hai pubblicato alcun annuncio</h2>
+                        <a href="{{ route('admin.estates.create') }}" class="bt bt-new">
+                            <span><i class="fa-regular fa-square-plus"></i></span>
+                            <span class="d-none d-md-inline">Clicca qui per aggiungere il tuo primo annuncio</span>
+                        </a>
+                    </div>
     @endif
     </tbody>
     </table>

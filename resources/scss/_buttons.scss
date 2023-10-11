@@ -1,6 +1,6 @@
 @import 'partials/_vars';
 
-.bt{
+.bt {
   display: inline-block;
   font-weight: 400;
   text-align: center;
@@ -14,7 +14,7 @@
   border-radius: 0.25rem;
   color: white;
   transition: color 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
-  
+
   // &:hover{
   //   color: white;
   //   filter: brightness(115%);
@@ -23,31 +23,49 @@
   &.bt-gold {
     background-color: $logo-color;
     border-color: $logo-color;
-    &:hover{
+
+    &:hover {
       color: $logo-color;
       background-color: $bg-lightgrey;
     }
   }
+
+  &.bt-new {
+    background-color: $btNew;
+    border-color: $btNew;
+
+    &:hover {
+      // color: $btNew;
+      background-color: $lightBlue;
+    }
+  }
+
   &.bt-blue {
-    background-color: #396E91 ;
-    border-color: #396E91 ;
-    &:hover{
+    background-color: #396E91;
+    border-color: #396E91;
+
+    &:hover {
       color: #396E91;
       background-color: $bg-lightgrey;
     }
   }
+
   &.bt-dark-g {
     background-color: $darkGray;
     border-color: $darkGray;
-    &:hover{
+
+    &:hover {
       color: $darkGray;
       background-color: $bg-lightgrey;
     }
   }
+
   &.bt-red {
-    background-color: rgb(187, 0, 0);;
+    background-color: rgb(187, 0, 0);
+    ;
     border-color: rgb(187, 0, 0);
-    &:hover{
+
+    &:hover {
       color: rgb(187, 0, 0);
       background-color: $bg-lightgrey;
     }
