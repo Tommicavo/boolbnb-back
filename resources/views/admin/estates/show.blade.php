@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('title', $estate->title)
 @section('content')
+    <div class="result">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span>{{ session('success') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
+
     <div class="d-flex justify-content-between align-items-center my-3">
         <h1>Dettagli annuncio</h1>
         <div class="d-flex justify-content-between">
@@ -63,13 +72,6 @@
             </div>
         </div>
     </div>
-
-    <div class="result">
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-    </div>
-
 @endsection
 @section('scripts')
     @vite(['resources/js/charts.js'])

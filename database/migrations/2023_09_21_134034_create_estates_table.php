@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title')->required();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('address');
             $table->string('latitude');
             $table->string('longitude');
