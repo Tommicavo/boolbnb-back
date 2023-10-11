@@ -21,7 +21,7 @@
     </header>
 
     {{-- Charts --}}
-    @forelse ($estates as $estate)
+    @if ($estates)
 
         <div class="charts d-flex">
             <div class="container w-50">
@@ -58,57 +58,61 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Auth::id() === $estate->user_id)
-                        <tr class="dynamic-tr" data-estate="{{ $estate }}">
-                            <td class="pt-1"><img width="50px" height="50px" class="rounded" style="object-fit: cover"
-                                    src="{{ $estate->get_cover_path() }}" alt="{{ $estate->title }}"></td>
-                            <td class="px-3" colspan="3">{{ $estate->title }}</td>
-                            <td class="d-none d-md-table-cell px-3">{{ $estate->mq }} m²</td>
-                            <td class="px-3">{{ $estate->price }} €</td>
-                            <td class="px-3">
-                                @if ($estate->is_visible)
-                                    <i class="text-success fa-solid fa-circle-check"></i>
-                                @else
-                                    <i class="text-danger fa-solid fa-circle-xmark"></i>
-                                @endif
-                            </td>
-                            <td class="px-3">
-                                @if ($estate->getSponsorEndDate() !== null)
-                                    <span
-                                        class="badge rounded-pill text-bg-success">{{ $estate->getSponsorEndDate() }}</span>
-                                @else
-                                    <i class="text-danger fa-solid fa-circle-xmark"></i>
-                                @endif
-                            </td>
-                            <td class="px-3">
-                                <div class="d-flex justify-content-center">
+                    @foreach ($estates as $estate)
+                        @if (Auth::id() === $estate->user_id)
+                            <tr class="dynamic-tr" data-estate="{{ $estate }}">
+                                <td class="pt-1"><img width="50px" height="50px" class="rounded"
+                                        style="object-fit: cover" src="{{ $estate->get_cover_path() }}"
+                                        alt="{{ $estate->title }}"></td>
+                                <td class="px-3" colspan="3">{{ $estate->title }}</td>
+                                <td class="d-none d-md-table-cell px-3">{{ $estate->mq }} m²</td>
+                                <td class="px-3">{{ $estate->price }} €</td>
+                                <td class="px-3">
+                                    @if ($estate->is_visible)
+                                        <i class="text-success fa-solid fa-circle-check"></i>
+                                    @else
+                                        <i class="text-danger fa-solid fa-circle-xmark"></i>
+                                    @endif
+                                </td>
+                                <td class="px-3">
+                                    @if ($estate->getSponsorEndDate() !== null)
+                                        <span
+                                            class="badge rounded-pill text-bg-success">{{ $estate->getSponsorEndDate() }}</span>
+                                    @else
+                                        <i class="text-danger fa-solid fa-circle-xmark"></i>
+                                    @endif
+                                </td>
+                                <td class="px-3">
+                                    <div class="d-flex justify-content-center">
 
-                                    <a class="bt bt-dark-g" href="{{ route('admin.estates.promo', $estate) }}">
-                                        <span class="d-none d-xl-inline">Promuovi</span>
-                                        <span class="d-xl-none"><i class="fa-solid fa-comment-dollar"></i></span>
+                                        <a class="bt bt-dark-g" href="{{ route('admin.estates.promo', $estate) }}">
+                                            <span class="d-none d-xl-inline">Promuovi</span>
+                                            <span class="d-xl-none"><i class="fa-solid fa-comment-dollar"></i></span>
 
-                                    </a>
-                                    <a class="bt bt-gold mx-2 mx-lg-3" href="{{ route('admin.estates.edit', $estate) }}">
-                                        <span class="d-none d-xl-inline">Modifica</span>
-                                        <span class="d-xl-none"><i class="fa-solid fa-wrench"></i></span>
-                                    </a>
-                                    <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST"
-                                        class="deleteForm trashEstate" data-name="{{ $estate->title }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="bt bt-red delete" type="submit" data-bs-toggle="modal"
-                                            data-bs-target="#myModal">
-                                            <span class="d-none d-xl-inline">Elimina</span>
-                                            <span class="d-xl-none"><i class="fa-solid fa-trash-can"></i></span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endif
-                @empty
+                                        </a>
+                                        <a class="bt bt-gold mx-2 mx-lg-3"
+                                            href="{{ route('admin.estates.edit', $estate) }}">
+                                            <span class="d-none d-xl-inline">Modifica</span>
+                                            <span class="d-xl-none"><i class="fa-solid fa-wrench"></i></span>
+                                        </a>
+                                        <form action="{{ route('admin.estates.destroy', $estate) }}" method="POST"
+                                            class="deleteForm trashEstate" data-name="{{ $estate->title }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="bt bt-red delete" type="submit" data-bs-toggle="modal"
+                                                data-bs-target="#myModal">
+                                                <span class="d-none d-xl-inline">Elimina</span>
+                                                <span class="d-xl-none"><i class="fa-solid fa-trash-can"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                @else
                     <h2 class="text-center mt-5">Non hai pubblicato alcun annuncio</h2>
-    @endforelse
+    @endif
     </tbody>
     </table>
     </div>
