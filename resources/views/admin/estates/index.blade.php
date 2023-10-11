@@ -21,41 +21,43 @@
     </header>
 
     {{-- Charts --}}
-    <div class="charts d-flex">
-        <div class="container w-50">
-            <canvas id="myChartVisits" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
-        </div>
-        <div class="container w-50">
-            <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
-        </div>
-    </div>
+    @forelse ($estates as $estate)
 
-    {{-- Table --}}
-    <div class="indexContent d-flex align-items-center justify-content-center">
-        <table class="mt-3 align-middle">
-            <thead>
-                <tr>
-                    <th class="text-center ps-2"><i class="fa-solid fa-camera-retro"></i></th>
-                    <th class="ps-3 text-center text-lg-start" colspan="3"><i class="fa-solid fa-house"></i><span
-                            class="d-none d-lg-inline">
-                            Annuncio</span></th>
-                    <th class="d-none d-md-table-cell text-center text-xl-start px-3"><i
-                            class="fa-solid fa-layer-group"></i><span class="d-none d-xl-inline"> Superficie</span></th>
-                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-sack-dollar"></i><span
-                            class="d-none d-xl-inline">
-                            Prezzo</span></th>
-                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-eye"></i><span
-                            class="d-none d-xl-inline">
-                            Visibile</span></th>
-                    <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-arrow-trend-up"></i><span
-                            class="d-none d-xl-inline">
-                            Sponsor</span></th>
-                    <th class="text-end px-3 text-center"><i class="fa-solid fa-gears"></i><span class="d-none d-lg-inline">
-                            Azioni</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($estates as $estate)
+        <div class="charts d-flex">
+            <div class="container w-50">
+                <canvas id="myChartVisits" data-visits="{{ $monthlyVisitsJSON }}"></canvas>
+            </div>
+            <div class="container w-50">
+                <canvas id="myChartMessages" data-messages="{{ $monthlyMessagesJSON }}"></canvas>
+            </div>
+        </div>
+
+        {{-- Table --}}
+        <div class="indexContent d-flex align-items-center justify-content-center">
+            <table class="mt-3 align-middle">
+                <thead>
+                    <tr>
+                        <th class="text-center ps-2"><i class="fa-solid fa-camera-retro"></i></th>
+                        <th class="ps-3 text-center text-lg-start" colspan="3"><i class="fa-solid fa-house"></i><span
+                                class="d-none d-lg-inline">
+                                Annuncio</span></th>
+                        <th class="d-none d-md-table-cell text-center text-xl-start px-3"><i
+                                class="fa-solid fa-layer-group"></i><span class="d-none d-xl-inline"> Superficie</span></th>
+                        <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-sack-dollar"></i><span
+                                class="d-none d-xl-inline">
+                                Prezzo</span></th>
+                        <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-eye"></i><span
+                                class="d-none d-xl-inline">
+                                Visibile</span></th>
+                        <th class="px-3 text-center text-xl-start"><i class="fa-solid fa-arrow-trend-up"></i><span
+                                class="d-none d-xl-inline">
+                                Sponsor</span></th>
+                        <th class="text-end px-3 text-center"><i class="fa-solid fa-gears"></i><span
+                                class="d-none d-lg-inline">
+                                Azioni</span></th>
+                    </tr>
+                </thead>
+                <tbody>
                     @if (Auth::id() === $estate->user_id)
                         <tr class="dynamic-tr" data-estate="{{ $estate }}">
                             <td class="pt-1"><img width="50px" height="50px" class="rounded" style="object-fit: cover"
@@ -104,9 +106,11 @@
                             </td>
                         </tr>
                     @endif
-                @endforeach
-            </tbody>
-        </table>
+                @empty
+                    <h2 class="text-center mt-5">Non hai pubblicato alcun annuncio</h2>
+    @endforelse
+    </tbody>
+    </table>
     </div>
 @endsection
 
