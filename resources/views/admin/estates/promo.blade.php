@@ -10,7 +10,8 @@
         <div class="row g-0">
             <div class="col-md-4">
                 @if ($estate->images)
-                    <img src="{{ $estate->get_cover_path() }}" class="img-fluid rounded-start" height="200" alt="...">
+                    <img src="{{ $estate->get_cover_path() }}" class="img-fluid rounded-start" height="200"
+                        style="object-fit: cover" alt="...">
                 @endif
             </div>
             <div class="col-md-8">
