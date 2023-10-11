@@ -1,4 +1,5 @@
 const rows = document.querySelectorAll('.dynamic-tr');
+const deleteButtons = document.querySelectorAll('.delete');
 
 rows.forEach(row => {
     const estate = JSON.parse(row.getAttribute('data-estate'));
@@ -10,6 +11,8 @@ rows.forEach(row => {
 });
 
 
-document.getElementById('delete').addEventListener('click', function(event) {
-    event.stopPropagation(); 
+deleteButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
 });

@@ -94,7 +94,7 @@
                                         class="deleteForm trashEstate" data-name="{{ $estate->title }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button id="delete" class="bt bt-red" type="submit" data-bs-toggle="modal"
+                                        <button class="bt bt-red delete" type="submit" data-bs-toggle="modal"
                                             data-bs-target="#myModal">
                                             <span class="d-none d-xl-inline">Elimina</span>
                                             <span class="d-xl-none"><i class="fa-solid fa-trash-can"></i></span>
