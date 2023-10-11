@@ -58,7 +58,7 @@
                 @foreach ($estates as $estate)
                     @if (Auth::id() === $estate->user_id)
                         <tr class="dynamic-tr" data-estate="{{ $estate }}">
-                            <td class="pt-1"><img width="50px" height="50px" class="rounded"
+                            <td class="pt-1"><img width="50px" height="50px" class="rounded" style="object-fit: cover"
                                     src="{{ $estate->get_cover_path() }}" alt="{{ $estate->title }}"></td>
                             <td class="px-3" colspan="3">{{ $estate->title }}</td>
                             <td class="d-none d-md-table-cell px-3">{{ $estate->mq }} m²</td>
